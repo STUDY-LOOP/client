@@ -14,7 +14,7 @@ function Main(){
     const [Password, setPassword] = useState("");
 
     const callApi = async() => {
-        const response = await axios.get('http://localhost:3000/');
+        const response = await axios.get('http://localhost:3000/api/study/all');
         //console.log(response);
         //console.log(response.data);
         setStudies(response.data);
@@ -39,8 +39,8 @@ function Main(){
                 {loading ? <h3>LOADING...</h3> : studies.map(
                     study => (
                         <StudyList
-                            key={study.groupId}
-                            groupId={study.groupId}
+                            key={study.gpId}
+                            gpId={study.groupPublicId}
                             groupName={study.groupName}
                         />
                     )

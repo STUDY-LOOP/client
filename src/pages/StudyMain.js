@@ -1,10 +1,9 @@
 import { useEffect, useState } from "react";
-import { useParams } from 'react-router-dom';
-//import { useDispatch } from 'react-redux';
+import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
 
-import StudyInfo from '../components/StudyInfo';
 import PageLink from '../components/PageLink';
+import StudyInfo from '../components/StudyInfo';
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -44,6 +43,21 @@ function StudyMain(){
                     gpId={studyInfo.groupPublicId}
                     groupName={studyInfo.groupName}
                     members={studyMembers}
+                />
+            </div>
+
+            <div>
+                <PageLink
+                    link={`/study-group/${gpId}/member`}
+                    title={'회원 관리'}
+                /><br/>
+                <PageLink
+                    link={`/study-group/${gpId}/assignment`}
+                    title={'과제함'}
+                /><br/>
+                <PageLink
+                    link={`/study-group/${gpId}/videoChat`}
+                    title={'화상회의'}
                 />
             </div>
             
