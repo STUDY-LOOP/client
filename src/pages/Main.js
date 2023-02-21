@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, useRef } from "react";
+import { useNavigate } from 'react-router-dom';
 //import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import Layout from '../components/Layout';
 import StudyList from '../components/StudyList';
+import LoginForm from '../components/LoginForm';
 
 function Main(){
     //const dispatch = useDispatch();
@@ -12,6 +14,11 @@ function Main(){
 
     const [Email, setEmail] = useState("");
     const [Password, setPassword] = useState("");
+
+    const idRef = useRef();
+    const pwRef = useRef();
+    const navigate = useNavigate();
+
 
     const callApi = async() => {
         const response = await axios.get('http://localhost:3000/api/study/all');
@@ -27,10 +34,12 @@ function Main(){
 
     return (
         <div>
+            {/* <LoginForm /> */}
+            
             <Layout 
-                userNick={null}
+                //userNick={null}
                 participatingCount={null}
-                email={null}
+                //email={null}
             />
             <hr/>
 
