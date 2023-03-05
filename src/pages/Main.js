@@ -1,38 +1,29 @@
 import { useEffect, useState } from "react";
-//import { useDispatch } from 'react-redux';
 import axios from 'axios';
 
 import Layout from '../components/Layout';
 import StudyList from '../components/StudyList';
 
-function Main(){
-    //const dispatch = useDispatch();
+const SERVER_URI = 'http://localhost:3000';
+
+function Main() {
     const [loading, setLoading] = useState(true);
     const [studies, setStudies] = useState([]);
 
-    const [Email, setEmail] = useState("");
-    const [Password, setPassword] = useState("");
-
-    const callApi = async() => {
+    const callApi = async () => {
         const response = await axios.get('http://localhost:3000/api/study/all');
-        //console.log(response);
-        //console.log(response.data);
         setStudies(response.data);
         setLoading(false);
     };
 
-    useEffect(()=>{
+    useEffect(() => {
         callApi();
     }, []);
 
     return (
         <div>
-            <Layout 
-                userNick={null}
-                participatingCount={null}
-                email={null}
-            />
-            <hr/>
+            <Layout />
+            <hr />
 
             <div className="study-groups">
                 <h2>개설된 스터디</h2>
@@ -46,16 +37,16 @@ function Main(){
                     )
                 )}
             </div>
-            
-            <br/><br/>
-            
-            
+
+            <br /><br />
+
+
             <div>
                 <form action="/study-group" method="get">
                     <button type="submit">스터디 만들기</button>
                 </form>
             </div>
-            
+
         </div>
     );
 }

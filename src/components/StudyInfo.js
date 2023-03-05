@@ -1,5 +1,3 @@
-import PropTypes from "prop-types";
-
 function StudyInfo({gpId, groupName, members}){
     return (
         <div>

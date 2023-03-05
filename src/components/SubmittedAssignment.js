@@ -1,14 +1,9 @@
-import { useEffect, useState } from "react";
-import { useParams, Link } from 'react-router-dom';
 import axios from 'axios';
-
-import PageLink from '../components/PageLink';
-import StudyInfo from '../components/StudyInfo';
 
 const SERVER_URI = 'http://localhost:3000';
 
 function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick }) {
-    const onClick = (event) => {
+    const onClick = () => {
         //event.preventDefault();
         axios.delete(`${SERVER_URI}/api/assignment`, {
             data: {
