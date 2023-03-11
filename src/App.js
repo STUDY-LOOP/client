@@ -8,6 +8,7 @@ import StudyMain from "./pages/StudyMain";
 import CreateGroup from "./pages/CreateGroup";
 import StudyMember from "./pages/StudyMember";
 import StudyAssignment from "./pages/StudyAssignment";
+import VideoChat from './pages/VideoChat';
 
 function App() {
   
@@ -22,6 +23,7 @@ function App() {
             <Route path="/study-group/:gpId" element={<StudyMain />} />
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
+            <Route path="/study-group/:gpId/videoChat" element={<VideoChat />} />
         </Routes>
     </BrowserRouter>
   );
