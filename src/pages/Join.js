@@ -40,7 +40,7 @@ function Join() {
                 </div>
                 <div className="input-group">
                     <label htmlFor="nickname">닉네임</label>
-                    <input type="nickname" name="nickname" onChange={nickInputHandler} required />
+                    <input type="text" name="nickname" onChange={nickInputHandler} required />
                 </div>
                 <div className="input-group">
                     <label htmlFor="password">비밀번호</label>
