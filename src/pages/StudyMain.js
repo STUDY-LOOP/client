@@ -4,6 +4,7 @@ import axios from 'axios';
 
 import PageLink from '../components/PageLink';
 import StudyInfo from '../components/StudyInfo';
+import Calendar from '../components/Calendar';
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -59,6 +60,8 @@ function StudyMain() {
                     members={studyMembers}
                 />
             </div>
+
+            <Calendar />
 
             {sessionStorage.getItem("user_nick") !== null
                 ? <div>

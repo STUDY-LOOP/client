@@ -11,7 +11,7 @@ function Main() {
     const [studies, setStudies] = useState([]);
 
     const callApi = async () => {
-        const response = await axios.get('http://localhost:3000/api/study/all');
+        const response = await axios.get(`${SERVER_URI}/api/study/all`);
         setStudies(response.data);
         setLoading(false);
     };
@@ -22,9 +22,7 @@ function Main() {
 
     return (
         <div>
-            <Layout />
-            <hr />
-
+            <Layout /> <hr />
             <div className="study-groups">
                 <h2>개설된 스터디</h2>
                 {loading ? <h3>LOADING...</h3> : studies.map(
@@ -36,10 +34,7 @@ function Main() {
                         />
                     )
                 )}
-            </div>
-
-            <br /><br />
-
+            </div> <br /><br />
 
             <div>
                 <form action="/study-group" method="get">
