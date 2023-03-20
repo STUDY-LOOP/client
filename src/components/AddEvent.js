@@ -91,7 +91,31 @@ function AddEvent({ date_start }) {
     const logHandler = (event) => { event.preventDefault(); setLog(event.target.value); };
     const contentHandler = (event) => { event.preventDefault(); setContent(event.target.value); };
 
-    const onClickAsgmt = async () => {
+    const onClickAsgmt = async (event) => {
+        event.preventDefault()
+
+        axios.post(`${SERVER_URI}/api/assignmentBox`, {
+            gpId: gpId,
+            log: log,
+            title: eventTitle,
+            content: content,
+            deadline: date_start,
+        })
+        .then(res => {
+            axios.post(`${SERVER_URI}/api/event`, {
+                gpId: gpId,
+                event_title: eventTitle,
+                event_type: type,
+                date_start: date_start,
+                event_color: color[Number(type)],
+                boxId: res.data,
+            })
+        })
+        .then(() => window.location.replace(`/study-group/${gpId}`))
+        .catch((err) => alert(err));
+    };
+
+    /* const onClickAsgmt = async () => {
 
         await axios.all([
             axios.post(`${SERVER_URI}/api/event`, {
@@ -111,7 +135,7 @@ function AddEvent({ date_start }) {
         ])
         .then(() => window.location.replace(`/study-group/${gpId}`))
         .catch(err => alert(err));
-    };
+    }; */
 
 
     return (
