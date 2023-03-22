@@ -8,7 +8,6 @@ import axios from 'axios';
 
 import AddEvent from './AddEvent';
 import StudyLog from './StudyLog';
-import EachAsgmt from './EachAsgmt';
 import './style/Calendar.css';
 
 const SERVER_URI = 'http://localhost:3000';
@@ -20,7 +19,7 @@ function Calendar() {
     const [groupEvents, setGroupEvents] = useState([]);
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
     const [logModalIsOpen, setLogModalIsOpen] = useState(false);
-    const [asgmtModalIsOpen, setAsgmtModalIsOpen] = useState(false);
+    // const [asgmtModalIsOpen, setAsgmtModalIsOpen] = useState(false);
     const [clickedDate, setClickedDate] = useState(null);
 
     const callApi = async () => {
@@ -40,7 +39,7 @@ function Calendar() {
     const handleDateClick = (arg) => {
         setAddModalIsOpen(true);
         setLogModalIsOpen(false);
-        setAsgmtModalIsOpen(false);
+        // setAsgmtModalIsOpen(false);
         setClickedDate(arg.dateStr);
     }
 
@@ -50,11 +49,14 @@ function Calendar() {
         if (event_type == 0) {
             setLogModalIsOpen(true);
             setAddModalIsOpen(false);
-            setAsgmtModalIsOpen(false);
+            // setAsgmtModalIsOpen(false);
         }
         // 과제
         else if (event_type == 1) {
-            setAsgmtModalIsOpen(true);
+            let boxId = arg.event._def.extendedProps.boxId;
+            window.location.href = `/study-group/${gpId}/${boxId}`;
+
+            // setAsgmtModalIsOpen(true);
             setLogModalIsOpen(false);
             setAddModalIsOpen(false);
         }
@@ -66,7 +68,7 @@ function Calendar() {
                 <Modal
                     className="modal"
                     isOpen={addModalIsOpen}
-                    onRequestClose={() => { setAddModalIsOpen(false);} }
+                    onRequestClose={() => { setAddModalIsOpen(false); }}
                     ariaHideApp={false}
                 >
                     <AddEvent
@@ -82,15 +84,6 @@ function Calendar() {
                     ariaHideApp={false}
                 >
                     <StudyLog />
-                </Modal>
-
-                <Modal
-                    className="modal"
-                    isOpen={asgmtModalIsOpen}
-                    onRequestClose={() => setAsgmtModalIsOpen(false)}
-                    ariaHideApp={false}
-                >
-                    <EachAsgmt />
                 </Modal>
             </div>
 

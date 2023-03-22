@@ -8,7 +8,7 @@ const SERVER_URI = 'http://localhost:3000';
 
 function AssignmentBox({ gpId, boxId, title, Assignments }) {
     const [files, setFiles] = useState();
-
+    
     const onChange = (event) => {
         setFiles(event.target.files[0]);
     };
@@ -18,7 +18,7 @@ function AssignmentBox({ gpId, boxId, title, Assignments }) {
         let jsonData = JSON.stringify({ 
             gpId: gpId,
             boxId: boxId,
-            uploader: '3@3',
+            uploader: sessionStorage.getItem('user_email'),
         });
         
         const formData = new FormData();
@@ -31,17 +31,21 @@ function AssignmentBox({ gpId, boxId, title, Assignments }) {
     return (
         <div>
             <strong>{title}</strong>
-            {Assignments.map(
-                (asgmt) =>
-                    <Submitted
-                        key={asgmt.filename}
-                        gpId={gpId}
-                        uploader={asgmt.uploader}
-                        filename={asgmt.filename}
-                        fileOrigin={asgmt.fileOrigin}
-                        userNick={asgmt.User.userNick}
-                    />
-            )}
+            {Object.keys(Assignments).length !== 0?
+            <div>
+                {Assignments&&Assignments.map(
+                    (asgmt) =>
+                        <Submitted
+                            key={asgmt.filename}
+                            gpId={gpId}
+                            uploader={asgmt.uploader}
+                            filename={asgmt.filename}
+                            fileOrigin={asgmt.fileOrigin}
+                            userNick={asgmt.User.userNick}
+                        />
+                )}
+            </div>
+            :<div>제출된 과제 없음</div>}
 
             <div>
                 <form onSubmit={upload} encType="multipart/form-data">
