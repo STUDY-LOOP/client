@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 
-function EachAssignment({userId, title, assignment}){
+function EachAssignment({userId, title, assignment, userNick}){
     const [mine, setMine] = useState(false);
 
     useEffect(() => {
@@ -14,7 +14,7 @@ function EachAssignment({userId, title, assignment}){
 
     return (
         <div>
-            {title} : { mine ? "제출" : "미제출" }
+            {title? title: userNick} : { mine ? "제출" : "미제출" }
         </div>
     )
 }

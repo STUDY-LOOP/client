@@ -26,7 +26,7 @@ function AddEvent({ date_start }) {
     }, [date_start])
 
     useEffect(() => {
-        if (startDateTime > endDateTime) {
+        if (endDateTime && startDateTime > endDateTime) {
             window.alert('시작일 이후의 날짜를 선택하세요.');
             setEndDateTime(startDateTime);
         }
@@ -43,28 +43,29 @@ function AddEvent({ date_start }) {
         const divPicker = document.getElementById("picker");
         const divPickers = document.getElementById("pickers");
 
-        //스터디
+        // '스터디' 클릭할 경우
         if (event.target.value === "0") {
             btnAddEvent.style.display = 'block';
             divCreateAsgmt.style.display = 'none'
             divPicker.style.display = 'block';
             divPickers.style.display = 'none';
-            setEndDateTime(startDateTime);
+            setEndDateTime(null);
         }
-        //과제 마감
+        // '과제 마감' 클릭할 경우
         else if (event.target.value === "1") {
             btnAddEvent.style.display = 'none';
             divCreateAsgmt.style.display = 'block';
             divPicker.style.display = 'block';
             divPickers.style.display = 'none';
-            setEndDateTime(startDateTime);
+            setEndDateTime(null);
         }
-        //기타
+        // '기타' 클릭할 경우
         else {
             btnAddEvent.style.display = 'block';
             divCreateAsgmt.style.display = 'none';
             divPicker.style.display = 'none';
             divPickers.style.display = 'block';
+            setEndDateTime(startDateTime);
         };
     };
 
@@ -80,6 +81,7 @@ function AddEvent({ date_start }) {
             }, {
                 withCredentials: true
             })
+            .then(() => window.location.replace(`/study-group/${gpId}`))
             .catch(err => alert(err));
     }
 
@@ -99,14 +101,16 @@ function AddEvent({ date_start }) {
             log: log,
             title: eventTitle,
             content: content,
-            deadline: date_start,
+            deadline: startDateTime,
         })
         .then(res => {
+            alert(res.data);
             axios.post(`${SERVER_URI}/api/event`, {
                 gpId: gpId,
                 event_title: eventTitle,
                 event_type: type,
-                date_start: date_start,
+                date_start: startDateTime,
+                date_end: null,
                 event_color: color[Number(type)],
                 boxId: res.data,
             })
@@ -114,29 +118,6 @@ function AddEvent({ date_start }) {
         .then(() => window.location.replace(`/study-group/${gpId}`))
         .catch((err) => alert(err));
     };
-
-    /* const onClickAsgmt = async () => {
-
-        await axios.all([
-            axios.post(`${SERVER_URI}/api/event`, {
-                gpId: gpId,
-                event_title: eventTitle,
-                event_type: type,
-                date_start: date_start,
-                event_color: color[Number(type)],
-            }),
-            axios.post(`${SERVER_URI}/api/assignmentBox`, {
-                gpId: gpId,
-                log: log,
-                title: eventTitle,
-                content: content,
-                deadline: date_start,
-            }),
-        ])
-        .then(() => window.location.replace(`/study-group/${gpId}`))
-        .catch(err => alert(err));
-    }; */
-
 
     return (
         <>

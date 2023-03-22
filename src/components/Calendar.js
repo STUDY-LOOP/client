@@ -8,7 +8,6 @@ import axios from 'axios';
 
 import AddEvent from './AddEvent';
 import StudyLog from './StudyLog';
-import EachAsgmt from './EachAsgmt';
 import './style/Calendar.css';
 
 const SERVER_URI = 'http://localhost:3000';
@@ -86,15 +85,6 @@ function Calendar() {
                 >
                     <StudyLog />
                 </Modal>
-
-                {/* <Modal
-                    className="modal"
-                    isOpen={asgmtModalIsOpen}
-                    onRequestClose={() => setAsgmtModalIsOpen(false)}
-                    ariaHideApp={false}
-                >
-                    <EachAsgmt />
-                </Modal> */}
             </div>
 
             <div id="calendarDiv">
