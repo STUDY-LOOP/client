@@ -9,7 +9,6 @@ const SERVER_URI = 'http://localhost:3000';
 function AssignmentBox({ gpId, boxId, title, Assignments }) {
     const [files, setFiles] = useState();
     
-    console.log(Assignments)
     const onChange = (event) => {
         setFiles(event.target.files[0]);
     };
@@ -47,18 +46,6 @@ function AssignmentBox({ gpId, boxId, title, Assignments }) {
                 )}
             </div>
             :<div>제출된 과제 없음</div>}
-            
-            {/*Assignments.map(
-                (asgmt) =>
-                    <Submitted
-                        key={asgmt.filename}
-                        gpId={gpId}
-                        uploader={asgmt.uploader}
-                        filename={asgmt.filename}
-                        fileOrigin={asgmt.fileOrigin}
-                        userNick={asgmt.User.userNick}
-                    />
-            )*/}
 
             <div>
                 <form onSubmit={upload} encType="multipart/form-data">

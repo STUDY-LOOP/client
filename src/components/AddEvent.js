@@ -16,6 +16,7 @@ function AddEvent({ date_start }) {
     const [type, setType] = useState(null);
     const [startDateTime, setStartDateTime] = useState(date_start);
     const [endDateTime, setEndDateTime] = useState(date_start);
+    const [description, setDescription] = useState(null);
 
     const color = ['#088A29', '#5882FA', '#FACC2E'];    // 초록 파랑 주황
 
@@ -34,6 +35,7 @@ function AddEvent({ date_start }) {
 
 
     const eventTitleInputHandler = (event) => { event.preventDefault(); setEventTitle(event.target.value); };
+    const descriptionHandler = (event) => { event.preventDefault(); setDescription(event.target.value); };
     const typeInputHandler = (event) => {
         event.preventDefault();
         setType(event.target.value);
@@ -42,6 +44,7 @@ function AddEvent({ date_start }) {
         const divCreateAsgmt = document.getElementById("div-create-asgmt");
         const divPicker = document.getElementById("picker");
         const divPickers = document.getElementById("pickers");
+        const divDescription = document.getElementById("div-description");
 
         // '스터디' 클릭할 경우
         if (event.target.value === "0") {
@@ -49,7 +52,9 @@ function AddEvent({ date_start }) {
             divCreateAsgmt.style.display = 'none'
             divPicker.style.display = 'block';
             divPickers.style.display = 'none';
+            divDescription.style.display = 'none';
             setEndDateTime(null);
+            setDescription(null);
         }
         // '과제 마감' 클릭할 경우
         else if (event.target.value === "1") {
@@ -57,7 +62,9 @@ function AddEvent({ date_start }) {
             divCreateAsgmt.style.display = 'block';
             divPicker.style.display = 'block';
             divPickers.style.display = 'none';
+            divDescription.style.display = 'none';
             setEndDateTime(null);
+            setDescription(null);
         }
         // '기타' 클릭할 경우
         else {
@@ -65,7 +72,9 @@ function AddEvent({ date_start }) {
             divCreateAsgmt.style.display = 'none';
             divPicker.style.display = 'none';
             divPickers.style.display = 'block';
+            divDescription.style.display = 'block';
             setEndDateTime(startDateTime);
+            setDescription(null);
         };
     };
 
@@ -77,6 +86,7 @@ function AddEvent({ date_start }) {
                 event_type: type,
                 date_start: startDateTime,
                 date_end: endDateTime,
+                event_des: description,
                 event_color: color[Number(type)],
             }, {
                 withCredentials: true
@@ -122,11 +132,11 @@ function AddEvent({ date_start }) {
     return (
         <>
             <div id="picker">
-                <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd h:mm:ss a" />
+                <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd a h:mm" />
             </div>
             <div id="pickers" style={{ display: "none" }}>
-                <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd h:mm:ss a" />~
-                <DateTimePicker onChange={setEndDateTime} value={endDateTime} format="y-MM-dd h:mm:ss a" /> <br />
+                <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd a h:mm" />~
+                <DateTimePicker onChange={setEndDateTime} value={endDateTime} format="y-MM-dd a h:mm" /> <br />
             </div>
 
             <label htmlFor="title">TITLE</label>
@@ -140,13 +150,16 @@ function AddEvent({ date_start }) {
                 <option value="2">기타</option>
             </select><br />
 
+            <div id="div-description" style={{ display: "none" }}>
+                DESCRIPTION <input type="input" onChange={descriptionHandler} value={description} />
+            </div>
+
             <button id="button-add-event" onClick={onClickAddEvent}>일정 등록</button>
 
             <div id="div-create-asgmt" style={{ display: "none" }}>
                 <form>
-                    <input type="hidden" value="{{groupPublicId}}" name="gpId" /> <br />
-                    log <input type="input" onChange={logHandler} /> <br />
-                    content <input type="input" onChange={contentHandler} /> <br />
+                    LOG <input type="input" onChange={logHandler} /> <br />
+                    CONTENT <input type="input" onChange={contentHandler} /> <br />
                     <button type="button" onClick={onClickAsgmt}>과제함 생성</button>
                 </form>
             </div>
