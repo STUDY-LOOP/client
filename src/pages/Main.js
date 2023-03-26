@@ -22,7 +22,7 @@ function Main() {
 
     return (
         <div>
-            <Layout /> <hr />
+            <Layout/> <hr />
             <div className="study-groups">
                 <h2>개설된 스터디</h2>
                 {loading ? <h3>LOADING...</h3> : studies.map(
