@@ -47,7 +47,6 @@ function Layout() {
                 ? <div>
                     <div className="user-name">{`안녕하세요! ${sessionStorage.getItem("user_nick")}님`}</div>
                     <a id="my-profile" href="/my/profile" className="btn">마이페이지</a>&nbsp;
-                    <a id="logout" href={`${SERVER_URI}/api/user/logout`} className="btn">이상한로그아웃</a>&nbsp;
                     <button type="button" onClick={onClickLogout} className="btn">로그아웃</button>
                 </div>
 

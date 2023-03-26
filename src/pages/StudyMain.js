@@ -10,10 +10,12 @@ const SERVER_URI = 'http://localhost:3000';
 
 function StudyMain() {
     const { gpId } = useParams();
+    const userEmail = sessionStorage.getItem("user_email");
 
     const [loading, setLoading] = useState(true);
     const [studyInfo, setStudyInfo] = useState([]);
     const [studyMembers, setStudyMembers] = useState([]);
+    let membersEmail = [];
 
     useEffect(() => {
         axios.all([
@@ -23,6 +25,8 @@ function StudyMain() {
             axios.spread((res1, res2) => {
                 setStudyInfo(res1.data);
                 setStudyMembers(res2.data);
+                res2.data.map((m) => membersEmail.push(m.email));
+                console.log(membersEmail.includes(userEmail))
                 setLoading(false);
             })
         ).catch((err) => console.log(err));
@@ -63,17 +67,16 @@ function StudyMain() {
 
             <Calendar />
 
-            {sessionStorage.getItem("user_nick") !== null
-                ? <div>
+            {/* 로그인 안했거나 || 스터디장이거나 || 스터디원이라면 -> 가입 불가 */}
+            {userEmail===null || userEmail===studyInfo.groupLeader || membersEmail.includes(userEmail) ? null
+                : <div>
                     <button type="button" onClick={onClickJoin}>스터디 가입하기</button>
                 </div>
-                : <div/>
             }
 
-
-            <div>
-                <button type="button" onClick="location.href='/study-group/{{groupPublicId}}/setting'">스터디 설정</button> <br />
-            </div>
+            {userEmail === studyInfo.groupLeader?
+            <button type="button" onClick="location.href='/study-group/{{groupPublicId}}/setting'">스터디 설정</button>
+            : null}
 
             <div>
                 <PageLink

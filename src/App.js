@@ -4,6 +4,7 @@ import {useState, useEffect} from 'react';
 
 import Main from "./pages/Main";
 import Join from "./pages/Join";
+import MyPage from "./pages/MyPage";
 import StudyMain from "./pages/StudyMain";
 import CreateGroup from "./pages/CreateGroup";
 import StudyMember from "./pages/StudyMember";
@@ -20,12 +21,12 @@ function App() {
         <Routes>
             <Route path="/" element={<Main />} />
             <Route path="/join" element={<Join />} />
+            <Route path="/my/profile" element={<MyPage />} />
             <Route path="/study-group" element={<CreateGroup />} />
             <Route path="/study-group/:gpId" element={<StudyMain />} />
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
             <Route path="/study-group/:gpId/:boxId" element={<CalendarAssignment />} />
-            {/* <Route path="/study-group/:gpId/calendar/assignment" element={<CalendarAssignment />} /> */}
             <Route path="/study-group/:gpId/videoChat" element={<VideoChat />} />
         </Routes>
     </BrowserRouter>

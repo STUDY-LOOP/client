@@ -21,11 +21,12 @@ function UserAssignment({ email, nick, gpId }){
 
     return (
         <div>
-            <p>{nick}</p>
+            <p><b>{nick}</b></p>
 
             {assignmentBoxes.map(
                 asgmt => (
                     <EachAssignment
+                        key={email}
                         userId={email}
                         title={asgmt.title}
                         assignment={asgmt.Assignments}
