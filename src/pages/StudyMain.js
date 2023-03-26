@@ -1,9 +1,11 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import io from 'socket.io-client';
 
 import PageLink from '../components/PageLink';
 import StudyInfo from '../components/StudyInfo';
+import Chat from '../components/Chat';
 import Calendar from '../components/Calendar';
 
 const SERVER_URI = 'http://localhost:3000';
@@ -64,6 +66,12 @@ function StudyMain() {
                     members={studyMembers}
                 />
             </div>
+            
+            <hr />
+            <div>
+              <Chat />
+            </div>
+            <hr />
 
             <Calendar />
 
@@ -91,10 +99,9 @@ function StudyMain() {
                     link={`/study-group/${gpId}/videoChat`}
                     title={'화상회의'}
                 />
-            </div>
-
-        </div>
-    );
+            </div>      
+      </div>
+  );
 }
 
 export default StudyMain;
