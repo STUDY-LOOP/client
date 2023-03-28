@@ -10,6 +10,7 @@ import CreateGroup from "./pages/CreateGroup";
 import StudyMember from "./pages/StudyMember";
 import StudyAssignment from "./pages/StudyAssignment";
 import CalendarAssignment from "./pages/CalendarAssignment";
+import StudyLog from "./pages/StudyLog";
 import VideoChat from './pages/VideoChat';
 
 function App() {
@@ -27,6 +28,7 @@ function App() {
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
             <Route path="/study-group/:gpId/:boxId" element={<CalendarAssignment />} />
+            <Route path="/study-group/:gpId/log/:log" element={<StudyLog />} />
             <Route path="/study-group/:gpId/videoChat" element={<VideoChat />} />
         </Routes>
     </BrowserRouter>

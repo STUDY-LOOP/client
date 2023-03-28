@@ -7,7 +7,6 @@ import Modal from 'react-modal';
 import axios from 'axios';
 
 import AddEvent from './AddEvent';
-import StudyLog from './StudyLog';
 import './style/Calendar.css';
 
 const SERVER_URI = 'http://localhost:3000';
@@ -18,8 +17,6 @@ function Calendar() {
     const [loading, setLoading] = useState(true);
     const [groupEvents, setGroupEvents] = useState([]);
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
-    const [logModalIsOpen, setLogModalIsOpen] = useState(false);
-    // const [asgmtModalIsOpen, setAsgmtModalIsOpen] = useState(false);
     const [clickedDate, setClickedDate] = useState(null);
 
     const callApi = async () => {
@@ -38,8 +35,6 @@ function Calendar() {
 
     const handleDateClick = (arg) => {
         setAddModalIsOpen(true);
-        setLogModalIsOpen(false);
-        // setAsgmtModalIsOpen(false);
         setClickedDate(arg.dateStr);
     }
 
@@ -47,17 +42,14 @@ function Calendar() {
         const event_type = arg.event._def.extendedProps.event_type;
         // 스터디
         if (event_type == 0) {
-            setLogModalIsOpen(true);
+            let log = arg.event._def.extendedProps.log;
+            window.location.href = `/study-group/${gpId}/log/${log}`;
             setAddModalIsOpen(false);
-            // setAsgmtModalIsOpen(false);
         }
         // 과제
         else if (event_type == 1) {
             let boxId = arg.event._def.extendedProps.boxId;
             window.location.href = `/study-group/${gpId}/${boxId}`;
-
-            // setAsgmtModalIsOpen(true);
-            setLogModalIsOpen(false);
             setAddModalIsOpen(false);
         }
     }
@@ -75,15 +67,6 @@ function Calendar() {
                         date_start={clickedDate}
                     />
 
-                </Modal>
-
-                <Modal
-                    className="modal"
-                    isOpen={logModalIsOpen}
-                    onRequestClose={() => setLogModalIsOpen(false)}
-                    ariaHideApp={false}
-                >
-                    <StudyLog />
                 </Modal>
             </div>
 
