@@ -1,0 +1,43 @@
+#div-scroll {
+    display: block;
+}
+
+#div-grid-asgmt::-webkit-scrollbar {
+    display: none;
+}
+
+#div-grid-asgmt {
+    display: grid;
+    width: 70%;
+    height: 100%;
+    overflow-y: auto;
+
+    gap: 10px;
+
+    grid-template-areas:
+        "div-layout"
+        "div-asgmt-layout"
+        "div-list"
+    ;
+}
+
+#div-layout {
+    grid-area: div-layout;
+}
+
+#div-asgmt-layout {
+    grid-area: div-asgmt-layout;
+}
+
+#div-asgmt-layout div {
+    text-align: right;
+}
+
+#div-list {
+    grid-area: div-list;
+}
+
+#modal-create-box {
+    width: 30%;
+    height: 60%;
+}

@@ -1,0 +1,67 @@
+#div-layout-grid::-webkit-scrollbar {
+    display: none;
+}
+
+#div-layout-grid {
+    /* display: grid; */
+    width: 100%;
+    height: 100%;
+    overflow-y: auto;
+
+    display: flex;
+    flex-direction: column;
+}
+
+#div-layout-1 {
+    grid-area: div-upper;
+    width: 60%;
+}
+
+#div-grid-cal-asgmt {
+    grid-area: div-lower;
+    margin-top: 50px;
+    display: grid;
+    width: 40%;
+
+    gap: 10px;
+    grid-template-areas:
+        "div-layout-2       div-btn-detail"
+        "div-my-asgmt       div-my-asgmt"
+        "div-all-asgmts     div-all-asgmts"
+        "div-btn-boxes      div-btn-boxes"
+        "div-no-submit      div-no-submit"
+    ;
+}
+
+#div-layout-2 {
+    grid-area: div-layout-2;
+}
+
+#div-btn-detail {
+    grid-area: div-btn-detail;
+    text-align: right;
+}
+
+#div-my-asgmt {
+    grid-area: div-my-asgmt;
+    margin-top: 30px;
+}
+
+#trigger-asgmt {
+    float: right;
+    text-align: right;
+}
+
+#div-all-asgmts {
+    grid-area: div-all-asgmts;
+    margin-top: 30px;
+}
+
+#div-btn-boxes {
+    grid-area: div-btn-boxes;
+    text-align: right;
+}
+
+#div-no-submit {
+    grid-area: div-no-submit;
+}
