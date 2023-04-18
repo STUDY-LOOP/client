@@ -28,6 +28,7 @@ function App() {
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
             <Route path="/study-group/:gpId/:boxId" element={<CalendarAssignment />} />
+            <Route path="/:gpId/asgmt/:boxId" element={<CalendarAssignment />} />
             <Route path="/study-group/:gpId/log/:log" element={<StudyLog />} />
             <Route path="/study-group/:gpId/videoChat" element={<VideoChat />} />
         </Routes>

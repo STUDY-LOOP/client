@@ -29,13 +29,6 @@ function StudyLog() {
     return (
         <>
             <div>
-                <PageLink
-                    link={'/'}
-                    title={'메인화면으로'}
-                />
-            </div> <hr />
-
-            <div>
                 {content}
                 <button type="button" onClick={handleOnClick}>수정하기</button>
 

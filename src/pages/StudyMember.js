@@ -1,9 +1,16 @@
 import { useEffect, useState } from "react";
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Alert, Badge, Button, Table } from "react-bootstrap";
 
 import UserAssignment from '../components/UserAssignment';
+import AssignmentName from '../components/AssignmentName';
 import MemberWithQuitBtn from '../components/MemberWithQuitBtn';
+import LayoutStudyPage from '../components/LayoutStudyPage';
+import LayoutMain from '../components/LayoutMain';
+import './style/StudyMember.css';
+import './style/Common.css';
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -38,46 +45,121 @@ function StudyMember() {
 
 
     return (
-        <div>
-            [스터디장] {studyInfo.groupLeader} <br /><br />
-
-            <div>
-                [스터디원]
-
-                {studyMembers.map((member) =>
-                    <MemberWithQuitBtn
-                        key={member.email}
-                        email={member.email}
-                        nick={member.userNick}
-                        gpId={studyInfo.groupPublicId}
-                        leader={studyInfo.groupLeader}
-                    />
-                )}
+        <div class="div-layout-upper">
+            <div class="div-layout-lower-1">
+                <LayoutMain />
             </div>
-
-            <hr />
-
-            <div>
-                {loading ? <h3>LOADING...</h3> : <>
-
-                <UserAssignment
-                    key={studyInfo.groupLeader}
-                    email={studyInfo.groupLeader}
-                    nick={studyLeader}
-                    gpId={studyInfo.groupPublicId}
-                />
-
-                {studyMembers.map(
-                    (member) =>
-                        <UserAssignment
-                            key={member.email}
-                            email={member.email}
-                            nick={member.userNick}
+            {/* <div class="div-layout-lower-2"> */}
+            <div class="div-layout-lower-2-custom">
+                <div id="div-grid-members">
+                    <div id="div-layout">
+                        <LayoutStudyPage
+                            key={studyInfo.groupPublicId}
                             gpId={studyInfo.groupPublicId}
+                            groupName={studyInfo.groupName}
+                            leader={studyInfo.leader}
                         />
+                    </div>
+                    <div id="div-members">
+                        // 이 부분이 필요해 보이나요? 스터디장 말고 스터디원 목록 <br /><br />
+                        [스터디장] {studyInfo.groupLeader} <br /><br />
 
-                )} </>}
+                        <div>
+                            [스터디원]
+
+                            {studyMembers.map((member) =>
+                                <MemberWithQuitBtn
+                                    key={member.email}
+                                    email={member.email}
+                                    nick={member.userNick}
+                                    gpId={studyInfo.groupPublicId}
+                                    leader={studyInfo.groupLeader}
+                                />
+                            )}
+                        </div>
+                    </div>
+
+                    <div id="div-table-asgmt">
+                        <Alert variant="primary">
+                            <p>과제</p>
+                        </Alert>
+                        {loading ? <h3>LOADING...</h3> :
+                            <Table responsive bordered hover className="tables">
+                                <thead>
+                                    <tr>
+                                        <td width="50"></td>
+                                        <AssignmentName
+                                            key={studyInfo.groupPublicId}
+                                            gpId={studyInfo.groupPublicId}
+                                        />
+                                        <td width="70"><b>미제출</b></td>
+
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <UserAssignment
+                                        key={studyInfo.groupLeader}
+                                        email={studyInfo.groupLeader}
+                                        nick={studyLeader}
+                                        gpId={studyInfo.groupPublicId}
+                                    />
+
+                                    {studyMembers.map(
+                                        (member) =>
+                                            <UserAssignment
+                                                key={member.email}
+                                                email={member.email}
+                                                nick={member.userNick}
+                                                gpId={studyInfo.groupPublicId}
+                                            />
+                                    )}
+                                </tbody>
+                            </Table>
+                        }
+                    </div>
+
+                    <div id="div-table-attend">
+                        <h2><Badge pill bg="primary">과제</Badge></h2>
+                        {loading ? <h3>LOADING...</h3> :
+
+                            <Table responsive bordered hover className="tables" id="HIHI">
+                                <thead>
+                                    <tr>
+                                        <td></td>
+                                        <AssignmentName
+                                            key={studyInfo.groupPublicId}
+                                            gpId={studyInfo.groupPublicId}
+                                        />
+                                        <td><b>미제출</b></td>
+                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>dd</td>
+                                    </tr>
+                                </thead>
+
+                                <tbody>
+                                    <UserAssignment
+                                        key={studyInfo.groupLeader}
+                                        email={studyInfo.groupLeader}
+                                        nick={studyLeader}
+                                        gpId={studyInfo.groupPublicId}
+                                    />
+
+                                    {studyMembers.map(
+                                        (member) =>
+                                            <UserAssignment
+                                                key={member.email}
+                                                email={member.email}
+                                                nick={member.userNick}
+                                                gpId={studyInfo.groupPublicId}
+                                            />
+                                    )}
+                                </tbody>
+                            </Table>
+                        }
+                    </div>
+                </div>
             </div>
+            {/* </div> */}
         </div>
     );
 }

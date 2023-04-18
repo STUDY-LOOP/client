@@ -1,0 +1,22 @@
+#after-login button {
+    color: white;
+    padding-left: 0;
+}
+
+#join {
+    color: white;
+    padding-left: 0;
+}
+
+#welcome-name {
+    color: white;
+}
+
+#login {
+    color: white;
+    padding-left: 0;
+}
+
+#enter-login {
+    float: right;
+}
