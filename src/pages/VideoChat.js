@@ -1,12 +1,56 @@
 import { useEffect, useState, useRef } from "react";
-import { useLocation } from 'react-router-dom';
+import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { io } from "socket.io-client";
 import { Peer } from "peerjs";
-import { useNavigate } from 'react-router-dom';
+
+import axios from 'axios';
 
 const SERVER_URI = 'http://localhost:3000';
 
 function VideoChat() {
+    // const meetId = useParams();
+    const { gpId } = useParams();
+    var meetId = 0;
+    var today = new Date();
+
+    // dateTimeString 코드 정리
+    var year = today.getFullYear();
+    var month = ('0' + (today.getMonth() + 1)).slice(-2);
+    var day = ('0' + today.getDate()).slice(-2);
+    var dateString = year + '-' + month + '-' + day;
+
+    var hours = ('0' + today.getHours()).slice(-2);
+    var minutes = ('0' + today.getMinutes()).slice(-2);
+    var seconds = ('0' + today.getSeconds()).slice(-2);
+    var timeString = hours + ':' + minutes + ':' + seconds;
+
+    const dateTimeString = dateString + 'T' + timeString + '.000Z'; // YYYY-MM-DDTHH:MM:SSZ
+
+    const callApi = async () => {
+        await axios.get(`/api/${gpId}/meet`)
+            .then((res) => {
+                meetId = res.data;
+               
+                axios.post(`/api/${gpId}/check-attendance/${meetId}`, {
+                        userNick: NICKNAME,
+                        enterDate: dateTimeString,
+                })
+                .then(
+                    
+                )
+                .catch(err => alert(err));
+
+            })
+            .catch(err => 
+                alert("회의 시간 아님")); //스터디 메인 페이지로 이동
+                
+    };
+
+    useEffect(() => {
+        console.log('run');
+        callApi();
+    }, [])
+
     const location = useLocation();
     const navigate = useNavigate();
 
@@ -14,20 +58,20 @@ function VideoChat() {
     const peers = []
     let room_id, user_id, user_name
 
-    const NICKNAME = "닉네임";
-    const ROOM_ID = "group public Id";
-
+    const NICKNAME = sessionStorage.getItem("user_nick");
+    const ROOM_ID = gpId;
+    const [studyInfo, setStudyInfo] = useState([]);
     const [message, setMessage] = useState(''); //chat input
     const [users, setUsers] = useState(1);
 
     const [mic, setMic] = useState({
-        curState: true, 
-        name: "Mute"
+        curState: true,
+        name: "BsMicMuteFill" //"Mute"
     });
 
     const [camera, setCamera] = useState({
-        curState: true,  
-        name: "Turn Camera Off"
+        curState: true,
+        name: "Turn Camera Off" 
     });
 
     const allStream = useRef();
@@ -35,14 +79,14 @@ function VideoChat() {
     const chatContent = document.querySelector('#chat-content');
 
     const handleMuteClick = () => {
-        if (mic.curState) {  
+        if (mic.curState) {
             let audio = allStream.current.getAudioTracks();
             audio[0].enabled = false;
             setMic({
                 curState: false,
                 name: "UnMute"
             });
-        } else { 
+        } else {
             let audio = allStream.current.getAudioTracks();
             audio[0].enabled = true;
             setMic({
@@ -86,7 +130,6 @@ function VideoChat() {
     });
 
     useEffect(() => {
-
         myPeer.on('open', peerid => {
             room_id = ROOM_ID
             user_name = NICKNAME
@@ -164,14 +207,14 @@ function VideoChat() {
             userVideo.addEventListener('loadedmetadata', () => {
                 userVideo.play();
             });
-            videoGrid.current.append(userVideo); 
+            videoGrid.current.append(userVideo);
         }
 
         function removeVideoStream(userVideo, stream) {
             console.log('remove video stream run', stream);
             userVideo.srcObject = stream;
             const videoParent = userVideo.parentNode;
-            userVideo.remove(); 
+            userVideo.remove();
         }
 
         socket.on("update-video", data => {
@@ -185,8 +228,8 @@ function VideoChat() {
             socket.disconnect();
         };
 
-    }, []); 
-    
+    }, []);
+
     const handleOnKeyPress = (e) => {
         if (e.key === 'Enter') {
             handleMessage();
@@ -201,14 +244,14 @@ function VideoChat() {
         else {
             const sender = NICKNAME;
             setMessage(''); //입력창 비우기
-            socket.emit('new_message', sender, text, ROOM_ID, () => {
+            socket.emit('new-message', sender, text, ROOM_ID, () => {
                 console.log('socket emit');
                 addMessage(sender, `You: ${text}`);
             });
-        }    
+        }
     }
 
-    socket.on('new_message', addMessage);
+    socket.on('new-message', addMessage);
 
     function addMessage(sender, message) {
         console.log(sender, ': ', message);
@@ -223,59 +266,61 @@ function VideoChat() {
 
     return (
         <div>
-            <div>
-                <p>[gpId:] {ROOM_ID}</p>
-                <p>[userNick:] {NICKNAME}</p>
+            <p>{`${sessionStorage.getItem("user_nick")}님`}</p>
+            <p>{studyInfo.groupName}</p>
 
-                <div>
-                    <div className="main_container">
-                        <div className="videochat_container">
-                            <div className="videochat_room">
-                                <div ref={videoGrid} id="video-grid">
-                                    
-                                </div>
-                            </div>
+            <div className="main_container">
+                <div className="videochat_container">
+                    <div className="videochat_room">
+                        <div ref={videoGrid} id="video-grid">
+
                         </div>
+                    </div>
+                </div>
 
-                        <div className="button_container">
-                            <div className="button_grid">
-                                <button onClick={handleMuteClick} id="mute-btn">{mic.name}</button>
-                            </div>
-                            <div className="button_grid">
-                                <button onClick={handleCameraClick} id="camera-btn">{camera.name}</button>
-                            </div>
-                            <div className="button_grid">
-                                <button onClick={handleExitClick} id="exit-btn">Exit</button>
-                            </div>
-                        </div>
+                <div className="button_container">
+                    <div className="button_grid">
+                        <button onClick={handleMuteClick} id="mute-btn">
+                            {mic.name}
+                        </button>
+                    </div>
+                    <div className="button_grid">
+                        <button onClick={handleCameraClick} id="camera-btn">
+                            {camera.name}
+                        </button>
+                    </div>
+                    <div className="button_grid">
+                        <button onClick={handleExitClick} id="exit-btn">
+                            Exit
+                        </button>
+                    </div>
+                </div>
 
-                        <div className="chat_container">
-                            <div id="chat-room">
-                                <span> Chat </span>
-                            </div>
+                <div className="chat_container">
+                    <div id="chat-room">
+                        <span> Chat </span>
+                    </div>
 
-                            <div id="chat-content">
-                                <ul className="message">
+                    <div id="chat-content">
+                        <ul className="message">
 
-                                </ul>
+                        </ul>
 
-                            </div>
+                    </div>
 
-                            <div className="enter_message">
-                                <input 
-                                value={message}
-                                onChange={(e) => setMessage(e.target.value)} 
-                                onKeyPress={handleOnKeyPress} 
-                                id="enter-message" 
-                                type="text" 
-                                placeholder="Type message here..." />
-                            </div>
-                        </div>
-
+                    <div className="enter_message">
+                        <input
+                            value={message}
+                            onChange={(e) => setMessage(e.target.value)}
+                            onKeyPress={handleOnKeyPress}
+                            id="enter-message"
+                            // type="text"
+                            placeholder="Type message here..." />
                     </div>
                 </div>
 
             </div>
+
         </div>
     );
 }
