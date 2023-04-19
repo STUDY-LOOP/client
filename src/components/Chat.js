@@ -1,10 +1,12 @@
 import axios from 'axios';
 import io from 'socket.io-client';
 import { useParams } from 'react-router-dom';
-import { useEffect } from 'react';
+import React, { useEffect } from 'react';
+import { renderToString } from 'react-dom/server';
 
 const SERVER_URI = 'http://localhost:3000';
 
+/* --- 본문 --- */
 function Chat() {
   const { gpId } = useParams();
 
@@ -44,23 +46,41 @@ function Chat() {
   };
 
   // msg 수신 시 채팅 컴포넌트 생성
-  const makeChatDiv = (userNick, content, datetime) => {
-    let div = document.createElement('div');
-    let nameH3 = document.createElement('h3');
-    let contentP = document.createElement('p');
-    let dateP = document.createElement('p');
+  const makeChatDiv = async (userNick, content, datetime) => {
+    console.log(userNick, content, datetime);
+    const ChatDiv = await React.createElement(
+      'div',
+      { className: 'chat' },
+      React.createElement(
+        'div',
+        { className: 'info', style: { marginBottom: '6px' } },
+        React.createElement(
+          'span',
+          { style: { marginRight: '4px', color: '#4a4848' } },
+          userNick
+        ),
+        React.createElement('span', { style: { color: '#c2c2c2' } }, datetime)
+      ),
+      React.createElement(
+        'div',
+        {
+          className: 'content',
+          style: {
+            backgroundColor: '#f0f0f0',
+            color: '#4a4848',
+            padding: '10px 20px',
+          },
+        },
+        content
+      )
+    );
 
-    nameH3.innerHTML = userNick;
-    contentP.innerHTML = content;
-    dateP.innerHTML = datetime;
+    const el = document.createElement('div');
+    el.innerHTML = renderToString(ChatDiv);
 
-    div.appendChild(nameH3);
-    div.appendChild(contentP);
-    div.appendChild(dateP);
+    const chatContainer = document.getElementById('chatArea');
 
-    div.className = 'chat';
-
-    document.getElementById('chatArea').prepend(div);
+    chatContainer.append(el.firstChild);
   };
 
   // msg 수신 이벤트
@@ -69,9 +89,9 @@ function Chat() {
   return (
     <div>
       <h2>CHAT</h2>
+      <div id="chatArea"></div>
       <input id="content" type="text" placeholder="type.." />
       <button onClick={sendMessage}>SEND</button>
-      <div id="chatArea"></div>
     </div>
   );
 }
