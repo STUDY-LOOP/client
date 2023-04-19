@@ -1,21 +1,24 @@
-/* 일요일 날짜: 빨간색 */
-.fc-day-sun a {
-    color: rgb(226, 0, 0);
-}
-  
-/* 토요일 날짜: 파란색 */
+.fc-day-mon a, 
+.fc-day-tue a,
+.fc-day-wed a,
+.fc-day-thu a,
+.fc-day-fri a { color: rgb(0, 0, 0); }
+
 .fc-day-sat a {
     color: rgb(0, 0, 201);
 }
 
-
-.modal {
-    z-index: 10;
-    padding: 30px;
-    background-color: rgb(82, 119, 240);
+.fc-day-sun a {
+    color: rgb(226, 0, 0);
 }
 
-.calendar {
+#div-comp-calendar {
+    position: relative;
+}
+
+#div-comp-add-event {
+    position: absolute;
     z-index: 3;
+    background-color: aliceblue;
 }
 

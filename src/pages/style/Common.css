@@ -1,0 +1,24 @@
+.wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.div-layout-upper {
+    display: flex;
+    width: 100%;
+    height: 100vh;
+}
+
+.div-layout-lower-1{
+    float: left;
+    height: 100%;
+    width: min-content;
+}
+
+.div-layout-lower-2{
+    float: left;
+    height: 100%;
+    flex: 1 0 auto;
+    padding: 30px;
+}

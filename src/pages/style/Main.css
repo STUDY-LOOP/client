@@ -1,0 +1,13 @@
+
+#div-scroll-main {
+    display: block;
+}
+
+#div-scroll-main-child {
+    height: 100%;
+    overflow-y: auto;
+}
+
+#div-scroll-main-child::-webkit-scrollbar {
+    display: none;
+}

@@ -1,0 +1,44 @@
+.div-layout-lower-2-custom{
+    float: left;
+    width: 80%;
+    height: 100%;
+    padding: 30px;
+}
+
+
+#div-grid-members {
+    display: grid;
+    width: 80%;
+    height: min-content;
+
+    /* grid-template-rows: 1fr 2fr 10fr; */
+    grid-template-columns: 1fr 1fr;
+    gap: 10px;
+
+    grid-template-areas:
+        "div-layout         div-layout"
+        "div-members        div-members"
+        "div-table-asgmt    div-table-attend"
+    ;
+}
+
+#div-layout {
+    grid-area: div-layout;
+}
+
+#div-members {
+    grid-area: div-members;
+}
+
+#div-table-asgmt {
+    grid-area: div-table-asgmt;
+    overflow-x: auto;
+    margin: 30px;
+}
+
+#div-table-attend {
+    grid-area: div-table-attend;
+    overflow-x: auto;
+    margin: 30px;
+}
+
