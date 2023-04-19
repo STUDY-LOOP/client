@@ -4,13 +4,10 @@ import axios from 'axios';
 
 // table UI 
 import * as React from 'react';
-import Table from '@mui/material/Table';
-import TableBody from '@mui/material/TableBody';
-import TableCell from '@mui/material/TableCell';
-import TableContainer from '@mui/material/TableContainer';
-import TableHead from '@mui/material/TableHead';
-import TableRow from '@mui/material/TableRow';
-import Paper from '@mui/material/Paper';
+import { styled } from '@mui/material/styles';
+import { typography } from '@mui/system';
+import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
+
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -29,12 +26,12 @@ function MeetAttendance() {
 
     return (
         <div>
-            <TableContainer component={Paper}>
-                <Table sx={{ minWidth: 650 }} aria-label="simple table">
+            <TableContainer sx={{ width: 400 }} component={Paper}>
+                <Table stickyHeader="true">
                     <TableHead>
                         <TableRow>
-                            <TableCell>이름</TableCell>
-                            <TableCell>출석 여부</TableCell>
+                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>이름</TableCell>
+                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>출석 여부</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
@@ -43,8 +40,8 @@ function MeetAttendance() {
                                 key={row.userNick}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row">{row.userNick}</TableCell>
-                                <TableCell>{row.attendState}</TableCell>
+                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row.userNick}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }}>{row.attendState}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

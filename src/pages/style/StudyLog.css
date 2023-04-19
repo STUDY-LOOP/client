@@ -1,0 +1,21 @@
+.div-page-header {
+    margin-bottom: 20px;
+}
+
+.div-component-header {
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+#div-studylog {
+    flex-direction: column;
+}
+
+#div-minutes {
+    margin-bottom: 60px;
+}
+
+#div-attendance {
+    margin-bottom: 60px;
+}
