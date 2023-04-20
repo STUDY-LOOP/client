@@ -2,7 +2,6 @@ import { useEffect, useState, useRef } from "react";
 import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { io } from "socket.io-client";
 import { Peer } from "peerjs";
-
 import axios from 'axios';
 
 const SERVER_URI = 'http://localhost:3000';
@@ -10,7 +9,6 @@ const SERVER_URI = 'http://localhost:3000';
 function VideoChat() {
     // const meetId = useParams();
     const { gpId } = useParams();
-    var meetId = 0;
     var today = new Date();
 
     // dateTimeString 코드 정리
@@ -27,27 +25,26 @@ function VideoChat() {
     const dateTimeString = dateString + 'T' + timeString + '.000Z'; // YYYY-MM-DDTHH:MM:SSZ
 
     const callApi = async () => {
-        await axios.get(`/api/${gpId}/meet`)
+        await axios.get(`${SERVER_URI}/api/${gpId}/meet`)
             .then((res) => {
-                meetId = res.data;
-               
-                axios.post(`/api/${gpId}/check-attendance/${meetId}`, {
-                        userNick: NICKNAME,
-                        enterDate: dateTimeString,
-                })
-                .then(
-                    
-                )
-                .catch(err => alert(err));
+                var meetId = res.data;
 
+                axios.post(`${SERVER_URI}/api/${gpId}/check-attendance/${meetId}`, {
+                    userNick: NICKNAME,
+                    enterDate: dateTimeString,
+                })
+                    .then(
+                )
+                    .catch(err => alert(err));
             })
-            .catch(err => 
-                alert("회의 시간 아님")); //스터디 메인 페이지로 이동
-                
+            .catch(err => alert(err));
+                // alert("회의 시간 아님")
+                // 스터디 메인 페이지로 이동
+            
     };
 
     useEffect(() => {
-        console.log('run');
+        // console.log('run');
         callApi();
     }, [])
 
@@ -71,7 +68,7 @@ function VideoChat() {
 
     const [camera, setCamera] = useState({
         curState: true,
-        name: "Turn Camera Off" 
+        name: "Turn Camera Off"
     });
 
     const allStream = useRef();
