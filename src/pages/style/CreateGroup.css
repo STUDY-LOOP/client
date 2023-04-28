@@ -1,0 +1,17 @@
+#div-scroll-create {
+    display: block;
+}
+
+#div-create-form::-webkit-scrollbar {
+    display: none;
+}
+
+#div-create-form {
+    width: 70%;
+    height: 100%;
+    overflow-y: auto;
+}
+
+.row {
+    margin-top: 10px;
+}

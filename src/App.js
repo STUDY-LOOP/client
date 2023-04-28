@@ -23,7 +23,7 @@ function App() {
             <Route path="/" element={<Main />} />
             <Route path="/join" element={<Join />} />
             <Route path="/my/profile" element={<MyPage />} />
-            <Route path="/study-group" element={<CreateGroup />} />
+            <Route path="/group/create" element={<CreateGroup />} />
             <Route path="/study-group/:gpId" element={<StudyMain />} />
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
