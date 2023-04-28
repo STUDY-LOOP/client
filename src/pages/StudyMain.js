@@ -1,10 +1,10 @@
-import { useEffect, useState } from 'react';
+import { useEffect, useState, MouseEvent } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import FullCalendar from '@fullcalendar/react';
 import dayGridPlugin from '@fullcalendar/daygrid';
 import interactionPlugin from '@fullcalendar/interaction';
-// import Modal from 'react-modal';
+import BootstrapMenu from "bootstrap-menu";
 
 import io from 'socket.io-client';
 import 'bootstrap/dist/css/bootstrap.min.css';
@@ -49,9 +49,11 @@ function StudyMain() {
         ]).then(
             axios.spread((res1, res2, res3) => {
                 setStudyInfo(res1.data);
-                setStudyRule(res1.data.StudyRule.rule);
+                setStudyRule(res1.data.StudyRule);
+                setStudySchedule(res1.data.StudySchedule);
                 setStudyMembers(res2.data);
                 setGroupEvents(res3.data);
+
                 res2.data.map((m) => membersEmail.push(m.email));
                 console.log(membersEmail.includes(userEmail))
                 setLoading(false);
@@ -103,6 +105,32 @@ function StudyMain() {
         }
     }
 
+    const handleEventRender = info => {
+        let { event, el } = info;
+        new BootstrapMenu(el, {
+            actions: [
+                {
+                    name: "Action",
+                    onClick: function () {
+                        alert("'Action' clicked!");
+                    }
+                },
+                {
+                    name: "Another action",
+                    onClick: function () {
+                        console.log("'Another action' clicked!");
+                    }
+                },
+                {
+                    name: "A third action",
+                    onClick: function () {
+                        console.log("'A third action' clicked!");
+                    }
+                }
+            ]
+        });
+    }
+
     return (
         <div class="div-layout-upper">
 
@@ -132,7 +160,12 @@ function StudyMain() {
                             gpId={studyInfo.groupPublicId}
                             groupName={studyInfo.groupName}
                             leader={studyInfo.leader}
-                            rule={studyRule}
+                            rule={studyRule.rule}
+                            lateTime={studyRule.lateTime}
+                            lateFee={studyRule.lateFee}
+                            absentTime={studyRule.absentTime}
+                            absentFee={studyRule.absentFee}
+                            description={studyInfo.groupDescription}
                         />
                     </div>
 
@@ -149,6 +182,7 @@ function StudyMain() {
                             eventClick={handleEventClick}
                             events={groupEvents}
                             height={500}
+                            eventRender={handleEventRender}
                         />
 
                         <div id="div-comp-add-event" style={{ display: "none" }}>

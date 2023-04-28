@@ -77,7 +77,6 @@ function AddEvent({ date_start }) {
             deadline: startDateTime,
         })
             .then(res => {
-                alert(res.data);
                 axios.post(`${SERVER_URI}/api/event`, {
                     gpId: gpId,
                     event_title: eventTitle,

@@ -7,17 +7,17 @@
 
 #div-grid {
     display: grid;
-    width: 70%;
+    width: 80%;
 
     /* grid-template-rows: 1fr fr 2fr 1fr 1fr; */
-    grid-template-columns: repeat(5, 1fr);
+    grid-template-columns: repeat(8, 1fr);
     gap: 10px;
 
     grid-template-areas:
-        "div-info       div-info        div-info        div-info        div-info"
-        "div-calendar   div-calendar    div-calendar    div-calendar    ."
-        "div-calendar   div-calendar    div-calendar    div-calendar    div-chat"
-        "div-btn        div-btn         div-btn         div-btn         div-video"
+        "div-info       div-info        div-info        div-info        div-info        div-info    div-info"
+        "div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    .           ."
+        "div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    div-chat    div-chat"
+        "div-btn        div-btn         div-btn         div-btn         div-btn         div-video   div-video"
     ;
 }
 

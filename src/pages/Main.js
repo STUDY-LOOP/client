@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import { useNavigate } from "react-router";
 import axios from 'axios';
 
 import LayoutMain from '../components/LayoutMain';
@@ -12,6 +13,7 @@ import { Button } from "react-bootstrap";
 const SERVER_URI = 'http://localhost:3000';
 
 function Main() {
+    const navigate = useNavigate();
     const [loading, setLoading] = useState(true);
     const [studies, setStudies] = useState([]);
     const [user, setUser] = useState(sessionStorage.getItem("user_nick"));
@@ -19,9 +21,7 @@ function Main() {
     const callApi = async () => {
         const response = await axios.get(`${SERVER_URI}/api/study/all`);
         setStudies(response.data);
-        setLoading(false);
-
-        
+        setLoading(false);        
     };
 
     useEffect(() => {
@@ -32,6 +32,9 @@ function Main() {
         setUser(sessionStorage.getItem("user_nick"))
     }, [sessionStorage.getItem("user_nick")]);
 
+    const onClickCreate = () => {
+        navigate('/group/create');
+    }
 
     return (
         <div class="div-layout-upper">
@@ -46,25 +49,22 @@ function Main() {
                     <br /><br />
 
                     <div className="study-groups">
-                        <h2>개설된 스터디</h2>
+                        <h2><b>개설된 스터디</b></h2>
                         {loading ? <h3>LOADING...</h3> : studies.map(
                             study => (
                                 <StudyList
                                     key={study.gpId}
                                     gpId={study.groupPublicId}
                                     groupName={study.groupName}
+                                    groupDesc={study.groupDescription}
                                 />
                             )
                         )}
                     </div> <br /><br />
 
-                    {/* <CreateStudyBtn /> */}
-
                     {user
                         ? <div>
-                            <form action="/study-group" method="get">
-                                <Button type="submit">스터디 만들기</Button>
-                            </form>
+                            <Button onClick={onClickCreate}>스터디 만들기</Button>
                         </div>
                         : <>로그인 안 된 상태</>}
 
