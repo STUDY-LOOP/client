@@ -40,7 +40,6 @@ function StudyMain() {
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
     const [clickedDate, setClickedDate] = useState(null);
 
-
     useEffect(() => {
         axios.all([
             axios.get(`${SERVER_URI}/api/${gpId}/info`),
@@ -79,6 +78,7 @@ function StudyMain() {
 
     // 기본 버튼
     const onClickMember = () => { window.location.href = (`/study-group/${gpId}/member`) }
+    const onClickStudyInfo = () => { window.location.href = (`/study-group/${gpId}/studyinfo`) }
     const onClickAssignment = () => { window.location.href = (`/study-group/${gpId}/assignment`) }
     const onClickEnterVideo = () => { window.location.href = (`/study-group/${gpId}/videoChat`) }
 
@@ -201,7 +201,7 @@ function StudyMain() {
                         }
 
                         {userEmail === studyInfo.groupLeader ?
-                            <><Button type="button">스터디 설정</Button>&nbsp;</>
+                            <><Button type="button" onClick={onClickStudyInfo}>스터디 설정</Button>&nbsp;</>
                             : null}
 
                         <Button onClick={onClickMember}>회원 관리</Button> &nbsp;
