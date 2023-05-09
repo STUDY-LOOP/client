@@ -136,7 +136,7 @@ function MyPage() {
                 type="submit"
                 onClick={onClickEdit}
                 size="sm"
-                style={{ position: 'absolute', right: 205, bottom: 290 }}
+                style={{ position: 'absolute', right: 205, bottom: 270 }}
               >
                 Submit
               </Button>
@@ -151,7 +151,7 @@ function MyPage() {
                 {asLeader.map((study) => (
                   <>
                     <div>
-                      <ul>
+                      <ul className="mypage-ul">
                         <li>
                           <Link
                             className="mypage-link"
@@ -176,7 +176,7 @@ function MyPage() {
                 {asMember.map((study) => (
                   <>
                     <div>
-                      <ul>
+                      <ul className="mypage-ul">
                         <li>
                           <Link
                             className="mypage-link"

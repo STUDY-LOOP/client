@@ -7,14 +7,14 @@ a.mypage-link:hover {
   color: #0d6efd;
 }
 
-ul {
+.mypage-ul {
   list-style: none;
   position: relative;
   padding-left: 17px;
   margin: 10px 0px 10px 1px;
 }
 
-ul ::before {
+.mypage-ul ::before {
   content: '>';
   position: absolute;
   left: 0;
