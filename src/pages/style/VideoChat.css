@@ -1,0 +1,103 @@
+.div-layout-upper-2 {
+    width: 100%;
+    height: 100vh;
+    display: grid;
+    
+    grid-template-rows: 1fr 1fr 1fr 1fr 1fr 1fr 1fr 1fr;
+    grid-template-columns: 1fr 1fr 1fr 1fr 1fr;
+}
+
+/* .div-page-header2 {
+    color: white;
+    
+    grid-row: 1 / 2;
+    grid-column: 1 / 6;
+    background-color: #457b9d;
+} */
+
+.main-container {
+    display: grid;  
+}
+
+.videochat-container {
+    grid-row: 1 / 8;
+    grid-column: 1 / 6;
+    background-color:#f1faee;
+}
+
+.videochat-room {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-wrap: wrap;
+}
+
+#video-grid {
+    display: flex;
+    justify-content: center;
+    flex-wrap: wrap;
+}
+
+video {
+    object-fit: cover;
+    padding: 8px;
+}
+
+.button-container {
+    grid-row: 8 / 9;
+    grid-column: 1 / 6;
+    background-color: #1d3557;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.button-grid {  
+    display: flex;
+    flex-direction: row;  
+}
+
+#mic-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#camera-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#exit-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+#chat-btn {
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+/* .chat-container {
+    grid-row: 1 / 8;
+    grid-column: 5 / 6;
+    background-color: grey;
+} */
+
+#chat-room {
+    color: white;
+    font-size: 25px;
+    font-weight: 600;
+    margin-bottom: 15px;
+}
+
+#chat-content {
+
+}
+
+.enter-message {
+    /* align-self: end; */
+    /* align-items: flex-end; */
+    /* margin-top: auto; */
+}
+
+

@@ -7,6 +7,7 @@ import Join from "./pages/Join";
 import MyPage from "./pages/MyPage";
 import StudyMain from "./pages/StudyMain";
 import CreateGroup from "./pages/CreateGroup";
+import StudyInfo from "./pages/StudyInfo";
 import StudyMember from "./pages/StudyMember";
 import StudyAssignment from "./pages/StudyAssignment";
 import CalendarAssignment from "./pages/CalendarAssignment";
@@ -25,6 +26,7 @@ function App() {
             <Route path="/my/profile" element={<MyPage />} />
             <Route path="/group/create" element={<CreateGroup />} />
             <Route path="/study-group/:gpId" element={<StudyMain />} />
+            <Route path="/study-group/:gpId/studyinfo" element={<StudyInfo />} />
             <Route path="/study-group/:gpId/member" element={<StudyMember />} />
             <Route path="/study-group/:gpId/assignment" element={<StudyAssignment />} />
             <Route path="/study-group/:gpId/:boxId" element={<CalendarAssignment />} />
