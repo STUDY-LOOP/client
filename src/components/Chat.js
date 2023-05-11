@@ -46,9 +46,28 @@ function Chat() {
     callApi();
   }, []);
 
+  const getDate = () => {
+    let today = new Date();
+
+    let year = today.getFullYear();
+    let month = ('0' + (today.getMonth() + 1)).slice(-2);
+    let day = ('0' + today.getDate()).slice(-2);
+    let dateString = year + '-' + month + '-' + day;
+
+    let hours = ('0' + today.getHours()).slice(-2);
+    let minutes = ('0' + today.getMinutes()).slice(-2);
+    let seconds = ('0' + today.getSeconds()).slice(-2);
+    let timeString = hours + ':' + minutes + ':' + seconds;
+
+    const dateTimeString = dateString + ' ' + timeString; // YYYY-MM-DDTHH:MM:SSZ
+
+    return dateTimeString;
+  };
+
   // send 버튼 클릭 시 msg 송신
   const sendMessage = () => {
-    let datetime = new Date().toLocaleString();
+    let datetime = getDate();
+    console.log('날짜 시간 확인: ', datetime);
     let userNick = sessionStorage.getItem('user_nick');
     let content = document.getElementById('chat-content').value;
 
@@ -68,7 +87,7 @@ function Chat() {
 
   // send 버튼 클릭 시 notice 송신
   const sendNotice = () => {
-    let datetime = new Date().toLocaleString();
+    let datetime = getDate();
     let userNick = sessionStorage.getItem('user_nick');
     let content = document.getElementById('notice-content').value;
 
