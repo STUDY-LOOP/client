@@ -52,8 +52,10 @@ function CalendarAssignment() {
                 setMyFiles(res4.data);
                 setLoading(false);
             })
-        ).then(
-            file && file.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); })
+        ).then(() => {
+            file && file.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); });
+            console.log(file);
+        }
         ).catch((err) => console.log(err));
     }, []);
 
@@ -127,7 +129,6 @@ function CalendarAssignment() {
                                                                 <>
                                                                     <Form
                                                                         style={{ float: 'left', width: '78%' }}
-                                                                        onSubmit={upload}
                                                                         encType="multipart/form-data"
                                                                     >
                                                                         <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
@@ -136,7 +137,7 @@ function CalendarAssignment() {
                                                                     <Button
                                                                         style={{ float: 'right', width: '20%' }}
                                                                         size="sm"
-                                                                        type="submit">
+                                                                        onClick={upload}>
                                                                         제출
                                                                     </Button>
                                                                     <br /><br />
@@ -171,7 +172,6 @@ function CalendarAssignment() {
                                             <h4>내 과제</h4>
                                             <Form
                                                 style={{ float: 'left', width: '78%' }}
-                                                onSubmit={upload}
                                                 encType="multipart/form-data"
                                             >
                                                 <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
@@ -180,7 +180,7 @@ function CalendarAssignment() {
                                             <Button
                                                 style={{ float: 'right', width: '20%' }}
                                                 size="sm"
-                                                type="submit">
+                                                onClick={upload}>
                                                 과제 제출
                                             </Button>
                                         </div>
