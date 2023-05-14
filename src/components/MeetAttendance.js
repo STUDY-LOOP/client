@@ -37,10 +37,10 @@ function MeetAttendance() {
                     <TableBody>
                         {attendance.map((row) => (
                             <TableRow
-                                key={row.userNick}
+                                key={row['User.userNick']}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row.userNick}</TableCell>
+                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row['User.userNick']}</TableCell>
                                 <TableCell sx={{ textAlign: 'center' }}>{row.attendState}</TableCell>
                             </TableRow>
                         ))}
