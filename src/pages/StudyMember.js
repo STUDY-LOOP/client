@@ -8,6 +8,7 @@ import UserAssignment from '../components/UserAssignment';
 import AssignmentName from '../components/AssignmentName';
 import MemberWithQuitBtn from '../components/MemberWithQuitBtn';
 import LayoutStudyPage from '../components/LayoutStudyPage';
+import MemberAttendance from "../components/MemberAttendance.js";
 import LayoutMain from '../components/LayoutMain';
 import MemberSummary from '../components/MemberSummary';
 import './style/StudyMember.css';
@@ -25,8 +26,6 @@ function StudyMember() {
     const [assignments, setAssignments] = useState([]);
     const [studyLeader, setStudyLeader] = useState(null);
 
-
-
     useEffect(() => {
         axios.all([
             axios.get(`${SERVER_URI}/api/${gpId}/info`),
@@ -42,8 +41,6 @@ function StudyMember() {
             })
         ).catch((err) => console.log(err));
     }, []);
-
-
 
     return (
         <div class="div-layout-upper">
@@ -121,41 +118,44 @@ function StudyMember() {
                     </div>
 
                     <div id="div-table-attend">
-                        <h2><Badge pill bg="primary">과제</Badge></h2>
+                        <h2><Badge pill bg="primary">출석</Badge></h2>
                         {loading ? <h3>LOADING...</h3> :
+                            <MemberAttendance
 
-                            <Table responsive bordered hover className="tables" id="HIHI">
-                                <thead>
-                                    <tr>
-                                        <td></td>
-                                        <AssignmentName
-                                            key={studyInfo.groupPublicId}
-                                            gpId={studyInfo.groupPublicId}
-                                        />
-                                        <td><b>미제출</b></td>
-                                        <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>dd</td>
-                                    </tr>
-                                </thead>
+                            />
 
-                                <tbody>
-                                    <UserAssignment
-                                        key={studyInfo.groupLeader}
-                                        email={studyInfo.groupLeader}
-                                        nick={studyLeader}
-                                        gpId={studyInfo.groupPublicId}
-                                    />
+                            // <Table responsive bordered hover className="tables" id="HIHI">
+                            //     <thead>
+                            //         <tr>
+                            //             <td></td>
+                            //             <AssignmentName
+                            //                 key={studyInfo.groupPublicId}
+                            //                 gpId={studyInfo.groupPublicId}
+                            //             />
+                            //             <td><b>미제출</b></td>
+                            //             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>dd</td>
+                            //         </tr>
+                            //     </thead>
 
-                                    {studyMembers.map(
-                                        (member) =>
-                                            <UserAssignment
-                                                key={member.email}
-                                                email={member.email}
-                                                nick={member.userNick}
-                                                gpId={studyInfo.groupPublicId}
-                                            />
-                                    )}
-                                </tbody>
-                            </Table>
+                            //     <tbody>
+                            //         <UserAssignment
+                            //             key={studyInfo.groupLeader}
+                            //             email={studyInfo.groupLeader}
+                            //             nick={studyLeader}
+                            //             gpId={studyInfo.groupPublicId}
+                            //         />
+
+                            //         {studyMembers.map(
+                            //             (member) =>
+                            //                 <UserAssignment
+                            //                     key={member.email}
+                            //                     email={member.email}
+                            //                     nick={member.userNick}
+                            //                     gpId={studyInfo.groupPublicId}
+                            //                 />
+                            //         )}
+                            //     </tbody>
+                            // </Table>
                         }
                     </div>
 

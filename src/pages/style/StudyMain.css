@@ -1,50 +1,48 @@
-.div-layout-lower-2-custom{
-    float: left;
-    height: 100%;
-    flex: 1 0 auto;
-    padding: 30px;
+.div-layout-lower-2-custom {
+  float: left;
+  height: 100%;
+  flex: 1 0 auto;
+  padding: 30px;
 }
 
 #div-grid {
-    display: grid;
-    width: 80%;
+  display: grid;
+  width: 80%;
 
-    /* grid-template-rows: 1fr fr 2fr 1fr 1fr; */
-    grid-template-columns: repeat(8, 1fr);
-    gap: 10px;
+  /* grid-template-rows: 1fr fr 2fr 1fr 1fr; */
+  grid-template-columns: repeat(8, 1fr);
+  gap: 10px;
 
-    grid-template-areas:
-        "div-info       div-info        div-info        div-info        div-info        div-info    div-info"
-        "div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    .           ."
-        "div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    div-chat    div-chat"
-        "div-btn        div-btn         div-btn         div-btn         div-btn         div-video   div-video"
-    ;
+  grid-template-areas:
+    'div-info       div-info        div-info        div-info        div-info        div-info    div-info'
+    'div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    .           .'
+    'div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    div-chat    div-chat'
+    'div-btn        div-btn         div-btn         div-btn         div-btn         div-video   div-video';
 }
 
 #div-info {
-    grid-area: div-info;
-    display: flex;
+  grid-area: div-info;
+  display: flex;
 }
 
 #div-calendar {
-    grid-area: div-calendar;
+  grid-area: div-calendar;
 }
 
 #div-chat {
-    grid-area: div-chat;
+  grid-area: div-chat;
 }
 
 #div-btn {
-    grid-area: div-btn;
-    display: flex;
-
+  grid-area: div-btn;
+  display: flex;
 }
 
 #div-video {
-    grid-area: div-video;
-    width: 100%;
+  grid-area: div-video;
+  width: 100%;
 }
 
 #div-video Button {
-    width: 100%;
+  width: 100%;
 }

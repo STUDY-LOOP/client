@@ -11,12 +11,13 @@ import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper}
 
 const SERVER_URI = 'http://localhost:3000';
 
-function MeetAttendance() {
-    const { log } = useParams()
+function MemberAttendance() {
+    const { gpId } = useParams()
     const [attendance, setAttendance] = useState([])
 
     const callApi = async () => {
-        const res = await axios.get(`${SERVER_URI}/api/attendance/${log}`);
+        const res = await axios.get(`${SERVER_URI}/api/${gpId}/attendance`);
+        console.log(res.data);
         setAttendance(res.data);
     };
 
@@ -31,17 +32,21 @@ function MeetAttendance() {
                     <TableHead>
                         <TableRow>
                             <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>이름</TableCell>
-                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>출석 여부</TableCell>
+                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>출석</TableCell>
+                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>지각</TableCell>
+                            <TableCell sx={{ typography: 'body1', fontWeight: 'bold', textAlign: 'center' }}>결석</TableCell>
                         </TableRow>
                     </TableHead>
                     <TableBody>
                         {attendance.map((row) => (
                             <TableRow
-                                key={row['User.userNick']}
+                                key={row.User.userNick}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row['User.userNick']}</TableCell>
-                                <TableCell sx={{ textAlign: 'center' }}>{row.attendState}</TableCell>
+                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row.User.userNick}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }}>{row.attendCnt}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }}>{row.lateCnt}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }}>{row.absentCnt}</TableCell>
                             </TableRow>
                         ))}
                     </TableBody>
@@ -51,4 +56,4 @@ function MeetAttendance() {
     )
 }
 
-export default MeetAttendance;
+export default MemberAttendance;

@@ -40,10 +40,9 @@ function AddEvent({ date_start }) {
     const eventTitleInputHandler = (event) => { event.preventDefault(); setEventTitle(event.target.value); };
     const descriptionHandler = (event) => { event.preventDefault(); setDescription(event.target.value); };
 
-
     // -- 스터디 생성 -- //
     const onClickStudyEvent = async () => {
-        await axios
+        axios
             .post(`${SERVER_URI}/api/event`, {
                 gpId: gpId,
                 event_title: eventTitle,
@@ -53,9 +52,12 @@ function AddEvent({ date_start }) {
             }, {
                 withCredentials: true
             })
+            
+            .then(res => {
+                axios.post(`${SERVER_URI}/api/${gpId}/create-attendance/${res.data}`)
+            })
             .then(() => window.location.replace(`/study-group/${gpId}`))
             .catch(err => alert(err));
-        
     }
 
 

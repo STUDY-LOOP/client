@@ -1,0 +1,18 @@
+.Chat-div-info {
+  margin-bottom: 6px;
+}
+
+.Chat-span-usernick {
+  margin-right: 4px;
+  color: '#4a4848';
+}
+
+.Chat-span-datetime {
+  color: '#c2c2c2';
+}
+
+.Chat-div-content {
+  background-color: '#f0f0f0';
+  color: '#4a4848';
+  padding: 10px 20px;
+}
