@@ -1,3 +1,5 @@
+import { useEffect, useState } from "react";
+import { Link, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 
 import LayoutMain from '../components/LayoutMain';
@@ -15,6 +17,23 @@ import { TimePicker } from 'antd';
 const SERVER_URI = 'http://localhost:3000';
 
 function CreateGroup() {
+    const navigate = useNavigate();
+
+    const [interest0, setInt0] = useState(false);
+    const [interest1, setInt1] = useState(false);
+    const [interest2, setInt2] = useState(false);
+    const [interest3, setInt3] = useState(false);
+    const [interest4, setInt4] = useState(false);
+    const [interest5, setInt5] = useState(false);
+
+    const int0Handler = (event) => { event.preventDefault(); setInt0(event.target.checked); };
+    const int1Handler = (event) => { event.preventDefault(); setInt1(event.target.checked); };
+    const int2Handler = (event) => { event.preventDefault(); setInt2(event.target.checked); };
+    const int3Handler = (event) => { event.preventDefault(); setInt3(event.target.checked); };
+    const int4Handler = (event) => { event.preventDefault(); setInt4(event.target.checked); };
+    const int5Handler = (event) => { event.preventDefault(); setInt5(event.target.checked); };
+
+
     const onClick = (event) => {
         event.preventDefault();
         axios.post(`${SERVER_URI}/api/group`, {
@@ -29,7 +48,10 @@ function CreateGroup() {
 
             scheduleDay: document.getElementById('create-day').value,
             scheduleTime: document.getElementById('create-time').value,
+
+            interest0, interest1, interest2, interest3, interest4, interest5,
         });
+        navigate('/');
     };
 
     return (
@@ -101,7 +123,6 @@ function CreateGroup() {
                                         inputProps={{ 'aria-label': 'Without label' }}
                                         required
                                     >
-                                        {/* <MenuItem value={null}>미정</MenuItem> */}
                                         <MenuItem value="Mon">월</MenuItem>
                                         <MenuItem value="Tue">화</MenuItem>
                                         <MenuItem value="Wed">수</MenuItem>
@@ -123,6 +144,54 @@ function CreateGroup() {
                                     hourStep={1}
                                     format="HH:mm"
                                     defaultValue={dayjs('18:00', 'HH:mm')}
+                                />
+                            </Col>
+                        </Form.Group>
+
+                        <Form.Group as={Row}>
+                            <Form.Label column sm="2"> 스터디 종류 </Form.Label>
+                            <Col sm="1">
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-0"
+                                    label="어학"
+                                    onChange={int0Handler}
+                                />
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-1"
+                                    label="취업"
+                                    onChange={int1Handler}
+                                />
+                            </Col>
+
+                            <Col sm="1">
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-2"
+                                    label="개발"
+                                    onChange={int2Handler}
+                                />
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-3"
+                                    label="기타"
+                                    onChange={int3Handler}
+                                />
+                            </Col>
+
+                            <Col sm="2">
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-4"
+                                    label="취미/교양"
+                                    onChange={int4Handler}
+                                />
+                                <Form.Check
+                                    type="checkbox"
+                                    id="chkbox-5"
+                                    label="고시/공시"
+                                    onChange={int5Handler}
                                 />
                             </Col>
                         </Form.Group>

@@ -10,6 +10,7 @@ import MemberWithQuitBtn from '../components/MemberWithQuitBtn';
 import LayoutStudyPage from '../components/LayoutStudyPage';
 import MemberAttendance from "../components/MemberAttendance.js";
 import LayoutMain from '../components/LayoutMain';
+import MemberSummary from '../components/MemberSummary';
 import './style/StudyMember.css';
 import './style/Common.css';
 
@@ -156,6 +157,12 @@ function StudyMember() {
                             //     </tbody>
                             // </Table>
                         }
+                    </div>
+
+                    <div id="div-table-fee">
+                        <MemberSummary
+                            gpId={gpId}
+                        />
                     </div>
                 </div>
             </div>
