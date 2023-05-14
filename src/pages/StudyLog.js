@@ -1,10 +1,13 @@
 import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
-import Modal from 'react-modal';
 import axios from 'axios';
 import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css';
 
+import 'bootstrap/dist/css/bootstrap.min.css';
+import { Button, Accordion, Form, Modal } from "react-bootstrap";
+
+import AssignmentBox from '../components/AssignmentBox';
 import LayoutMain from '../components/LayoutMain';
 import './style/StudyLog.css'
 import './style/Common.css'
@@ -15,10 +18,11 @@ import MeetAttendance from '../components/MeetAttendance';
 const SERVER_URI = 'http://localhost:3000';
 
 function StudyLog() {
-    const { log } = useParams();
+    const { gpId, log } = useParams();
 
     const [loading, setLoading] = useState(true);
     const [content, setContent] = useState("initial");
+    const [assignments, setAssignments] = useState([]);
     const [modalIsOpen, setModalIsOpen] = useState(false);
     const [date, setDate] = useState("");
 
@@ -26,11 +30,14 @@ function StudyLog() {
         axios.all([
             axios.get(`${SERVER_URI}/api/event/${log}`),
             axios.get(`${SERVER_URI}/api/log/${log}`),
+            axios.get(`${SERVER_URI}/api/${gpId}/assignment`),
         ]).then(
-            axios.spread((res1, res2) => {
-                var dateInfo = res1.data[0].date_start; 
+            axios.spread((res1, res2, res3) => {
+                var dateInfo = res1.data[0].date_start;
                 setContent(res2.data.content);
+                setAssignments(res3.data);
                 toDate(dateInfo);
+                setLoading(false);
             })
         ).catch((err) => console.log(err));
     }, []);
@@ -51,10 +58,10 @@ function StudyLog() {
 
             <div id="div-studylog" class="div-layout-lower-2">
                 <div class="div-page-header">
-                    
+
                     <h1>{date} 로그</h1>
-                </div>  
-                
+                </div>
+
                 <div id="div-minutes">
                     <div class="div-component-header">
                         회의록
@@ -90,6 +97,21 @@ function StudyLog() {
                     </div>
                     <div class="div-component">
 
+                        {/* 과제제출여부 */}
+                        <Accordion defaultActiveKey="0" alwaysOpen>
+                            {loading ? <h3>LOADING...</h3> : assignments.map(
+                                (assignment) =>
+                                    <AssignmentBox
+                                        gpId={gpId}
+                                        boxId={assignment.boxId}
+                                        title={assignment.title}
+                                        content={assignment.content}
+                                        deadline={assignment.deadline}
+                                        Assignments={assignment.Assignments}
+                                    />
+
+                            )}
+                        </Accordion>
                     </div>
 
                 </div>

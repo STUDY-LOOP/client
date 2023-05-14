@@ -53,6 +53,7 @@ function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, s
         <>
             {forOneBox
                 ?
+                // 개별 과제함
                 <ListItem disablePadding>
                     <ListItemButton>
                         <ListItemIcon>
@@ -64,6 +65,7 @@ function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, s
                 </ListItem>
                 
                 :
+                // 과제함 전체보기
                 <tr>
                     <td><a href={`${SERVER_URI}/api/download/${filename}`} download>{fileOrigin}</a></td>
                     <td>{userNick}</td>

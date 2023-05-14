@@ -204,7 +204,7 @@ function StudyMain() {
                             <><Button type="button">스터디 설정</Button>&nbsp;</>
                             : null}
 
-                        <Button onClick={onClickMember}>회원 관리</Button> &nbsp;
+                        <Button onClick={onClickMember}>스터디 정보</Button> &nbsp;
                         <Button type="button" onClick={onClickAssignment}>과제함</Button>
 
                     </div>
