@@ -30,6 +30,18 @@
     grid-area: div-members;
 }
 
+#div-leader {
+    display: flex;
+    flex-direction: row;
+    margin-bottom: 15px;
+}
+
+#div-leader-nick {
+    margin-left: 10px;
+    padding-top: 3px; 
+    font-size: 20px;
+}
+
 #div-table-asgmt {
     grid-area: div-table-asgmt;
     overflow-x: auto;

@@ -33,6 +33,7 @@ function StudyMember() {
             axios.get(`${SERVER_URI}/api/${gpId}/assignment`),
         ]).then(
             axios.spread((res1, res2, res3) => {
+                console.log(res2)
                 setStudyInfo(res1.data);
                 setStudyLeader(res1.data.User.userNick)
                 setStudyMembers(res2.data);
@@ -60,10 +61,14 @@ function StudyMember() {
                     </div>
                     <div id="div-members">
                         // 이 부분이 필요해 보이나요? 스터디장 말고 스터디원 목록 <br /><br />
-                        [스터디장] {studyInfo.groupLeader} <br /><br />
-
-                        <div>
-                            [스터디원]
+                        {/* [스터디장] {studyInfo.groupLeader} <br /><br /> */}
+                        <div id="div-leader">
+                            <div class="div-component-header"> 스터디장 </div> 
+                            <div id="div-leader-nick"> {studyLeader} </div>
+                        </div>
+                        
+                        <div class="div-component-header">
+                            스터디원
 
                             {studyMembers.map((member) =>
                                 <MemberWithQuitBtn
