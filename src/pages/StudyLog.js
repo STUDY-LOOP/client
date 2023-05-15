@@ -2,7 +2,6 @@ import { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import MDEditor from '@uiw/react-md-editor';
-import Button from 'react-bootstrap/Button';
 /* import Editor from '@toast-ui/editor';
 import '@toast-ui/editor/dist/toastui-editor.css'; */
 
