@@ -17,7 +17,7 @@ import { TimePicker } from 'antd';
 
 const SERVER_URI = 'http://localhost:3000';
 
-function CreateGroup() {
+function StudyInfo() {
     const { gpId } = useParams();
 
     const [loading, setLoading] = useState(true);
@@ -172,4 +172,4 @@ function CreateGroup() {
     );
 }
 
-export default CreateGroup;
+export default StudyInfo;
