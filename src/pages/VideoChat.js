@@ -31,34 +31,6 @@ const SERVER_URI = 'http://localhost:3000';
 
 const drawerWidth = 350;
 
-const Main = styled('main', { shouldForwardProp: (prop) => prop !== 'open' })(
-    ({ theme, open }) => ({
-        flexGrow: 1,
-        padding: theme.spacing(3),
-        transition: theme.transitions.create('margin', {
-            easing: theme.transitions.easing.sharp,
-            duration: theme.transitions.duration.leavingScreen,
-        }),
-        marginRight: -drawerWidth,
-        ...(open && {
-            transition: theme.transitions.create('margin', {
-                easing: theme.transitions.easing.easeOut,
-                duration: theme.transitions.duration.enteringScreen,
-            }),
-            marginRight: 0,
-        }),
-    }),
-);
-
-const ButtonContanier = styled('div')(({ theme }) => ({
-    display: 'flex',
-    alignItems: 'center',
-    padding: theme.spacing(0, 1),
-    // necessary for content to be below app bar
-    ...theme.mixins.toolbar,
-    justifyContent: 'flex-start',
-}));
-
 const DrawerHeader = styled('div')(({ theme }) => ({
     display: 'flex',
     alignItems: 'center',
@@ -73,11 +45,26 @@ function VideoChat() {
     var today = new Date();
 
     const [date, setDate] = useState("");
-    // const [chat, setChat] = useState({
-    //     right: false,
-    // });
 
     const theme = useTheme();
+
+    const [numberOfUsers, setNumberOfUsers] = useState(1);
+    const videoContainerStyle = {
+        display: 'flex',
+        justifyContent: 'center',
+        flexWrap: 'wrap',
+        height: '100vh',
+        width: '100vw',
+    };
+
+    const videoStyle = {
+        width: numberOfUsers > 1 ? `calc(${100 / numberOfUsers}% - 10px)` : '100%',
+        height: numberOfUsers > 1 ? `calc(${100 / numberOfUsers}% - 10px)` : '100%',
+        margin: '5px',
+        maxHeight: '300px'
+    };
+
+
     const [chatOpen, setChatOpen] = useState(false);
 
     const handleChatOpen = () => {
@@ -142,7 +129,7 @@ function VideoChat() {
     const ROOM_ID = gpId;
     const [studyInfo, setStudyInfo] = useState([]);
     const [message, setMessage] = useState(''); //chat input
-    // const [users, setUsers] = useState(1);
+    const [users, setUsers] = useState(1);
 
     const [mic, setMic] = useState({
         curState: true,
@@ -198,24 +185,6 @@ function VideoChat() {
     const handleExitClick = () => {
         navigate(-1); //이전 페이지로 이동 
     }
-
-    // const handleChatClick = (anchor, open) => (event) => {
-    //     if (event.type === 'keydown' && (event.key === 'Tab' || event.key === 'Shift')) {
-    //         return;
-    //     }
-
-    //     setChat({ ...chat, [anchor]: open });
-    // }
-
-    // const list = (anchor) => (
-    //     <Box
-    //         sx={{ width: 350 }}
-    //         role="presentation"
-    //         onClick={handleChatClick(anchor, false)}
-    //         onKeyDown={handleChatClick(anchor, false)}
-    //     >
-    //     </Box>
-    // );
 
     // const myDiv = React.createElement('div');
     const myVideo = document.createElement('video');
@@ -274,6 +243,7 @@ function VideoChat() {
             socket.on("new-user-connected", data => {
                 // console.log('new user connected, ', data); //o
                 setTimeout(() => { connectToNewUser(data.id, data.name, stream) }, 2000);
+                setNumberOfUsers(numberOfUsers + 1);
             })
 
         });
@@ -314,7 +284,6 @@ function VideoChat() {
             });
             videoGrid.current.append(userVideo);
             // nameGrid.current.append(userName);
-            // videoGrid.current.style = "width: 300px; height: 200px;"
             // userDiv.append(userVideo)
             // userDiv.append(userNickDiv);
             // videoGrid.append(userDiv);
@@ -376,93 +345,66 @@ function VideoChat() {
 
     return (
         <div className="div-layout-upper-2">
-            {/* <div class="div-layout-lower-1">
-                <LayoutMain />
-            </div> */}
+            <div className="main-container">
+                <DrawerHeader />
 
-            {/* <div className="div-page-header2">
-                <h1>{studyInfo.groupName} {date} 회의</h1>
-                {NICKNAME}님
-            </div> */}
-
-            {/* <div className="videochat-container">
-                <div className="videochat-room">
-                    <div
-                        ref={videoGrid}
-                        // style={styled} 
-                        id="video-grid">
-                    </div>
-
+                <div style={videoContainerStyle}>
+                    {[...Array(numberOfUsers)].map((_, index) => (
+                        <div
+                            key={index}
+                            style={videoStyle}
+                            ref={videoGrid}
+                            id="video-grid">
+                        </div>
+                    ))}
                 </div>
-            </div> */}
 
-            {/* <div className="chat-container">
-                    <div id="chat-room">
-                        Chat
-                    </div>
-
-                    <div id="chat-content">
-                        <ul className="message">
-
-                        </ul>
-
-                    </div>
-
-                    <div className="enter-message">
-                        <input
-                            value={message}
-                            onChange={(e) => setMessage(e.target.value)}
-                            onKeyPress={handleOnKeyPress}
-                            id="enter-message"
-                            // type="text"
-                            placeholder="Type message here..." />
+                {/* <div className="videochat-container">
+                    <div className="videochat-room">
+                        <div
+                            ref={videoGrid}
+                            id="video-grid">
+                        </div>
                     </div>
                 </div> */}
-
-            <ButtonContanier className="button-grid"  open={chatOpen}>
-                <div className="button-grid">
-
-        
-                <div onClick={handleMuteClick} id="mic-btn">
-                    {mic.curState ? (
-                        < MicIcon sx={{ color: "white" }} fontSize="large" />
-                    ) : (
-                        < MicOffIcon sx={{ color: "white" }} fontSize="large" />
-                    )}
-                </div>
-                <div onClick={handleCameraClick} id="camera-btn">
-                    {camera.curState ? (
-                        < VideocamIcon sx={{ color: "white" }} fontSize="large" />
-                    ) : (
-                        < VideocamOffIcon sx={{ color: "white" }} fontSize="large" />
-                    )}
-                </div>
-                <div onClick={handleExitClick} id="exit-btn">
-                    <LogoutIcon sx={{ color: "white" }} fontSize="large" />
-                </div>
-
-                <div
-                    id="chat-btn"
-                    onClick={handleChatOpen}
-                    sx={{ ...(chatOpen && { display: 'none' }) }}>
-                    <TextsmsIcon sx={{ color: "white" }} fontSize="large" />
-                </div>
             </div>
-            </ButtonContanier>
-            <Main open={chatOpen}>
-                <DrawerHeader />
-                <div className="videochat-container">
-                <div className="videochat-room">
-                    <div
-                        ref={videoGrid}
-                        // style={styled} 
-                        id="video-grid">
+            <div className="button-container">
+
+                <div className="div-meet-info">
+                    {studyInfo.groupName} {date} &nbsp;
+                    {NICKNAME}
+                </div>
+
+                <div className="div-button-grid" open={chatOpen}>
+                    <div onClick={handleMuteClick} id="mic-btn">
+                        {mic.curState ? (
+                            < MicIcon sx={{ color: "white" }} fontSize="medium" />
+                        ) : (
+                            < MicOffIcon sx={{ color: "white" }} fontSize="medium" />
+                        )}
+                    </div>
+                    <div onClick={handleCameraClick} id="camera-btn">
+                        {camera.curState ? (
+                            < VideocamIcon sx={{ color: "white" }} fontSize="medium" />
+                        ) : (
+                            < VideocamOffIcon sx={{ color: "white" }} fontSize="medium" />
+                        )}
+                    </div>
+                    <div onClick={handleExitClick} id="exit-btn">
+                        <LogoutIcon sx={{ color: "white" }} fontSize="medium" />
                     </div>
 
+                    <div
+                        id="chat-btn"
+                        onClick={handleChatOpen}
+                        sx={{ ...(chatOpen && { display: 'none' }) }}>
+                        <TextsmsIcon sx={{ color: "white" }} fontSize="medium" />
+                    </div>
                 </div>
+
+
             </div>
 
-            </Main>
             <Drawer
                 sx={{
                     width: drawerWidth,
@@ -483,65 +425,7 @@ function VideoChat() {
 
             </Drawer>
 
-            {/* <div className="button-container">
-                <div className="button-grid">
-                    <div onClick={handleMuteClick} id="mic-btn">
-                        {mic.curState ? (
-                            < MicIcon sx={{ color: "white" }} fontSize="large" />
-                        ) : (
-                            < MicOffIcon sx={{ color: "white" }} fontSize="large" />
-                        )}
-                    </div>
-                    <div onClick={handleCameraClick} id="camera-btn">
-                        {camera.curState ? (
-                            < VideocamIcon sx={{ color: "white" }} fontSize="large" />
-                        ) : (
-                            < VideocamOffIcon sx={{ color: "white" }} fontSize="large" />
-                        )}
-                    </div>
-                    <div onClick={handleExitClick} id="exit-btn">
-                        <LogoutIcon sx={{ color: "white" }} fontSize="large" />
-                    </div>
 
-                    <div
-                        id="chat-btn"
-                        onClick={handleChatOpen}
-                        sx={{ ...(chatOpen && { display: 'none' }) }}>
-                        <TextsmsIcon sx={{ color: "white" }} fontSize="large" />
-                    </div>
-
-                    <Drawer
-                        sx={{
-                            width: drawerWidth,
-                            flexShrink: 0,
-                            '& .MuiDrawer-paper': {
-                                width: drawerWidth,
-                            },
-                        }}
-                        variant="persistent"
-                        anchor="right"
-                        open={chatOpen}
-                    >
-                        <DrawerHeader>
-                            <div onClick={handleChatClose}>
-                                {theme.direction === 'rtl' ? <ChevronLeftIcon /> : <ChevronRightIcon />}
-                            </div>
-                        </DrawerHeader>
-
-                    </Drawer> */}
-
-            {/* <div onClick={handleChatClick('right', true)} id="chat-btn">
-                        <TextsmsIcon sx={{ color: "white" }} fontSize="large" />
-                    </div>
-                    <Drawer
-                        anchor="right"
-                        open={chat.right}
-                        onClose={handleChatClick('right', false)}
-                    >
-                        {list('right')}
-                    </Drawer> */}
-            {/* </div>
-            </div> */}
         </div>
     );
 }
