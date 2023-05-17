@@ -1,10 +1,8 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 
-import Submitted from '../components/SubmittedAssignment';
 import AssignmentResult from '../components/AssignmentResult';
 import AssignmentName from '../components/AssignmentName';
 import StudyNameRow from '../components/StudyNameRow';

@@ -49,7 +49,7 @@ function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline, eve
 
 	return (
 		<>
-			<Accordion.Item eventKey="0">
+			<Accordion.Item eventKey={boxId}>
 				<Accordion.Header id="accordion-header">
 					<h4>
 						<strong>{title}</strong>

@@ -5,19 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Popover, OverlayTrigger, Form } from "react-bootstrap";
 import { Box, List, ListItem } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 import LayoutMain from '../components/LayoutMain';
 import Submitted from '../components/SubmittedAssignment';
-import AssignmentBox from '../components/AssignmentBox';
-import EachAssignment from '../components/EachAssignment';
 import LayoutStudyPage from '../components/LayoutStudyPage';
 import CalculateDue from '../components/CalculateDue';
 
 import './style/CalendarAssignment.css';
 import './style/Common.css';
-import { Calculate } from "@mui/icons-material";
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -220,19 +216,6 @@ function CalendarAssignment() {
 
                                 <div id="div-btn-boxes">
                                     <Button onClick={onClickToBoxes} size="sm">전체 과제함</Button>
-                                </div>
-
-                                <div id="div-no-submit">
-                                    미제출자
-                                    {members.map(
-                                        member => (
-                                            <EachAssignment
-                                                userId={member.email}
-                                                userNick={member.userNick}
-                                                assignment={assignments.Assignments}
-                                            />
-                                        )
-                                    )}
                                 </div>
                             </div>
                         </div>
