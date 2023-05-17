@@ -196,7 +196,7 @@ function StudyMain() {
                         {/* 로그인 안했거나 || 스터디장이거나 || 스터디원이라면 -> 가입 불가 */}
                         {userEmail === null || userEmail === studyInfo.groupLeader || membersEmail.includes(userEmail) ? null
                             : <div>
-                                <Button type="button" onClick={onClickJoin}>스터디 가입하기</Button>
+                                <><Button type="button" onClick={onClickJoin}>스터디 가입하기</Button>&nbsp;</>
                             </div>
                         }
 

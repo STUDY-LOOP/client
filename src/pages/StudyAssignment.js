@@ -101,9 +101,9 @@ function StudyMember() {
                                 <Form>
                                     <Form.Group className="mb-3" controlId="formLog">
                                         <Form.Label><h5><strong>스터디 로그</strong></h5></Form.Label>
-                                        <Form.Control type="input" placeholder="스터디 회차를 알려주세요" onChange={logHandler} required />
+                                        <Form.Control type="input" onChange={logHandler} required />
                                         <Form.Text className="text-muted">
-                                            여기에 설명도 넣을 수 있음!
+                                            과제와 연동되는 스터디 회차를 알려주세요
                                         </Form.Text>
                                     </Form.Group>
 

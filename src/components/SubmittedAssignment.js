@@ -19,9 +19,9 @@ import Face6 from '@mui/icons-material/Face6';
 
 const SERVER_URI = 'http://localhost:3000';
 
-function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, submittedOn, deadline, forOneBox }) {
+function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, submittedOn, deadline, forOneBox, state }) {
 
-    const icon = Math.floor(Math.random()*6)+1;
+    const icon = Math.floor(Math.random() * 6) + 1;
 
     // 시간 계산
     const submittedOnD = new Date(submittedOn);
@@ -47,36 +47,48 @@ function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, s
         });
 
         window.location.reload();
-    }; 
+    };
 
     return (
         <>
             {forOneBox
                 ?
                 // 개별 과제함
-                <ListItem disablePadding>
-                    <ListItemButton>
-                        <ListItemIcon>
-                            {icon===1 ? <Face1/> : <>{icon===2 ? <Face2/> : <>{icon===3 ? <Face3 /> : <>{icon===4 ? <Face4/> : <>{icon===5 ? <Face5 /> : <>{icon===6 ? <Face6/> : null }</> }</> }</> }</> }</> }
-                        </ListItemIcon>
-                        <ListItemText primary={userNick} />
-                        <a href={`${SERVER_URI}/api/download/${filename}`} download>{fileOrigin}</a>
-                    </ListItemButton>
-                </ListItem>
-                
+                <>
+                    {filename ?
+                        <ListItem disablePadding>
+                            <ListItemButton>
+                                <ListItemIcon>
+                                    {icon === 1 ? <Face1 /> : <>{icon === 2 ? <Face2 /> : <>{icon === 3 ? <Face3 /> : <>{icon === 4 ? <Face4 /> : <>{icon === 5 ? <Face5 /> : <>{icon === 6 ? <Face6 /> : null}</>}</>}</>}</>}</>}
+                                </ListItemIcon>
+                                <ListItemText primary={userNick} />
+                                <a href={`${SERVER_URI}/api/download/${filename}`} download>{fileOrigin}</a>
+                            </ListItemButton>
+                        </ListItem>
+                        : null
+                    }
+                </>
+
                 :
                 // 과제함 전체보기
-                <tr>
-                    <td><a href={`${SERVER_URI}/api/download/${filename}`} download>{fileOrigin}</a></td>
-                    <td>{userNick}</td>
-                    <td>
-                        {gap > 0 ? <>지각({time})</> : null}
-                    </td>
+                <>
+                    {filename ?
+                        <tr>
+                            <td><a href={`${SERVER_URI}/api/download/${filename}`} download>{fileOrigin}</a></td>
+                            <td>{userNick}</td>
+                            <td>
+                                {gap > 0 ? <>지각({time})</> : null}
+                            </td>
 
-                    {uploader === sessionStorage.getItem('user_email')
-                        ? <Button variant="outline-primary" size="sm" onClick={onClick}>삭제</Button>
-                        : null}
-                </tr>}
+                            {uploader === sessionStorage.getItem('user_email')
+                                ? <Button variant="outline-primary" size="sm" onClick={onClick}>삭제</Button>
+                                : null}
+                        </tr>
+                        : null
+                    }
+                </>
+
+            }
         </>
     )
 }

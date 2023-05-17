@@ -43,12 +43,12 @@ function StudyMember() {
     }, []);
 
     return (
-        <div class="div-layout-upper">
-            <div class="div-layout-lower-1">
+        <div className="div-layout-upper">
+            <div className="div-layout-lower-1">
                 <LayoutMain />
             </div>
-            {/* <div class="div-layout-lower-2"> */}
-            <div class="div-layout-lower-2-custom">
+            {/* <div className="div-layout-lower-2"> */}
+            <div className="div-layout-lower-2-custom">
                 <div id="div-grid-members">
                     <div id="div-layout">
                         <LayoutStudyPage
@@ -59,13 +59,12 @@ function StudyMember() {
                         />
                     </div>
                     <div id="div-members">
-                        // 이 부분이 필요해 보이나요? 스터디장 말고 스터디원 목록 <br /><br />
-                        {/* [스터디장] {studyInfo.groupLeader} <br /><br /> */}
                         <div id="div-leader">
-                            <div class="div-component-header"> 스터디장 </div> 
+                            <div class="div-component-header"> 스터디장 </div>
                             <div id="div-leader-nick"> {studyLeader} </div>
                         </div>
-                        
+
+                        {/* 포스터 영상 촬영용 임시 주석
                         <div class="div-component-header">
                             스터디원
 
@@ -79,94 +78,34 @@ function StudyMember() {
                                 />
                             )}
                         </div>
-                    </div>
-
-                    <div id="div-table-asgmt">
-                        <Alert variant="primary">
-                            <p>과제</p>
-                        </Alert>
-                        {loading ? <h3>LOADING...</h3> :
-                            <Table responsive bordered hover className="tables">
-                                <thead>
-                                    <tr>
-                                        <td width="50"></td>
-                                        <AssignmentName
-                                            key={studyInfo.groupPublicId}
-                                            gpId={studyInfo.groupPublicId}
-                                        />
-                                        <td width="70"><b>미제출</b></td>
-
-                                    </tr>
-                                </thead>
-
-                                <tbody>
-                                    <UserAssignment
-                                        key={studyInfo.groupLeader}
-                                        email={studyInfo.groupLeader}
-                                        nick={studyLeader}
-                                        gpId={studyInfo.groupPublicId}
-                                    />
-
-                                    {studyMembers.map(
-                                        (member) =>
-                                            <UserAssignment
-                                                key={member.email}
-                                                email={member.email}
-                                                nick={member.userNick}
-                                                gpId={studyInfo.groupPublicId}
-                                            />
-                                    )}
-                                </tbody>
-                            </Table>
-                        }
+                        */}
                     </div>
 
                     <div id="div-table-attend">
                         <h2><Badge pill bg="primary">출석</Badge></h2>
                         {loading ? <h3>LOADING...</h3> :
-                            <MemberAttendance
-
-                            />
-
-                            // <Table responsive bordered hover className="tables" id="HIHI">
-                            //     <thead>
-                            //         <tr>
-                            //             <td></td>
-                            //             <AssignmentName
-                            //                 key={studyInfo.groupPublicId}
-                            //                 gpId={studyInfo.groupPublicId}
-                            //             />
-                            //             <td><b>미제출</b></td>
-                            //             <td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td></td><td>dd</td>
-                            //         </tr>
-                            //     </thead>
-
-                            //     <tbody>
-                            //         <UserAssignment
-                            //             key={studyInfo.groupLeader}
-                            //             email={studyInfo.groupLeader}
-                            //             nick={studyLeader}
-                            //             gpId={studyInfo.groupPublicId}
-                            //         />
-
-                            //         {studyMembers.map(
-                            //             (member) =>
-                            //                 <UserAssignment
-                            //                     key={member.email}
-                            //                     email={member.email}
-                            //                     nick={member.userNick}
-                            //                     gpId={studyInfo.groupPublicId}
-                            //                 />
-                            //         )}
-                            //     </tbody>
-                            // </Table>
+                            <MemberSummary
+                                key={gpId}
+                                gpId={gpId}
+                                isAsgmt={false}
+                            />         
                         }
+                        {/*
+                        {loading ? <h3>LOADING...</h3> :
+                            <MemberAttendance />
+                        }
+                        */}
                     </div>
 
-                    <div id="div-table-fee">
-                        <MemberSummary
-                            gpId={gpId}
-                        />
+                    <div id="div-table-asgmt">
+                        <h2><Badge pill bg="primary">과제</Badge></h2>
+                        {loading ? <h3>LOADING...</h3> :
+                            <MemberSummary
+                                key={gpId}
+                                gpId={gpId}
+                                isAsgmt={true}
+                            />         
+                        }
                     </div>
                 </div>
             </div>

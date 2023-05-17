@@ -5,7 +5,6 @@ import axios from 'axios';
 import LayoutMain from '../components/LayoutMain';
 import StudyList from '../components/StudyList';
 import SearchResult from '../components/SearchResult';
-import CreateStudyBtn from '../components/CreateStudyBtn';
 import './style/Common.css'
 import './style/Main.css'
 
@@ -154,7 +153,7 @@ function Main() {
                         ? <div>
                             <Button onClick={onClickCreate}>스터디 만들기</Button>
                         </div>
-                        : <>로그인 안 된 상태</>}
+                        : <>로그인 후 사용해주세요!</>}
 
                     {/*
                      <div id="div-main-carousel">

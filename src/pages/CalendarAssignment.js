@@ -5,19 +5,15 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { Button, Popover, OverlayTrigger, Form } from "react-bootstrap";
 import { Box, List, ListItem } from '@mui/material';
 import ListItemButton from '@mui/material/ListItemButton';
-import ListItemIcon from '@mui/material/ListItemIcon';
 import ListItemText from '@mui/material/ListItemText';
 
 import LayoutMain from '../components/LayoutMain';
 import Submitted from '../components/SubmittedAssignment';
-import AssignmentBox from '../components/AssignmentBox';
-import EachAssignment from '../components/EachAssignment';
 import LayoutStudyPage from '../components/LayoutStudyPage';
 import CalculateDue from '../components/CalculateDue';
 
 import './style/CalendarAssignment.css';
 import './style/Common.css';
-import { Calculate } from "@mui/icons-material";
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -31,6 +27,7 @@ function CalendarAssignment() {
     const [loading, setLoading] = useState(true);
     const [assignments, setAssignments] = useState([]);
     const [file, setFiles] = useState([]);
+    const [submittedFile, setSubmittedFiles] = useState([]);
     const [members, setMembers] = useState([]);
     const [info, setInfos] = useState([]);
     const [myAsgmt, setMyAsgmt] = useState(false);
@@ -46,15 +43,15 @@ function CalendarAssignment() {
         ]).then(
             axios.spread((res1, res2, res3, res4) => {
                 setAssignments(res1.data);
-                setFiles(res1.data.Assignments);
+                setSubmittedFiles(res1.data.Assignments);
                 setMembers(res2.data);
                 setInfos(res3.data);
                 setMyFiles(res4.data);
                 setLoading(false);
             })
         ).then(() => {
-            file && file.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); });
-            console.log(file);
+            submittedFile && submittedFile.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); });
+            console.log(submittedFile);
         }
         ).catch((err) => console.log(err));
     }, []);
@@ -163,6 +160,7 @@ function CalendarAssignment() {
                                                             userNick={my_nick}
                                                             deadline={assignments.deadline}
                                                             forOneBox={true}
+                                                            state={asgmt.submitState}
                                                         />
                                                 )}
                                             </List>
@@ -190,8 +188,8 @@ function CalendarAssignment() {
                                 <div id="div-all-asgmts">
                                     <h4>과제 전체보기</h4>
                                     <List>
-                                        {Object.keys(file).length !== 0 ?
-                                            <>{file && file.map(
+                                        {Object.keys(submittedFile).length !== 0 ?
+                                            <>{submittedFile && submittedFile.map(
                                                 (asgmt) =>
                                                     <Submitted
                                                         key={asgmt.filename}
@@ -203,6 +201,7 @@ function CalendarAssignment() {
                                                         userNick={asgmt.User.userNick}
                                                         deadline={assignments.deadline}
                                                         forOneBox={true}
+                                                        state={asgmt.submitState}
                                                     />
                                             )}</>
                                             :
@@ -217,19 +216,6 @@ function CalendarAssignment() {
 
                                 <div id="div-btn-boxes">
                                     <Button onClick={onClickToBoxes} size="sm">전체 과제함</Button>
-                                </div>
-
-                                <div id="div-no-submit">
-                                    미제출자
-                                    {members.map(
-                                        member => (
-                                            <EachAssignment
-                                                userId={member.email}
-                                                userNick={member.userNick}
-                                                assignment={assignments.Assignments}
-                                            />
-                                        )
-                                    )}
                                 </div>
                             </div>
                         </div>

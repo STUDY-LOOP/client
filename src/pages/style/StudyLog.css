@@ -10,6 +10,12 @@
 
 #div-studylog {
     flex-direction: column;
+    display: block;
+}
+
+#div-log-scroll {
+    height: 100%;
+    overflow-y: auto;
 }
 
 #div-minutes {
@@ -18,4 +24,42 @@
 
 #div-attendance {
     margin-bottom: 60px;
+}
+
+/* 그리드 */
+
+#div-log-grid {
+    display: grid;
+
+    width: 90%;
+
+    grid-template-areas:
+        "div-minutes    div-minutes     div-attendance"
+        "div-minutes    div-minutes     div-assignment "
+    ;
+} 
+
+#div-log-editor {
+    border: 1px solid rgb(154, 148, 148);
+    padding: 10px;
+}
+
+#div-minutes {
+    grid-area: div-minutes;
+    padding: 2px;
+    display:block;
+    width: 100%;
+}
+
+#div-attendance {
+    grid-area: div-attendance;
+    width: 100%;
+    margin-left: 100px;
+}  
+
+#div-assignment {
+    grid-area: div-assignment;
+    width: 80%;
+    margin-left: 100px;
+    margin-bottom: 40px;
 }
