@@ -31,6 +31,7 @@ function CalendarAssignment() {
     const [loading, setLoading] = useState(true);
     const [assignments, setAssignments] = useState([]);
     const [file, setFiles] = useState([]);
+    const [submittedFile, setSubmittedFiles] = useState([]);
     const [members, setMembers] = useState([]);
     const [info, setInfos] = useState([]);
     const [myAsgmt, setMyAsgmt] = useState(false);
@@ -46,15 +47,15 @@ function CalendarAssignment() {
         ]).then(
             axios.spread((res1, res2, res3, res4) => {
                 setAssignments(res1.data);
-                setFiles(res1.data.Assignments);
+                setSubmittedFiles(res1.data.Assignments);
                 setMembers(res2.data);
                 setInfos(res3.data);
                 setMyFiles(res4.data);
                 setLoading(false);
             })
         ).then(() => {
-            file && file.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); });
-            console.log(file);
+            submittedFile && submittedFile.map(asgmt => { if (asgmt.uploader === my_email) setMyAsgmt(true); });
+            console.log(submittedFile);
         }
         ).catch((err) => console.log(err));
     }, []);
@@ -163,6 +164,7 @@ function CalendarAssignment() {
                                                             userNick={my_nick}
                                                             deadline={assignments.deadline}
                                                             forOneBox={true}
+                                                            state={asgmt.submitState}
                                                         />
                                                 )}
                                             </List>
@@ -190,8 +192,8 @@ function CalendarAssignment() {
                                 <div id="div-all-asgmts">
                                     <h4>과제 전체보기</h4>
                                     <List>
-                                        {Object.keys(file).length !== 0 ?
-                                            <>{file && file.map(
+                                        {Object.keys(submittedFile).length !== 0 ?
+                                            <>{submittedFile && submittedFile.map(
                                                 (asgmt) =>
                                                     <Submitted
                                                         key={asgmt.filename}
@@ -203,6 +205,7 @@ function CalendarAssignment() {
                                                         userNick={asgmt.User.userNick}
                                                         deadline={assignments.deadline}
                                                         forOneBox={true}
+                                                        state={asgmt.submitState}
                                                     />
                                             )}</>
                                             :

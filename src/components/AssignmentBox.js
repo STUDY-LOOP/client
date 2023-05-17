@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {
@@ -17,8 +17,9 @@ import './style/AssignmentBox.css';
 
 const SERVER_URI = 'http://localhost:3000';
 
-function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline }) {
+function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline, eventId }) {
 	const [files, setFiles] = useState();
+	const navigate = useNavigate();
 
 	// 시간 계산
 	const deadlineD = new Date(deadline);
@@ -43,11 +44,12 @@ function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline }) {
 		formData.append('jsonData', jsonData);
 
 		await axios.post(`${SERVER_URI}/api/assignment`, formData);
+		navigate(`/study-group/${gpId}/asgmt/${boxId}`);
 	};
 
 	return (
 		<>
-			<Accordion.Item eventKey={boxId}>
+			<Accordion.Item eventKey="0">
 				<Accordion.Header id="accordion-header">
 					<h4>
 						<strong>{title}</strong>
