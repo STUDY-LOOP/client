@@ -7,11 +7,13 @@ const SERVER_URI = 'http://localhost:3000';
 
 function AssignmentName({ gpId }) {
 
-    const [assignmentBoxes, setAssignmentBoxes] = useState([]);
+    const [events, setEvents] = useState([]);
 
     const callApi = async () => {
-        const response = await axios.get(`${SERVER_URI}/api/${gpId}/assignment`);
-        setAssignmentBoxes(response.data);
+        const response = await axios.get(`${SERVER_URI}/api/${gpId}/event/title`);
+        setEvents(response.data);
+        
+        console.log(response.data)
     };
 
     useEffect(() => {
@@ -21,20 +23,20 @@ function AssignmentName({ gpId }) {
 
     return (
         <>
-            {assignmentBoxes.map(
-                asgmt => (
+            {events.map(
+                event => (
                     <td>
                         <OverlayTrigger
-                            key={asgmt.boxId}
+                            key={event.id}
                             placement='top'
                             overlay={
                                 <Tooltip>
-                                    {asgmt.title}
+                                    {event.event_title}
                                 </Tooltip>
                             }
                         >
                             
-                            <b>{new Date(asgmt.deadline).getMonth()+1}/{new Date(asgmt.deadline).getDate()}</b>
+                            <b>{new Date(event.date_start).getMonth()+1}/{new Date(event.date_start).getDate()}</b>
                         </OverlayTrigger>
                     </td>
                 )
