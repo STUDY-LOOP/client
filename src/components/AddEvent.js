@@ -52,7 +52,7 @@ function AddEvent({ date_start }) {
             }, {
                 withCredentials: true
             })
-            
+
             .then(res => {
                 axios.post(`${SERVER_URI}/api/${gpId}/create-attendance/${res.data}`)
             })
@@ -69,27 +69,47 @@ function AddEvent({ date_start }) {
     const contentHandler = (event) => { event.preventDefault(); setContent(event.target.value); };
 
     const onClickAsgmtEvent = async (event) => {
-        event.preventDefault()
+        // event.preventDefault()
 
-        axios.post(`${SERVER_URI}/api/assignmentBox`, {
+        // axios.post(`${SERVER_URI}/api/assignmentBox`, {
+        //     gpId: gpId,
+        //     log: log,
+        //     title: eventTitle,
+        //     content: content,
+        //     deadline: startDateTime,
+        // })
+        //     .then(res => {
+        //         axios.post(`${SERVER_URI}/api/event`, {
+        //             gpId: gpId,
+        //             event_title: eventTitle,
+        //             event_type: '1',
+        //             date_start: startDateTime,
+        //             event_color: color[1],
+        //             boxId: res.data,
+        //         })
+        //     })
+        //     .then(() => window.location.replace(`/study-group/${gpId}`))
+        //     .catch((err) => alert(err));
+
+
+        const boxId = await axios.post(`${SERVER_URI}/api/assignmentBox`, {
             gpId: gpId,
             log: log,
             title: eventTitle,
             content: content,
             deadline: startDateTime,
-        })
-            .then(res => {
-                axios.post(`${SERVER_URI}/api/event`, {
-                    gpId: gpId,
-                    event_title: eventTitle,
-                    event_type: '1',
-                    date_start: startDateTime,
-                    event_color: color[1],
-                    boxId: res.data,
-                })
-            })
-            .then(() => window.location.replace(`/study-group/${gpId}`))
-            .catch((err) => alert(err));
+        });
+
+        await axios.post(`${SERVER_URI}/api/event`, {
+            gpId: gpId,
+            event_title: eventTitle,
+            event_type: '1',
+            date_start: startDateTime,
+            event_color: color[1],
+            boxId: boxId.data,
+        });
+
+        window.location.replace(`/study-group/${gpId}`);
     };
 
 
@@ -134,10 +154,10 @@ function AddEvent({ date_start }) {
                     </Form.Group>
                 </Form>
 
-                <hr/>
-                <Button 
+                <hr />
+                <Button
                     onClick={onClickStudyEvent}
-                    style={{float: 'right'}}
+                    style={{ float: 'right' }}
                 >
                     스터디 만들기
                 </Button>
@@ -175,10 +195,10 @@ function AddEvent({ date_start }) {
                     </Form.Group>
                 </Form>
 
-                <hr/>
-                <Button 
+                <hr />
+                <Button
                     onClick={onClickAsgmtEvent}
-                    style={{float: 'right'}}
+                    style={{ float: 'right' }}
                 >
                     과제함 만들기
                 </Button>
@@ -216,10 +236,10 @@ function AddEvent({ date_start }) {
                     </Form.Group>
                 </Form>
 
-                <hr/>
-                <Button 
+                <hr />
+                <Button
                     onClick={onClickEtcEvent}
-                    style={{float: 'right'}}
+                    style={{ float: 'right' }}
                 >
                     일정 만들기
                 </Button>

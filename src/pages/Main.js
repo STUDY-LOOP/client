@@ -5,7 +5,6 @@ import axios from 'axios';
 import LayoutMain from '../components/LayoutMain';
 import StudyList from '../components/StudyList';
 import SearchResult from '../components/SearchResult';
-import CreateStudyBtn from '../components/CreateStudyBtn';
 import './style/Common.css';
 import './style/Main.css';
 

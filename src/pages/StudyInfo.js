@@ -4,6 +4,7 @@ import { useParams } from 'react-router-dom';
 import axios from 'axios';
 
 import LayoutMain from '../components/LayoutMain';
+import LayoutStudyPage from '../components/LayoutStudyPage';
 import './style/Common.css'
 import './style/CreateGroup.css'
 
@@ -17,7 +18,7 @@ import { TimePicker } from 'antd';
 
 const SERVER_URI = 'http://localhost:3000';
 
-function CreateGroup() {
+function StudyInfo() {
     const { gpId } = useParams();
 
     const [loading, setLoading] = useState(true);
@@ -57,7 +58,7 @@ function CreateGroup() {
             scheduleDay: document.getElementById('create-day').value,
             scheduleTime: document.getElementById('create-time').value,
         }
-        
+
         // null과 빈 문자열 모두 아닌 경우에만 updatedValue
         const updatedValue = Object.fromEntries(
             Object.entries(createdValue).filter(([_, value]) => value !== null && value !== '')
@@ -75,6 +76,11 @@ function CreateGroup() {
 
             <div id="div-scroll-create" className="div-layout-lower-2">
                 <div id="div-create-form">
+                    <LayoutStudyPage
+                        gpId={studyInfo.groupPublicId}
+                        groupName={studyInfo.groupName}
+                    />
+
                     <h2><b>스터디 설정</b></h2> <br />
 
                     <h3>스터디 소개</h3>
@@ -165,6 +171,7 @@ function CreateGroup() {
 
                         <br />
                         <Button id="upate-btn" onClick={onClick}>스터디 정보 수정</Button>
+                        <br/> <br/>
                     </Form>
                 </div>
             </div >
@@ -172,4 +179,4 @@ function CreateGroup() {
     );
 }
 
-export default CreateGroup;
+export default StudyInfo;

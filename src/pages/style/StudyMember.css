@@ -18,7 +18,7 @@
     grid-template-areas:
         "div-layout         div-layout"
         "div-members        div-members"
-        "div-table-asgmt    div-table-attend"
+        "div-table-attend   div-table-asgmt"
     ;
 }
 
