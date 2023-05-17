@@ -1,4 +1,22 @@
-.Chat-div-info {
+#entire-chat-div {
+  display: flex;
+  flex-direction: column;
+  height: 500px;
+}
+
+.chat-notice-tab {
+  justify-content: flex-start;
+}
+
+#chatArea {
+  overflow: scroll;
+}
+
+.Chat-input-div {
+  justify-content: flex-end;
+}
+
+/* .Chat-div-info {
   margin-bottom: 6px;
 }
 
@@ -15,4 +33,4 @@
   background-color: '#f0f0f0';
   color: '#4a4848';
   padding: 10px 20px;
-}
+} */

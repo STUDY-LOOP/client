@@ -1,3 +1,25 @@
 .link-group {
-    font-size: 13.55pt;
+  font-size: 13.55pt;
+}
+
+#study-main-card {
+  display: flex;
+  flex-direction: column;
+}
+
+#study-card-img {
+  justify-content: flex-start;
+}
+
+#study-card-title {
+  justify-content: flex-start;
+}
+
+#study-card-text {
+  justify-content: flex-start;
+  height: 38%;
+}
+
+#study-card-button {
+  justify-content: flex-end;
 }

@@ -134,7 +134,7 @@ function Chat() {
           style: {
             backgroundColor: '#f0f0f0',
             color: '#4a4848',
-            padding: '10px 20px',
+            padding: '8px 15px',
           },
         },
         content
@@ -177,7 +177,7 @@ function Chat() {
           style: {
             backgroundColor: '#f0f0f0',
             color: '#4a4848',
-            padding: '10px 20px',
+            padding: '8px 15px',
           },
         },
         content
@@ -197,7 +197,7 @@ function Chat() {
 
   // 렌더
   return (
-    <div>
+    <div id="entire-chat-div">
       <Tabs
         id="controlled-chat-notice-tab"
         activeKey={key}
@@ -229,7 +229,7 @@ function Chat() {
                   style={{
                     backgroundColor: '#f0f0f0',
                     color: '#4a4848',
-                    padding: '10px 20px',
+                    padding: '8px 15px',
                   }}
                 >
                   {chat.content}
@@ -271,7 +271,7 @@ function Chat() {
                   style={{
                     backgroundColor: '#f0f0f0',
                     color: '#4a4848',
-                    padding: '10px 20px',
+                    padding: '8px 15px',
                   }}
                 >
                   {notice.content}

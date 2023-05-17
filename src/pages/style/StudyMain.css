@@ -11,7 +11,7 @@
 
   /* grid-template-rows: 1fr fr 2fr 1fr 1fr; */
   grid-template-columns: repeat(8, 1fr);
-  gap: 10px;
+  gap: 12px;
 
   grid-template-areas:
     'div-info       div-info        div-info        div-info        div-info        div-info    div-info'

@@ -72,6 +72,9 @@ function MyPage() {
       newNick: values.nickname,
       newPW: values.password,
     });
+    //sessionStorage 업데이트
+    console.log('이 부분 실행 확인!!!!!!!!!!!!!!!!!!');
+    sessionStorage.setItem('user_nick', values.nickname);
   };
 
   return (
