@@ -22,10 +22,12 @@ function LayoutStudyPage({ gpId, groupName, leader, rule, lateTime, lateFee, abs
 
     return (
         <div>
-            <h1 onClick={onClickTitle}>
-                <b>{groupName}</b>
-            </h1>
-            <p onClick={handleShow}>{description}</p>
+            <div id="header-studymain">
+                <h1 onClick={onClickTitle}>
+                    <b>{groupName}</b>
+                </h1>
+                <p onClick={handleShow}>{description}</p>
+            </div>
 
             <div id="offcanvas-rules">
                 <Offcanvas show={show} onHide={handleClose} placement="top">
@@ -43,28 +45,28 @@ function LayoutStudyPage({ gpId, groupName, leader, rule, lateTime, lateFee, abs
                         </p> */}
 
                         <div>
-                        <Table bordered hover size="sm">
-                            <thead>
-                                <tr>
-                                    <th></th>
-                                    <th>시간</th>
-                                    <th>벌금</th>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td><b>지각</b></td>
-                                    <td>{lateTime}</td>
-                                    <td>{lateFee}</td>
-                                </tr>
-                                <tr>
-                                    <td><b>결석</b></td>
-                                    <td>{absentTime}</td>
-                                    <td>{absentFee}</td>
-                                </tr>
-                            </tbody>
-                        </Table>
-                    </div>
+                            <Table bordered hover size="sm">
+                                <thead>
+                                    <tr>
+                                        <th></th>
+                                        <th>시간</th>
+                                        <th>벌금</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr>
+                                        <td><b>지각</b></td>
+                                        <td>{lateTime}</td>
+                                        <td>{lateFee}</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>결석</b></td>
+                                        <td>{absentTime}</td>
+                                        <td>{absentFee}</td>
+                                    </tr>
+                                </tbody>
+                            </Table>
+                        </div>
                     </Offcanvas.Body>
                 </Offcanvas>
             </div>

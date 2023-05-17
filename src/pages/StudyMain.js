@@ -138,7 +138,7 @@ function StudyMain() {
                 <LayoutMain />
             </div>
 
-            <div id="div-studymain" class="div-layout-lower-2-custom">
+            <div id="div-studymain" class="div-layout-lower-2-custom-studymain">
                 <Modal
                     show={addModalIsOpen}
                     onHide={() => { setAddModalIsOpen(false); }}
@@ -205,13 +205,14 @@ function StudyMain() {
                             : null}
 
                         <Button onClick={onClickMember}>스터디 정보</Button> &nbsp;
-                        <Button type="button" onClick={onClickAssignment}>과제함</Button>
-
-                    </div>
-
-                    <div id="div-video">
+                        <Button type="button" onClick={onClickAssignment}>과제함</Button> &nbsp;
                         <Button type="button" onClick={onClickEnterVideo}>화상회의</Button>
+
                     </div>
+
+                    {/* <div id="div-video">
+                        <Button type="button" onClick={onClickEnterVideo}>화상회의</Button>
+                    </div> */}
                 </div>
 
             </div>
