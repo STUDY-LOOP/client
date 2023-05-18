@@ -81,7 +81,7 @@ function SubmittedAssignment({ gpId, uploader, filename, fileOrigin, userNick, s
                             </td>
 
                             {uploader === sessionStorage.getItem('user_email')
-                                ? <Button variant="outline-primary" size="sm" onClick={onClick}>삭제</Button>
+                                ? <Button variant="outline-success" size="sm" onClick={onClick}>삭제</Button>
                                 : null}
                         </tr>
                         : null

@@ -137,6 +137,7 @@ function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline, eve
 					</Form>
 
 					<Button
+						variant="success"
 						style={{ float: 'right', width: '20%' }}
 						size="sm"
 						onClick={upload}

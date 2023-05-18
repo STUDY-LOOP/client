@@ -13,12 +13,12 @@ function StudyList({ gpId, groupName, groupDesc }) {
   };
 
   return (
-    <Card id="study-main-card" style={{ width: '15rem', height: '22rem' }}>
+    <Card id="study-main-card" style={{ width: '15rem', height: '22rem', marginTop: '20px' }}>
       <Card.Img variant="top" src={imgUrl} id="study-card-img" />
       <Card.Body>
         <Card.Title id="study-card-title">{groupName}</Card.Title>
         <Card.Text id="study-card-text">{groupDesc}</Card.Text>
-        <Button variant="primary" onClick={onClick} id="study-card-button">
+        <Button variant="success" onClick={onClick} id="study-card-button">
           스터디 입장하기
         </Button>
       </Card.Body>

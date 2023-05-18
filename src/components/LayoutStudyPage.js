@@ -30,7 +30,7 @@ function LayoutStudyPage({ gpId, groupName, leader, rule, lateTime, lateFee, abs
             </div>
 
             <div id="offcanvas-rules">
-                <Offcanvas show={show} onHide={handleClose} placement="top">
+                <Offcanvas show={show} onHide={handleClose} placement="start">
                     <Offcanvas.Header closeButton>
                         <Offcanvas.Title><h2>스터디 규칙</h2></Offcanvas.Title>
                     </Offcanvas.Header>
@@ -38,11 +38,6 @@ function LayoutStudyPage({ gpId, groupName, leader, rule, lateTime, lateFee, abs
                         <p><b>
                             {rule}
                         </b></p>
-
-                        {/* <p>
-                            - {lateTime}분부터 지각 (벌금 {lateFee}원) <br />
-                            - {absentTime}분부터 결석 (벌금 {absentFee}원)
-                        </p> */}
 
                         <div>
                             <Table bordered hover size="sm">

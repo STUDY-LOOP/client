@@ -8,13 +8,31 @@
   justify-content: flex-start;
 }
 
-#chatArea {
-  overflow: scroll;
+#chatArea, #noticeArea {
+  height: 90%;
+  overflow-y: auto;
+  flex-direction: column-reverse;
 }
 
-.Chat-input-div {
-  justify-content: flex-end;
+/* 채팅창과 입력칸 분리 */
+#div-tab-chat, #div-tab-notice {
+  position: relative;
+  height: 62vh;
+
+  display: block;
 }
+
+.Chat-input-div, .Notice-input-div {
+  /* justify-content: flex-end; */
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+}
+
+.Chat-input-div input, .Notice-input-div input {
+  width: 75%;
+}
+
 
 /* .Chat-div-info {
   margin-bottom: 6px;
@@ -30,7 +48,7 @@
 }
 
 .Chat-div-content {
-  background-color: '#f0f0f0';
+  background-color: '#ffffff';
   color: '#4a4848';
   padding: 10px 20px;
 } */

@@ -81,77 +81,81 @@ function StudyMember() {
                 <LayoutMain />
             </div>
             <div id="div-scroll" class="div-layout-lower-2">
-                <div id="div-grid-asgmt">
-                    <div id="div-layout">
+                <div id="div-scroll-inner-asgmt">
+                    <div id="div-layout" class="colored-layout-div">
                         <LayoutStudyPage
                             gpId={studyInfo.groupPublicId}
                             groupName={studyInfo.groupName}
                         />
                     </div>
 
-                    <div id="div-asgmt-layout">
-                        <h3>과제함</h3>
+                    <div id="div-grid-asgmt">
+                        <div id="div-asgmt-layout">
+                            <h3>과제함</h3>
 
-                        <Modal show={modalIsOpen} onHide={() => { setModalIsOpen(false); }}>
-                            <Modal.Header closeButton>
-                                <Modal.Title><h2><strong>새 과제함 만들기</strong></h2></Modal.Title>
-                            </Modal.Header>
+                            <Modal show={modalIsOpen} onHide={() => { setModalIsOpen(false); }}>
+                                <Modal.Header closeButton>
+                                    <Modal.Title><h2><strong>새 과제함 만들기</strong></h2></Modal.Title>
+                                </Modal.Header>
 
-                            <Modal.Body>
-                                <Form>
-                                    <Form.Group className="mb-3" controlId="formLog">
-                                        <Form.Label><h5><strong>스터디 로그</strong></h5></Form.Label>
-                                        <Form.Control type="input" onChange={logHandler} required />
-                                        <Form.Text className="text-muted">
-                                            과제와 연동되는 스터디 회차를 알려주세요
-                                        </Form.Text>
-                                    </Form.Group>
+                                <Modal.Body>
+                                    <Form>
+                                        <Form.Group className="mb-3" controlId="formLog">
+                                            <Form.Label><h5><strong>스터디 로그</strong></h5></Form.Label>
+                                            <Form.Control type="input" onChange={logHandler} required />
+                                            <Form.Text className="text-muted">
+                                                과제와 연동되는 스터디 회차를 알려주세요
+                                            </Form.Text>
+                                        </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label><h5><strong>과제명</strong></h5></Form.Label>
-                                        <Form.Control type="input" placeholder="과제명을 적어주세요" onChange={titleHandler} required />
-                                    </Form.Group>
+                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                            <Form.Label><h5><strong>과제명</strong></h5></Form.Label>
+                                            <Form.Control type="input" placeholder="과제명을 적어주세요" onChange={titleHandler} required />
+                                        </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label><h5><strong>과제 설명</strong></h5></Form.Label>
-                                        <Form.Control type="text" placeholder="과제에 대해 설명해주세요" onChange={contentHandler} required />
-                                    </Form.Group>
+                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                            <Form.Label><h5><strong>과제 설명</strong></h5></Form.Label>
+                                            <Form.Control type="text" placeholder="과제에 대해 설명해주세요" onChange={contentHandler} required />
+                                        </Form.Group>
 
-                                    <Form.Group className="mb-3" controlId="formBasicEmail">
-                                        <Form.Label><h5><strong>마감일</strong></h5></Form.Label> <br />
-                                        <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd a h:mm" />
-                                    </Form.Group>
-                                </Form>
-                            </Modal.Body>
+                                        <Form.Group className="mb-3" controlId="formBasicEmail">
+                                            <Form.Label><h5><strong>마감일</strong></h5></Form.Label> <br />
+                                            <DateTimePicker onChange={setStartDateTime} value={startDateTime} format="y-MM-dd a h:mm" />
+                                        </Form.Group>
+                                    </Form>
+                                </Modal.Body>
 
-                            <Modal.Footer>
-                                <Button type="button" onClick={onClickCreate}>과제함 생성</Button>
-                            </Modal.Footer>
-                        </Modal>
+                                <Modal.Footer>
+                                    <Button variant="success" type="button" onClick={onClickCreate}>과제함 생성</Button>
+                                </Modal.Footer>
+                            </Modal>
 
-                        <div>
-                            <Button onClick={handleModal}>과제함 추가하기</Button>
+                            <div>
+                                <Button variant="success" onClick={handleModal}>과제함 추가하기</Button>
+                            </div>
                         </div>
+
+
+
+                        {/* 과제제출여부 */}
+                        <Accordion defaultActiveKey="0" alwaysOpen>
+                            {loading ? <h3>LOADING...</h3> : assignments.map(
+                                (assignment) =>
+                                    <AssignmentBox
+                                        gpId={gpId}
+                                        boxId={assignment.boxId}
+                                        title={assignment.title}
+                                        content={assignment.content}
+                                        deadline={assignment.deadline}
+                                        Assignments={assignment.Assignments}
+                                    />
+
+                            )}
+                        </Accordion>
                     </div>
 
-
-
-                    {/* 과제제출여부 */}
-                    <Accordion defaultActiveKey="0" alwaysOpen>
-                        {loading ? <h3>LOADING...</h3> : assignments.map(
-                            (assignment) =>
-                                <AssignmentBox
-                                    gpId={gpId}
-                                    boxId={assignment.boxId}
-                                    title={assignment.title}
-                                    content={assignment.content}
-                                    deadline={assignment.deadline}
-                                    Assignments={assignment.Assignments}
-                                />
-
-                        )}
-                    </Accordion>
                 </div>
+
             </div>
         </div>
     );

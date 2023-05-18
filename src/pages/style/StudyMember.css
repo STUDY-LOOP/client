@@ -1,8 +1,7 @@
 .div-layout-lower-2-custom{
     float: left;
-    width: 80%;
+    width: 100%;
     height: 100%;
-    padding: 30px;
 }
 
 
@@ -11,23 +10,18 @@
     width: 80%;
     height: min-content;
 
-    /* grid-template-rows: 1fr 2fr 10fr; */
     grid-template-columns: 1fr 1fr;
     gap: 10px;
 
     grid-template-areas:
-        "div-layout         div-layout"
         "div-members        div-members"
         "div-table-attend   div-table-asgmt"
     ;
 }
 
-#div-layout {
-    grid-area: div-layout;
-}
-
 #div-members {
     grid-area: div-members;
+    padding: 30px;
 }
 
 #div-leader {
@@ -46,11 +40,13 @@
     grid-area: div-table-asgmt;
     overflow-x: auto;
     margin: 30px;
+    padding: 30px;
 }
 
 #div-table-attend {
     grid-area: div-table-attend;
     overflow-x: auto;
     margin: 30px;
+    padding: 30px;
 }
 

@@ -156,6 +156,7 @@ function AddEvent({ date_start }) {
 
                 <hr />
                 <Button
+                    variant="success"
                     onClick={onClickStudyEvent}
                     style={{ float: 'right' }}
                 >
@@ -197,6 +198,7 @@ function AddEvent({ date_start }) {
 
                 <hr />
                 <Button
+                    variant="success"
                     onClick={onClickAsgmtEvent}
                     style={{ float: 'right' }}
                 >
@@ -238,6 +240,7 @@ function AddEvent({ date_start }) {
 
                 <hr />
                 <Button
+                    variant="success"
                     onClick={onClickEtcEvent}
                     style={{ float: 'right' }}
                 >

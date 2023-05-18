@@ -87,7 +87,7 @@ function MyPage() {
             <LayoutMain />
           </div>
 
-          <div class="div-layout-lower-2-custom">
+          <div id="div-mypage-content" class="div-layout-lower-2-custom">
             <h4 style={{ fontWeight: 600 }}>내 정보</h4>
 
             <Form>
@@ -135,7 +135,7 @@ function MyPage() {
               </Form.Group>
 
               <Button
-                variant="primary"
+                variant="success"
                 type="submit"
                 onClick={onClickEdit}
                 size="sm"

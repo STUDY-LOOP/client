@@ -129,7 +129,7 @@ function Join() {
                             <Col sm="3">
                                 <Button
                                     id="btn-pw-chk"
-                                    variant="outline-primary"
+                                    variant="outline-success"
                                     size="sm"
                                     onClick={onClickCheck}
                                 >
@@ -197,7 +197,7 @@ function Join() {
                         </Form.Group>
 
                         <br />
-                        <Button id="create-btn" onClick={onClickJoin}>계정 생성</Button>
+                        <Button variant="success" id="create-btn" onClick={onClickJoin}>계정 생성</Button>
                     </Form>
                 </div>
             </div>
