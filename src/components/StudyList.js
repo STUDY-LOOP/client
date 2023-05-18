@@ -13,7 +13,14 @@ function StudyList({ gpId, groupName, groupDesc }) {
   };
 
   return (
-    <Card id="study-main-card" style={{ width: '15rem', height: '22rem', marginTop: '20px' }}>
+    <Card
+      id="study-main-card"
+      style={{
+        width: '15rem',
+        height: '22rem',
+        marginTop: '20px',
+      }}
+    >
       <Card.Img variant="top" src={imgUrl} id="study-card-img" />
       <Card.Body>
         <Card.Title id="study-card-title">{groupName}</Card.Title>

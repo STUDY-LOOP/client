@@ -117,22 +117,28 @@ function Main() {
         <div id="div-scroll-main-child">
           <div id="div-search">
             <div id="div-search-input-btn">
-              <h1><b>스터디 준비부터 진행까지</b></h1>
+              <h1>
+                <b>스터디 준비부터 진행까지</b>
+              </h1>
               <h3>새로운 스터디를 시작하세요!</h3> <br />
-              <input
-                id="input-search"
-                type="search"
-                placeholder="관심있는 스터디를 검색하세요"
-                onChange={onChageSearch}
-              />
-              <Button variant="success" style={{ marginLeft: '20px' }} onClick={onClickSearch}>
-                검색
-              </Button>
+              <div>
+                <input
+                  id="input-search"
+                  type="search"
+                  placeholder="관심있는 스터디를 검색하세요"
+                  onChange={onChageSearch}
+                />
+                <Button
+                  variant="success"
+                  style={{ marginLeft: '10px' }}
+                  onClick={onClickSearch}
+                >
+                  검색
+                </Button>
+              </div>
             </div>
           </div>
-
           <div class="divider"></div>
-
           <Container fluid id="div-list-groups">
             <CardGroup>
               <Row xs={2} md={3} lg={4} xl={4} id="row-main">
@@ -155,19 +161,13 @@ function Main() {
               </Row>
             </CardGroup>
           </Container>{' '}
-
           <br />
           <br />
-
           {user ? (
             <div id="div-btn-to-create-study">
               {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
 
-              <Fab
-                variant="extended"
-                color="success"
-                href="/group/create"
-              >
+              <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
               </Fab>
@@ -176,19 +176,12 @@ function Main() {
             <div id="div-btn-to-create-study">
               {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
 
-              <Fab
-                variant="extended"
-                color="success"
-                href="/group/create"
-              >
+              <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
               </Fab>
             </div>
           )}
-
-
-
           <>
             {/*
                      <div id="div-main-carousel">
@@ -236,7 +229,7 @@ function Main() {
           </>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
