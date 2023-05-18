@@ -10,7 +10,6 @@
   width: 100%;
   height: 100vh;
 
-  /* grid-template-rows: 1fr fr 2fr 1fr 1fr; */
   grid-template-columns: repeat(8, 1fr);
   /* gap: 10px; */
 
@@ -18,40 +17,44 @@
     'div-info       div-info        div-info        div-info        div-info        div-info        div-info    div-info'
     'div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    div-calendar    div-chat    div-chat'
     'div-calendar   div-calendar    div-calendar    div-calendar    div-calendar    div-calendar    div-chat    div-chat'
-    'div-btn        div-btn         div-btn         div-btn         div-btn         div-btn         div-chat    div-chat';
+    'div-btn        div-btn         div-btn         div-btn         div-btn         div-btn         div-video   div-video';
 }
 
+/* 상단 정보 */
 #div-info {
   grid-area: div-info;
   display: flex;
-  color: white;
-  background-color: #9BA4B5;
+  color: #ffffff;
+  background-color: #f97c22;
   padding-left: 30px;
   padding-top: 30px;
   padding-bottom: 20px;
 }
 
+/* 캘린더 */
 #div-calendar {
   grid-area: div-calendar;
-  background-color: #F6F1F1;
+  background-color: #fffdfd;
   padding-top: 10px;
   padding-left: 30px;
   padding-right: 30px;
   padding-bottom: 5px;
 }
 
+/* 채팅 */
 #div-chat {
   grid-area: div-chat;
-  background-color: white;
+  background-color: #F6F1F1;
   padding-top: 10px;
   padding-left: 20px;
   padding-right: 20px;
 }
 
+/* 하단 버튼 */
 #div-btn {
   grid-area: div-btn;
   display: flex;
-  background-color: #F6F1F1;
+  background-color: #fffdfd;
   padding-top: 10px;
   padding-left: 30px;
   padding-bottom: 18px;
@@ -61,11 +64,10 @@
 #div-video {
   grid-area: div-video;
   width: 100%;
-  padding-top: 10px;
-  margin-left: 10px;
-  padding-bottom: 18px;
+  padding: 10px;
 }
 
 #div-video Button {
   width: 100%;
+  height: 100%;
 }

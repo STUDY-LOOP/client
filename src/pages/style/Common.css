@@ -10,16 +10,27 @@
     height: 100vh;
 }
 
-.div-layout-lower-1{
+.div-layout-lower-1 {
     float: left;
     height: 100%;
     width: min-content;
 }
 
-.div-layout-lower-2{
+.div-layout-lower-2 {
     float: left;
     height: 100%;
     flex: 1 0 auto;
-    padding-top: 30px;
-    padding-left: 30px;
+    background: #fffdfd;
 }
+
+/* 상단 정보 */
+.colored-layout-div {
+    color: #ffffff;
+    background-color: #f97c22;
+    padding-left: 18px;
+    padding-top: 18px;
+    padding-bottom: 4px;
+    margin: 0;
+}
+
+/* 배경색 */

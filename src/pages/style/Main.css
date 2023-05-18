@@ -1,5 +1,15 @@
+/* 색 */
+#div-scroll-main {
+  background: linear-gradient(to right bottom, #f97c22 20%, #fffdfd 20%);
+}
+
+
+
 #div-scroll-main {
   display: block;
+
+  padding-top: 30px;
+  padding-left: 30px;
 }
 
 #div-scroll-main-child {
@@ -22,13 +32,6 @@
   width: 80%;
 }
 
-#input-search {
-  border-radius: 100px;
-  width: 500px;
-  padding: 10px;
-  padding-left: 20px;
-}
-
 #input-search:hover {
   cursor: pointer;
 }
@@ -42,4 +45,44 @@
   width: 500px;
 }
 
-/* full page scroll */
+#div-btn-to-create-study {
+  float: right;
+  position: sticky;
+  bottom: 50px;
+  right: 50px;
+}
+
+
+
+/* ver. 1 */
+#div-search {
+  position: relative;
+  height: 90%;
+  padding-left: 30px;
+  padding-top: 30px;
+}
+
+#div-search-input-btn {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+#input-search {
+  border-radius: 100px;
+  width: 500px;
+  padding: 10px;
+  padding-left: 20px;
+}
+
+
+
+
+/* ver. 2 */
+/* #input-search {
+  border-radius: 100px;
+  width: 500px;
+  padding: 10px;
+  padding-left: 20px;
+}*/

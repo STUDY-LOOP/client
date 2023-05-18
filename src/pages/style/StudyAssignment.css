@@ -2,20 +2,25 @@
     display: block;
 }
 
-#div-grid-asgmt::-webkit-scrollbar {
+#div-scroll-inner-asgmt::-webkit-scrollbar {
     display: none;
+}
+
+#div-scroll-inner-asgmt{
+    height: 100%;
+    overflow-y: auto;
+
 }
 
 #div-grid-asgmt {
     display: grid;
     width: 70%;
-    height: 100%;
-    overflow-y: auto;
 
     gap: 10px;
+    margin-top: 30px;
+    margin-left: 30px;
 
     grid-template-areas:
-        "div-layout"
         "div-asgmt-layout"
         "div-list"
     ;

@@ -66,11 +66,14 @@ function StudyLog() {
 			</div>
 
 			<div id="div-studylog" class="div-layout-lower-2">
-				<div id="div-log-scroll">
+				<div class="colored-layout-div">
 					<LayoutStudyPage
 						gpId={studyInfo.groupPublicId}
 						groupName={studyInfo.groupName}
 					/>
+				</div>
+
+				<div id="div-log-scroll">
 
 					<div class="div-page-header">
 						<h2>{date} 로그</h2>
@@ -99,14 +102,14 @@ function StudyLog() {
 										onChange={(con) => setContent(con)}
 									/>
 									<br />
-									<Button variant="primary" onClick={handleCloseOnClick}>
+									<Button variant="success" onClick={handleCloseOnClick}>
 										완료하기
 									</Button>{' '}
 
 								</Modal>
 							</div>
 							<br />
-							<Button variant="primary" onClick={handleOnClickModal}>
+							<Button variant="success" onClick={handleOnClickModal}>
 								수정하기
 							</Button>{' '}
 						</div>

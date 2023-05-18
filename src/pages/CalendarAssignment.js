@@ -89,66 +89,110 @@ function CalendarAssignment() {
 
                 <div id="div-scroll-main" class="div-layout-lower-2">
                     {loading ? <h2>loading...</h2> :
-                        <div id="div-layout-grid">
-                            <div id="div-layout-1" className="layout-study">
+                        <>
+                            <div id="div-layout-1" className="layout-study colored-layout-div">
                                 <LayoutStudyPage
                                     gpId={gpId}
                                     groupName={info.groupName}
                                 />
                             </div>
 
-                            <div id="div-grid-cal-asgmt">
-                                <div id="div-layout-2" className="layout-cal-asgmt">
-                                    <h3><strong>{assignments.title}</strong></h3>
-                                    <CalculateDue
-                                        describe={assignments.content}
-                                        inputDate={assignments.deadline}
-                                    />
-                                </div>
+                            <div id="div-layout-grid">
+                                <div id="div-grid-cal-asgmt">
+                                    <div id="div-layout-2" className="layout-cal-asgmt">
+                                        <h3><strong>{assignments.title}</strong></h3>
+                                        <CalculateDue
+                                            describe={assignments.content}
+                                            inputDate={assignments.deadline}
+                                        />
+                                    </div>
 
-                                <div id="div-btn-detail">
-                                    <Button onClick={onClickToDetail} size="sm">세부 페이지로</Button>
-                                </div>
+                                    <div id="div-btn-detail">
+                                        <Button variant="success" onClick={onClickToDetail} size="sm">세부 페이지로</Button>
+                                    </div>
 
-                                <div id="div-my-asgmt">
-                                    {myAsgmt
-                                        ? <div id="div-my-yes">
-                                            <h4>내 과제 &nbsp;
+                                    <div id="div-my-asgmt">
+                                        {myAsgmt
+                                            ? <div id="div-my-yes">
+                                                <h4>내 과제 &nbsp;
 
-                                                <OverlayTrigger
-                                                    id="trigger-asgmt"
-                                                    placement="bottom"
-                                                    trigger="click"
-                                                    overlay={
-                                                        <Popover>
-                                                            <Popover.Header as="h3">과제 제출</Popover.Header>
-                                                            <Popover.Body>
-                                                                <>
-                                                                    <Form
-                                                                        style={{ float: 'left', width: '78%' }}
-                                                                        encType="multipart/form-data"
-                                                                    >
-                                                                        <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
-                                                                    </Form>
+                                                    <OverlayTrigger
+                                                        id="trigger-asgmt"
+                                                        placement="bottom"
+                                                        trigger="click"
+                                                        overlay={
+                                                            <Popover>
+                                                                <Popover.Header as="h3">과제 제출</Popover.Header>
+                                                                <Popover.Body>
+                                                                    <>
+                                                                        <Form
+                                                                            style={{ float: 'left', width: '78%' }}
+                                                                            encType="multipart/form-data"
+                                                                        >
+                                                                            <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
+                                                                        </Form>
 
-                                                                    <Button
-                                                                        style={{ float: 'right', width: '20%' }}
-                                                                        size="sm"
-                                                                        onClick={upload}>
-                                                                        제출
-                                                                    </Button>
-                                                                    <br /><br />
-                                                                </>
-                                                            </Popover.Body>
-                                                        </Popover>
-                                                    }
+                                                                        <Button
+                                                                            variant="success"
+                                                                            style={{ float: 'right', width: '20%' }}
+                                                                            size="sm"
+                                                                            onClick={upload}>
+                                                                            제출
+                                                                        </Button>
+                                                                        <br /><br />
+                                                                    </>
+                                                                </Popover.Body>
+                                                            </Popover>
+                                                        }
+                                                    >
+                                                        <Button variant="outline-secondary" size="sm">추가 제출</Button>
+                                                    </OverlayTrigger>
+                                                </h4>
+
+                                                <List>
+                                                    {myFile.map(
+                                                        (asgmt) =>
+                                                            <Submitted
+                                                                key={asgmt.filename}
+                                                                gpId={gpId}
+                                                                uploader={asgmt.uploader}
+                                                                filename={asgmt.filename}
+                                                                fileOrigin={asgmt.fileOrigin}
+                                                                submittedOn={asgmt.submittedOn}
+                                                                userNick={my_nick}
+                                                                deadline={assignments.deadline}
+                                                                forOneBox={true}
+                                                                state={asgmt.submitState}
+                                                            />
+                                                    )}
+                                                </List>
+                                            </div>
+
+                                            : <div id="div-my-no">
+                                                <h4>내 과제</h4>
+                                                <Form
+                                                    style={{ float: 'left', width: '78%' }}
+                                                    encType="multipart/form-data"
                                                 >
-                                                    <Button variant="outline-secondary" size="sm">추가 제출</Button>
-                                                </OverlayTrigger>
-                                            </h4>
+                                                    <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
+                                                </Form>
 
-                                            <List>
-                                                {myFile.map(
+                                                <Button
+                                                    variant="success"
+                                                    style={{ float: 'right', width: '20%' }}
+                                                    size="sm"
+                                                    onClick={upload}>
+                                                    과제 제출
+                                                </Button>
+                                            </div>
+                                        }
+                                    </div>
+
+                                    <div id="div-all-asgmts">
+                                        <h4>과제 전체보기</h4>
+                                        <List>
+                                            {Object.keys(submittedFile).length !== 0 ?
+                                                <>{submittedFile && submittedFile.map(
                                                     (asgmt) =>
                                                         <Submitted
                                                             key={asgmt.filename}
@@ -157,68 +201,29 @@ function CalendarAssignment() {
                                                             filename={asgmt.filename}
                                                             fileOrigin={asgmt.fileOrigin}
                                                             submittedOn={asgmt.submittedOn}
-                                                            userNick={my_nick}
+                                                            userNick={asgmt.User.userNick}
                                                             deadline={assignments.deadline}
                                                             forOneBox={true}
                                                             state={asgmt.submitState}
                                                         />
-                                                )}
-                                            </List>
-                                        </div>
+                                                )}</>
+                                                :
+                                                <ListItem disablePadding>
+                                                    <ListItemButton>
+                                                        <ListItemText primary="제출된 과제 없음" />
+                                                    </ListItemButton>
+                                                </ListItem>
+                                            }
+                                        </List>
+                                    </div>
 
-                                        : <div id="div-my-no">
-                                            <h4>내 과제</h4>
-                                            <Form
-                                                style={{ float: 'left', width: '78%' }}
-                                                encType="multipart/form-data"
-                                            >
-                                                <Form.Control id="file-input" type="file" size="sm" name="fileData" onChange={onChange} />
-                                            </Form>
-
-                                            <Button
-                                                style={{ float: 'right', width: '20%' }}
-                                                size="sm"
-                                                onClick={upload}>
-                                                과제 제출
-                                            </Button>
-                                        </div>
-                                    }
-                                </div>
-
-                                <div id="div-all-asgmts">
-                                    <h4>과제 전체보기</h4>
-                                    <List>
-                                        {Object.keys(submittedFile).length !== 0 ?
-                                            <>{submittedFile && submittedFile.map(
-                                                (asgmt) =>
-                                                    <Submitted
-                                                        key={asgmt.filename}
-                                                        gpId={gpId}
-                                                        uploader={asgmt.uploader}
-                                                        filename={asgmt.filename}
-                                                        fileOrigin={asgmt.fileOrigin}
-                                                        submittedOn={asgmt.submittedOn}
-                                                        userNick={asgmt.User.userNick}
-                                                        deadline={assignments.deadline}
-                                                        forOneBox={true}
-                                                        state={asgmt.submitState}
-                                                    />
-                                            )}</>
-                                            :
-                                            <ListItem disablePadding>
-                                                <ListItemButton>
-                                                    <ListItemText primary="제출된 과제 없음" />
-                                                </ListItemButton>
-                                            </ListItem>
-                                        }
-                                    </List>
-                                </div>
-
-                                <div id="div-btn-boxes">
-                                    <Button onClick={onClickToBoxes} size="sm">전체 과제함</Button>
+                                    <div id="div-btn-boxes">
+                                        <Button variant="success" onClick={onClickToBoxes} size="sm">전체 과제함</Button>
+                                    </div>
                                 </div>
                             </div>
-                        </div>
+                        </>
+
                     }
                 </div>
 

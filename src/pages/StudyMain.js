@@ -194,25 +194,28 @@ function StudyMain() {
 
                     <div id="div-btn">
                         {/* 로그인 안했거나 || 스터디장이거나 || 스터디원이라면 -> 가입 불가 */}
-                        {userEmail === null || userEmail === studyInfo.groupLeader || membersEmail.includes(userEmail) ? null
-                            : <div>
-                                <><Button type="button" onClick={onClickJoin}>스터디 가입하기</Button>&nbsp;</>
-                            </div>
+                        {userEmail === null || userEmail === studyInfo.groupLeader || membersEmail.includes(userEmail)
+                            ?
+                            <>
+
+                            </>
+
+                            :
+                            <><Button variant="success" type="button" onClick={onClickJoin}>스터디 가입하기</Button>&nbsp;</>
+
                         }
 
                         {userEmail === studyInfo.groupLeader ?
-                            <><Button type="button" onClick={onClickStudyInfo}>스터디 설정</Button>&nbsp;</>
+                            <><Button variant="success" type="button" onClick={onClickStudyInfo}>스터디 설정</Button>&nbsp;</>
                             : null}
-
-                        <Button onClick={onClickMember}>스터디 정보</Button> &nbsp;
-                        <Button type="button" onClick={onClickAssignment}>과제함</Button> &nbsp;
-                        <Button type="button" onClick={onClickEnterVideo}>화상회의</Button>
+                        <Button variant="success" onClick={onClickMember}>스터디 정보</Button> &nbsp;
+                        <Button variant="success" type="button" onClick={onClickAssignment}>과제함</Button> &nbsp;
 
                     </div>
 
-                    {/* <div id="div-video">
-                        <Button type="button" onClick={onClickEnterVideo}>화상회의</Button>
-                    </div> */}
+                    <div id="div-video">
+                        <Button variant="success" type="button" onClick={onClickEnterVideo}>화상회의</Button>
+                    </div>
                 </div>
 
             </div>

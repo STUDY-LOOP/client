@@ -20,6 +20,12 @@ import {
   Container,
 } from 'react-bootstrap';
 import { Hidden } from '@mui/material';
+import Box from '@mui/material/Box';
+import Fab from '@mui/material/Fab';
+import AddIcon from '@mui/icons-material/Add';
+import EditIcon from '@mui/icons-material/Edit';
+import FavoriteIcon from '@mui/icons-material/Favorite';
+import NavigationIcon from '@mui/icons-material/Navigation';
 
 const SERVER_URI = 'http://localhost:3000';
 const DIVIDER_HEIGHT = 5;
@@ -110,17 +116,23 @@ function Main() {
 
         <div id="div-scroll-main-child">
           <div id="div-search">
-            <input
-              id="input-search"
-              type="search"
-              placeholder="관심있는 스터디를 검색하세요"
-              onChange={onChageSearch}
-            />
-            <Button style={{ marginLeft: '20px' }} onClick={onClickSearch}>
-              검색
-            </Button>
+            <div id="div-search-input-btn">
+              <h1><b>스터디 준비부터 진행까지</b></h1>
+              <h3>새로운 스터디를 시작하세요!</h3> <br />
+              <input
+                id="input-search"
+                type="search"
+                placeholder="관심있는 스터디를 검색하세요"
+                onChange={onChageSearch}
+              />
+              <Button variant="success" style={{ marginLeft: '20px' }} onClick={onClickSearch}>
+                검색
+              </Button>
+            </div>
           </div>
+
           <div class="divider"></div>
+
           <Container fluid id="div-list-groups">
             <CardGroup>
               <Row xs={2} md={3} lg={4} xl={4} id="row-main">
@@ -137,36 +149,48 @@ function Main() {
                           groupDesc={study.groupDescription}
                         />
                       </Col>
-
-                      {/* <StudyList
-                                            key={study.gpId}
-                                            gpId={study.groupPublicId}
-                                            groupName={study.groupName}
-                                            groupDesc={study.groupDescription}
-                                        />
-
-                                        <StudyList
-                                            key={study.gpId}
-                                            gpId={study.groupPublicId}
-                                            groupName={study.groupName}
-                                            groupDesc={study.groupDescription}
-                                        /> */}
                     </>
                   ))
                 )}
               </Row>
             </CardGroup>
           </Container>{' '}
+
           <br />
           <br />
+
           {user ? (
-            <div>
-              <Button onClick={onClickCreate}>스터디 만들기</Button>
+            <div id="div-btn-to-create-study">
+              {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
+
+              <Fab
+                variant="extended"
+                color="success"
+                href="/group/create"
+              >
+                <AddIcon sx={{ mr: 1 }} />
+                스터디 만들기
+              </Fab>
             </div>
           ) : (
-            <>로그인 안 된 상태</>
+            <div id="div-btn-to-create-study">
+              {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
+
+              <Fab
+                variant="extended"
+                color="success"
+                href="/group/create"
+              >
+                <AddIcon sx={{ mr: 1 }} />
+                스터디 만들기
+              </Fab>
+            </div>
           )}
-          {/*
+
+
+
+          <>
+            {/*
                      <div id="div-main-carousel">
                             <Carousel activeIndex={index} onSelect={handleSelect}>
                                 <Carousel.Item>
@@ -209,9 +233,10 @@ function Main() {
                             </Carousel>
                         </div> 
                         */}
+          </>
         </div>
       </div>
-    </div>
+    </div >
   );
 }
 

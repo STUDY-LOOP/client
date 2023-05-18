@@ -197,8 +197,9 @@ function CreateGroup() {
                         </Form.Group>
 
                         <br />
-                        <Button id="create-btn" onClick={onClick}>스터디 생성</Button>
+                        <Button variant="success" id="create-btn" onClick={onClick}>스터디 생성</Button>
                     </Form>
+                    <br /> <br />
                 </div>
             </div >
         </div >

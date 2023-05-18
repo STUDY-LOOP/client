@@ -47,17 +47,20 @@ function StudyMember() {
             <div className="div-layout-lower-1">
                 <LayoutMain />
             </div>
-            {/* <div className="div-layout-lower-2"> */}
+
             <div className="div-layout-lower-2-custom">
+
+                <div id="div-layout" class="colored-layout-div">
+                    <LayoutStudyPage
+                        key={studyInfo.groupPublicId}
+                        gpId={studyInfo.groupPublicId}
+                        groupName={studyInfo.groupName}
+                        leader={studyInfo.leader}
+                    />
+                </div>
+
                 <div id="div-grid-members">
-                    <div id="div-layout">
-                        <LayoutStudyPage
-                            key={studyInfo.groupPublicId}
-                            gpId={studyInfo.groupPublicId}
-                            groupName={studyInfo.groupName}
-                            leader={studyInfo.leader}
-                        />
-                    </div>
+
                     <div id="div-members">
                         <div id="div-leader">
                             <div class="div-component-header"> 스터디장 </div>
@@ -88,7 +91,7 @@ function StudyMember() {
                                 key={gpId}
                                 gpId={gpId}
                                 isAsgmt={false}
-                            />         
+                            />
                         }
                         {/*
                         {loading ? <h3>LOADING...</h3> :
@@ -104,7 +107,7 @@ function StudyMember() {
                                 key={gpId}
                                 gpId={gpId}
                                 isAsgmt={true}
-                            />         
+                            />
                         }
                     </div>
                 </div>

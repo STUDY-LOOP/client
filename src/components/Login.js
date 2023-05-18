@@ -121,6 +121,7 @@ function Login() {
 									</FloatingLabel>{' '}
 									<br />
 									<Button
+										variant="success"
 										id="enter-login"
 										type="button"
 										onClick={onClickLogin}
