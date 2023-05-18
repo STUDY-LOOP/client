@@ -87,7 +87,7 @@ function CalendarAssignment() {
                     <LayoutMain />
                 </div>
 
-                <div id="div-scroll-main" class="div-layout-lower-2">
+                <div id="div-scroll-main-calendar" class="div-layout-lower-2">
                     {loading ? <h2>loading...</h2> :
                         <>
                             <div id="div-layout-1" className="layout-study colored-layout-div">
