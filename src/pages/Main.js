@@ -27,7 +27,10 @@ import EditIcon from '@mui/icons-material/Edit';
 import FavoriteIcon from '@mui/icons-material/Favorite';
 import NavigationIcon from '@mui/icons-material/Navigation';
 
-const SERVER_URI = 'http://localhost:3000';
+const SERVER_URI =
+  process.env.NODE_ENV === 'production'
+    ? 'http://43.201.202.121:3000/'
+    : 'http://localhost:3000/';
 const DIVIDER_HEIGHT = 5;
 
 function Main() {

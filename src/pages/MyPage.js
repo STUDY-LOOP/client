@@ -9,7 +9,10 @@ import './style/Common.css';
 import './style/StudyMain.css';
 import './style/MyPage.css';
 
-const SERVER_URI = 'http://localhost:3000';
+const SERVER_URI =
+  process.env.NODE_ENV === 'production'
+    ? 'http://43.201.202.121:3000/'
+    : 'http://localhost:3000/';
 
 function MyPage() {
   const [loading, setLoading] = useState(true);
