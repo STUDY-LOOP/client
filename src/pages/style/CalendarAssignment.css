@@ -1,3 +1,10 @@
+#div-scroll-main {
+    margin: 0;
+    padding: 0;
+    background-color: #fffdfd;
+    background: #fffdfd;
+}
+
 #div-layout-grid::-webkit-scrollbar {
     display: none;
 }
@@ -5,7 +12,7 @@
 #div-layout-grid {
     /* display: grid; */
     width: 100%;
-    height: 100%;
+    height: fit-content;
     overflow-y: auto;
 
     display: flex;
@@ -23,7 +30,7 @@
     grid-area: div-lower;
     margin-top: 50px;
     display: grid;
-    width: 40%;
+    width: 60%;
 
     gap: 10px;
     grid-template-areas:
