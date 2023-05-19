@@ -16,8 +16,8 @@ import MeetAttendance from '../components/MeetAttendance';
 
 const SERVER_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://43.201.202.121:3000/'
-    : 'http://localhost:3000/';
+    ? 'http://43.201.202.121:3000'
+    : 'http://localhost:3000';
 
 function StudyLog() {
   const { gpId, log } = useParams();

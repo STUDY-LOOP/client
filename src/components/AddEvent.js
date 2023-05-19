@@ -10,8 +10,8 @@ import './style/AddEvent.css';
 
 const SERVER_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://43.201.202.121:3000/'
-    : 'http://localhost:3000/';
+    ? 'http://43.201.202.121:3000'
+    : 'http://localhost:3000';
 
 function AddEvent({ date_start }) {
   const { gpId } = useParams();

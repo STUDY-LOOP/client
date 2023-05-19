@@ -19,8 +19,8 @@ import Face6 from '@mui/icons-material/Face6';
 
 const SERVER_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://43.201.202.121:3000/'
-    : 'http://localhost:3000/';
+    ? 'http://43.201.202.121:3000'
+    : 'http://localhost:3000';
 
 function SubmittedAssignment({
   gpId,

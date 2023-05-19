@@ -13,8 +13,8 @@ import './style/Login.css';
 
 const SERVER_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://43.201.202.121:3000/'
-    : 'http://localhost:3000/';
+    ? 'http://43.201.202.121:3000'
+    : 'http://localhost:3000';
 
 function Login() {
   const [email, setEmail] = useState(null);

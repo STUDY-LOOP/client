@@ -5,8 +5,8 @@ import EachAssignment from './EachAssignment';
 
 const SERVER_URI =
   process.env.NODE_ENV === 'production'
-    ? 'http://43.201.202.121:3000/'
-    : 'http://localhost:3000/';
+    ? 'http://43.201.202.121:3000'
+    : 'http://localhost:3000';
 
 function UserAssignment({ email, nick, gpId }) {
   const [assignmentBoxes, setAssignmentBoxes] = useState([]);
