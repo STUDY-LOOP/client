@@ -32,8 +32,14 @@
 }
 
 video {
+    width: 400px;
+    height: 300px;
     object-fit: cover;
     padding: 10px;
+}
+
+.nickname {
+    color: white;
 }
 
 .button-container {
@@ -59,10 +65,6 @@ video {
 .button-container .div-button-grid {
     display: flex;
     margin: 0 auto;
-    /* justify-self: center;
-  flex-grow: 1;
-  justify-content: center;
-  align-items: center; */
 }
 
 #mic-btn {

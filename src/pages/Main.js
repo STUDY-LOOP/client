@@ -9,16 +9,7 @@ import './style/Common.css';
 import './style/Main.css';
 
 import 'bootstrap/dist/css/bootstrap.min.css';
-import {
-  Button,
-  Card,
-  CardGroup,
-  Col,
-  Row,
-  Carousel,
-  Modal,
-  Container,
-} from 'react-bootstrap';
+import { Button, Card, CardGroup, Col, Row, Carousel, Modal, Container } from 'react-bootstrap';
 import { Hidden } from '@mui/material';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
@@ -49,11 +40,11 @@ function Main() {
   const imgUrl2 = `cover/main${imgNum[1]}.jpg`;
   const imgUrl3 = `cover/main${imgNum[2]}.jpg`;
 
-  const onChageSearch = (e) => {
-    setKeyword(e.target.value);
-    console.log(keyword);
-  };
+  // const onChageSearch = (e) => {
+  //   setKeyword(e.target.value);
+  // };
   const onClickSearch = async () => {
+    let keyword = document.getElementById('input-search').value;
     const result = await axios.get(`${SERVER_URI}/api/search/${keyword}`);
     if (result !== null) {
       setSearchResult(result.data);
@@ -124,25 +115,42 @@ function Main() {
                 <b>스터디 준비부터 진행까지</b>
               </h1>
               <h3>새로운 스터디를 시작하세요!</h3> <br />
-              <div>
-                <input
-                  id="input-search"
-                  type="search"
-                  placeholder="관심있는 스터디를 검색하세요"
-                  onChange={onChageSearch}
-                />
-                <Button
-                  variant="success"
-                  style={{ marginLeft: '10px' }}
-                  onClick={onClickSearch}
-                >
-                  검색
-                </Button>
-              </div>
+                
+              <input
+                id="input-search"
+                type="search"
+                placeholder="관심있는 스터디를 검색하세요"
+                // onChange={onChageSearch}
+              />
+              <Button variant="success" style={{ marginLeft: '20px' }} onClick={onClickSearch}>
+                검색
+              </Button>
+
             </div>
           </div>
           <div class="divider"></div>
           <Container fluid id="div-list-groups">
+            <Row xs={2} md={3} lg={4} xl={4} id="row-main">
+              {loading ? (
+                <h3>LOADING...</h3>
+              ) : (
+                studies.map((study) => (
+                  <>
+                    <Col className="col-3">
+                      <StudyList
+                        key={study.gpId}
+                        gpId={study.groupPublicId}
+                        groupName={study.groupName}
+                        groupDesc={study.groupDescription}
+                      />
+                    </Col>
+                  </>
+                ))
+              )}
+            </Row>
+          </Container>{' '}
+
+          {/* <Container fluid id="div-list-groups">
             <CardGroup>
               <Row xs={2} md={3} lg={4} xl={4} id="row-main">
                 {loading ? (
@@ -163,7 +171,8 @@ function Main() {
                 )}
               </Row>
             </CardGroup>
-          </Container>{' '}
+          </Container>{' '} */}
+
           <br />
           <br />
           {user ? (

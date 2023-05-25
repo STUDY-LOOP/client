@@ -7,11 +7,7 @@ import { renderToString } from 'react-dom/server';
 
 // component for chat drawer
 import { styled, useTheme } from '@mui/material/styles';
-import Box from '@mui/material/Box';
 import Drawer from '@mui/material/Drawer';
-import Button from '@mui/material/Button';
-import MuiAppBar from '@mui/material/AppBar';
-
 import ChevronLeftIcon from '@mui/icons-material/ChevronLeft';
 import ChevronRightIcon from '@mui/icons-material/ChevronRight';
 
@@ -111,10 +107,7 @@ function VideoChat() {
           .catch((err) => alert(err));
       })
       .catch(
-        alert('회의가 없는 날입니다.')
-        // err => alert(err)
-        // 스터디 메인 페이지로 이동
-      );
+    );
   };
 
   useEffect(() => {
@@ -136,7 +129,6 @@ function VideoChat() {
   const ROOM_ID = gpId;
   const [studyInfo, setStudyInfo] = useState([]);
   const [message, setMessage] = useState(''); //chat input
-  const [users, setUsers] = useState(1);
 
   const [mic, setMic] = useState({
     curState: true,
@@ -150,8 +142,6 @@ function VideoChat() {
 
   const allStream = useRef();
   const videoGrid = useRef();
-  const nameGrid = useRef();
-  const chatContent = document.querySelector('#chat-content');
 
   const handleMuteClick = () => {
     if (mic.curState) {
@@ -192,15 +182,14 @@ function VideoChat() {
   };
 
   const handleExitClick = () => {
-    navigate(-1); //이전 페이지로 이동
+    navigate(-1); // 이전 페이지로 이동
   };
 
-  // const myDiv = React.createElement('div');
   const myVideo = document.createElement('video');
-  // const myName = React.createElement('span');
-  // const myNickDiv = React.createElement('div');
+  myVideo.muted = true; // 하울링 X
 
-  const socket = io();
+  const socket = io.connect(); //io();
+
   const myPeer = new Peer({
     path: '/peerjs',
     host: '/',
@@ -208,6 +197,7 @@ function VideoChat() {
   });
 
   useEffect(() => {
+
     myPeer.on('open', (peerid) => {
       room_id = ROOM_ID;
       user_name = NICKNAME;
@@ -220,205 +210,131 @@ function VideoChat() {
         audio: true,
       })
       .then((stream) => {
+
         // my stream
+        console.log('214: add my stream');
         user_name = NICKNAME;
-
-        addVideoStream(myVideo, stream);
-
-        if (videoGrid.current) {
-          videoGrid.current.append(myVideo);
-          // nameGrid.current.append(user_name);
-        }
+        addVideoStream(myVideo, stream, user_name);
 
         myStream = stream;
         allStream.current = stream;
 
         // call에 answer
         myPeer.on('call', (call) => {
-          call.answer(stream);
+          call.answer(stream, { metadata: { calleeName: NICKNAME } })
           const video = document.createElement('video');
-          // const nickDiv = React.createElement('span');
-          // const div = React.createElement('div');
           var callerName = call.metadata.callerName;
 
           call.on('stream', (userVideoStream) => {
-            addVideoStream(video, userVideoStream);
-            videoGrid.current.append(video);
-            // nameGrid.current.append(callerName);
+            console.log('231: add stream for', callerName);
+            console.log('232 video: ', userVideoStream);
+            addVideoStream(video, userVideoStream, callerName);
+          });
+
+          call.on('close', () => {
+            removeVideoStream(video, stream);
           });
         });
 
         // 새 유저 오면
         socket.on('new-user-connected', (data) => {
-          // console.log('new user connected, ', data); //o
-          setTimeout(() => {
-            connectToNewUser(data.id, data.name, stream);
-          }, 2000);
-          setNumberOfUsers(numberOfUsers + 1);
+          console.log('new user connected, ', data);
+          setTimeout(() => { connectToNewUser(data.id, data.name, stream) }, 2000);
         });
       });
 
-    socket.on('user-disconnected', (userId) => {
-      // console.log('user disconn. ', userId);
-      if (peers[userId]) {
-        peers[userId].close();
-      }
-    });
-
     function connectToNewUser(userId, calleeName, stream) {
-      // const userDiv = React.createElement('div');
-      // const userNickDiv = React.createElement('div');
       const userVideo = document.createElement('video');
-
       const call = myPeer.call(userId, stream, {
         metadata: { callerName: NICKNAME },
       });
 
       // 상대방이 그들의 video stream 보내면 작동
       call.on('stream', (userVideoStream) => {
-        addVideoStream(userVideo, userVideoStream);
+        console.log('264: add stream for', calleeName); // 두 번  실행됨
+        console.log('265 video: ', userVideoStream);
+        addVideoStream(userVideo, userVideoStream, calleeName);
       });
 
       call.on('close', () => {
-        //
-        // console.log('close call', stream);
         removeVideoStream(userVideo, stream);
       });
-
-      peers[userId] = call;
     }
 
-    function addVideoStream(userVideo, stream) {
-      // userNickDiv.innerText = userName;
+    function addVideoStream(userVideo, stream, nickname) {
+      console.log('(1)userVideo: ', userVideo, '(2)stream: ', stream, '(3)nickname', nickname);
+      const videoParent = document.createElement('div');
+
       userVideo.srcObject = stream;
       userVideo.addEventListener('loadedmetadata', () => {
         userVideo.play();
       });
-      videoGrid.current.append(userVideo);
-      // nameGrid.current.append(userName);
-      // userDiv.append(userVideo)
-      // userDiv.append(userNickDiv);
-      // videoGrid.append(userDiv);
+
+      videoParent.classList.add('video-container');
+      const nicknameElement = document.createElement('div');
+      nicknameElement.classList.add('nickname');
+      nicknameElement.textContent = nickname;
+
+      videoParent.append(userVideo);
+      // videoParent.append(nicknameElement);
+      videoGrid.current.append(videoParent);
     }
+
+    socket.on('user-disconnected', (userId, streamId) => {
+      console.log('user disconnected, ', userId, streamId);
+      if (peers[userId]) {
+        peers[userId].close();
+      }
+    });
 
     function removeVideoStream(userVideo, stream) {
-      // console.log('remove video stream run', stream);
-      userVideo.srcObject = stream;
+      console.log('remove video stream run, ', stream)
+      // Remove the video element
+      userVideo.srcObject = null;
+      userVideo.parentNode.remove(userVideo);
+
+      // Remove the nickname element
+      const nicknameElement = userVideo.nextSibling;
+      nicknameElement.parentNode.remove(nicknameElement);
+
+      // Remove the parent container
       const videoParent = userVideo.parentNode;
-      userVideo.remove();
+      videoParent.parentNode.remove(videoParent); 
+
+      // Clean up the stream tracks
+      if (stream) {
+        const tracks = stream.getTracks();
+        tracks.forEach((track) => track.stop());
+      }
     }
 
-    socket.on('update-video', (data) => {
-      window.location.reload(false);
+    socket.on('update-video', () => {
+      window.location.reload(true);
     });
 
     return function cleanup() {
       myStream.getTracks().forEach((track) => {
         track.stop(); //카메라, 오디오 꺼짐
       });
+      removeVideoStream(myVideo, myStream);
       socket.disconnect();
     };
   }, []);
 
-  const handleOnKeyPress = (e) => {
-    if (e.key === 'Enter') {
-      handleMessage();
-    }
-  };
-
-  const handleMessage = () => {
-    let datetime = new Date().toLocaleString();
-    let content = document.getElementById('chat-content').value;
-    document.getElementById('chat-content').value = '';
-
-    if (content === '') {
-    } else {
-      const sender = NICKNAME;
-      setMessage(''); //입력창 비우기
-      socket.emit('new-message', sender, content, datetime, ROOM_ID);
-    }
-  };
-
-  const makeChatDiv = async (sender, content, datetime) => {
-    const ChatDiv = await React.createElement(
-      'div',
-      { className: 'Chat-div' },
-      React.createElement(
-        'div',
-        { className: 'Chat-div-info', style: { marginBottom: '6px' } },
-        React.createElement(
-          'span',
-          {
-            className: 'Chat-span-usernick',
-            style: { marginRight: '4px', color: '#4a4848' },
-          },
-          sender
-        ),
-        React.createElement(
-          'span',
-          { className: 'Chat-span-datetime', style: { color: '#c2c2c2' } },
-          datetime
-        )
-      ),
-      React.createElement(
-        'div',
-        {
-          className: 'Chat-div-content',
-          style: {
-            backgroundColor: '#f0f0f0',
-            color: '#4a4848',
-            padding: '10px 20px',
-          },
-        },
-        content
-      )
-    );
-
-    const el = document.createElement('div');
-    el.innerHTML = renderToString(ChatDiv);
-
-    const chatContainer = document.getElementById('chatArea');
-    chatContainer.append(el.firstChild);
-  };
-
-  socket.on('new-message', makeChatDiv);
-
-  function addMessage(sender, message) {
-    // console.log(sender, ': ', message);
-    const ul = chatContent.querySelector('ul');
-    const li = document.createElement('li');
-    li.innerText = message;
-    ul.appendChild(li);
-    if (sender === NICKNAME) {
-      //내가 보낸 메시지면
-      li.style.textAlign = 'right';
-    }
-  }
 
   return (
     <div className="div-layout-upper-2">
       <div className="main-container">
         <DrawerHeader />
 
-        <div style={videoContainerStyle}>
-          {[...Array(numberOfUsers)].map((_, index) => (
+        <div className="videochat-container">
+          <div className="videochat-room">
             <div
-              key={index}
-              style={videoStyle}
               ref={videoGrid}
-              id="video-grid"
-            ></div>
-          ))}
+              id="video-grid">
+            </div>
+          </div>
         </div>
-
-        {/* <div className="videochat-container">
-                    <div className="videochat-room">
-                        <div
-                            ref={videoGrid}
-                            id="video-grid">
-                        </div>
-                    </div>
-                </div> */}
       </div>
       <div className="button-container">
         <div className="div-meet-info">
@@ -485,7 +401,7 @@ function VideoChat() {
                 <BootstrapButton
                   variant="outline-dark"
                   size="sm"
-                  onClick={handleMessage}
+
                 >
                   SEND
                 </BootstrapButton>

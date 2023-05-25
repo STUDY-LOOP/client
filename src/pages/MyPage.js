@@ -142,7 +142,7 @@ function MyPage() {
                 type="submit"
                 onClick={onClickEdit}
                 size="sm"
-                style={{ position: 'absolute', right: 230, bottom: 440 }}
+                style={{ position: 'absolute', right: 230, bottom: 450 }}
               >
                 Submit
               </Button>
