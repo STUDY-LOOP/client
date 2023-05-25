@@ -38,6 +38,7 @@ function StudyMain() {
     // 캘린더 관련
     const [groupEvents, setGroupEvents] = useState([]);
     const [addModalIsOpen, setAddModalIsOpen] = useState(false);
+    const [etcModalIsOpen, setEtcModalIsOpen] = useState(false);
     const [clickedDate, setClickedDate] = useState(null);
 
     useEffect(() => {
@@ -103,6 +104,11 @@ function StudyMain() {
             navigate(`/${gpId}/asgmt/${boxId}`);
             setAddModalIsOpen(false);
         }
+        // 기타
+        else if (event_type == 2) {
+            setAddModalIsOpen(false);
+            setEtcModalIsOpen(true);
+        }
     }
 
     const handleEventRender = info => {
@@ -151,6 +157,19 @@ function StudyMain() {
                         <AddEvent
                             date_start={clickedDate}
                         />
+                    </Modal.Body>
+                </Modal>
+
+                <Modal
+                    show={etcModalIsOpen}
+                    onHide={() => { setEtcModalIsOpen(false); }}
+                >
+                    <Modal.Header closeButton>
+                        <Modal.Title>{} 기타 스터디</Modal.Title>
+                    </Modal.Header>
+
+                    <Modal.Body>
+                        {} 스터디 내용
                     </Modal.Body>
                 </Modal>
 

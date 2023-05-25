@@ -1,5 +1,5 @@
 import { useEffect, useState } from 'react';
-import { useParams } from 'react-router-dom';
+import { useParams, useNavigate } from 'react-router-dom';
 
 import axios from 'axios';
 
@@ -7,10 +7,11 @@ import LayoutMain from '../components/LayoutMain';
 import LayoutStudyPage from '../components/LayoutStudyPage';
 import './style/Common.css'
 import './style/CreateGroup.css'
+import './style/StudyInfo.css'
 
 import 'bootstrap/dist/css/bootstrap.min.css';
 import dayjs from "dayjs"
-import { Button, Form, Col, Row } from "react-bootstrap"
+import { Button, Form, Col, Row, Alert } from "react-bootstrap"
 import { InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
@@ -20,12 +21,14 @@ const SERVER_URI = 'http://localhost:3000';
 
 function StudyInfo() {
     const { gpId } = useParams();
+    const navigate = useNavigate();
 
     const [loading, setLoading] = useState(true);
     const [studyInfo, setStudyInfo] = useState([]);
     const [studyRule, setStudyRule] = useState("");
     const [studySchedule, setStudySchedule] = useState([]);
     const [time, setTime] = useState(null);
+    const [show, setShow] = useState(false);
 
     useEffect(() => {
         axios.get(`${SERVER_URI}/api/${gpId}/info`)
@@ -67,6 +70,11 @@ function StudyInfo() {
         axios.post(`${SERVER_URI}/api/${gpId}/info`, updatedValue)
 
     };
+
+    const onClickDelete = async () => {
+        await axios.post(`${SERVER_URI}/api/remove/${gpId}`);
+        navigate(`/`);
+    }
 
     return (
         <div className="div-layout-upper">
@@ -175,7 +183,26 @@ function StudyInfo() {
                             </Form.Group>
 
                             <br />
-                            <Button variant="success" id="upate-btn" onClick={onClick}>스터디 정보 수정</Button>
+                            <div id="info-buttons">
+                                <Button variant="success" id="upate-btn" onClick={onClick}>스터디 정보 수정</Button>&nbsp;
+                                <Button variant="outline-danger" id="study-delete-btn" onClick={onClickDelete}>스터디 삭제</Button>
+                            </div>
+
+                            <Alert show={show} variant="success">
+                                <Alert.Heading>스터디를 삭제하시겠습니까?</Alert.Heading>
+                                <p>
+                                    삭제 이후에는 저장된 데이터를 복구할 수 없습니다.
+                                </p>
+                                <hr />
+                                <div className="d-flex justify-content-end">
+                                    <Button onClick={() => setShow(false)} variant="success">
+                                        뒤로가기
+                                    </Button>
+                                    <Button onClick={onClickDelete} variant="outline-danger">
+                                        삭제하기
+                                    </Button>
+                                </div>
+                            </Alert>
                             <br /> <br />
                         </Form>
 

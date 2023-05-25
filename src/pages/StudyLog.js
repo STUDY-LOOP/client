@@ -74,7 +74,6 @@ function StudyLog() {
 				</div>
 
 				<div id="div-log-scroll">
-
 					<div class="div-page-header">
 						<h2>{date} 로그</h2>
 					</div>

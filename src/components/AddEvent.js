@@ -42,6 +42,8 @@ function AddEvent({ date_start }) {
 
     // -- 스터디 생성 -- //
     const onClickStudyEvent = async () => {
+        
+        window.location.replace(`/study-group/${gpId}`);
         axios
             .post(`${SERVER_URI}/api/event`, {
                 gpId: gpId,
@@ -56,7 +58,7 @@ function AddEvent({ date_start }) {
             .then(res => {
                 axios.post(`${SERVER_URI}/api/${gpId}/create-attendance/${res.data}`)
             })
-            .then(() => window.location.replace(`/study-group/${gpId}`))
+            // .then(() => window.location.replace(`/study-group/${gpId}`))
             .catch(err => alert(err));
     }
 
@@ -69,29 +71,7 @@ function AddEvent({ date_start }) {
     const contentHandler = (event) => { event.preventDefault(); setContent(event.target.value); };
 
     const onClickAsgmtEvent = async (event) => {
-        // event.preventDefault()
-
-        // axios.post(`${SERVER_URI}/api/assignmentBox`, {
-        //     gpId: gpId,
-        //     log: log,
-        //     title: eventTitle,
-        //     content: content,
-        //     deadline: startDateTime,
-        // })
-        //     .then(res => {
-        //         axios.post(`${SERVER_URI}/api/event`, {
-        //             gpId: gpId,
-        //             event_title: eventTitle,
-        //             event_type: '1',
-        //             date_start: startDateTime,
-        //             event_color: color[1],
-        //             boxId: res.data,
-        //         })
-        //     })
-        //     .then(() => window.location.replace(`/study-group/${gpId}`))
-        //     .catch((err) => alert(err));
-
-
+        window.location.replace(`/study-group/${gpId}`);
         const boxId = await axios.post(`${SERVER_URI}/api/assignmentBox`, {
             gpId: gpId,
             log: log,
@@ -109,12 +89,13 @@ function AddEvent({ date_start }) {
             boxId: boxId.data,
         });
 
-        window.location.replace(`/study-group/${gpId}`);
+        // window.location.replace(`/study-group/${gpId}`);
     };
 
 
     // -- 기타 일정 생성 -- //
     const onClickEtcEvent = async () => {
+        window.location.replace(`/study-group/${gpId}`);
         await axios
             .post(`${SERVER_URI}/api/event`, {
                 gpId: gpId,
@@ -127,7 +108,7 @@ function AddEvent({ date_start }) {
             }, {
                 withCredentials: true
             })
-            .then(() => window.location.replace(`/study-group/${gpId}`))
+            // .then(() => window.location.replace(`/study-group/${gpId}`))
             .catch(err => alert(err));
     }
 

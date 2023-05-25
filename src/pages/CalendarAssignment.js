@@ -62,7 +62,7 @@ function CalendarAssignment() {
     };
 
     const upload = async (event) => {
-        event.preventDefault();
+        // event.preventDefault();
         let jsonData = JSON.stringify({
             gpId: gpId,
             boxId: boxId,
@@ -108,7 +108,7 @@ function CalendarAssignment() {
                                     </div>
 
                                     <div id="div-btn-detail">
-                                        <Button variant="success" onClick={onClickToDetail} size="sm">세부 페이지로</Button>
+                                        {/* <Button variant="success" onClick={onClickToDetail} size="sm">세부 페이지로</Button> */}
                                     </div>
 
                                     <div id="div-my-asgmt">
