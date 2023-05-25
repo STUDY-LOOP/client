@@ -28,6 +28,7 @@ function StudyLog() {
   const [modalIsOpen, setModalIsOpen] = useState(false);
   const [studyInfo, setStudyInfo] = useState([]);
   const [date, setDate] = useState('');
+  const [originalDate, setOriginalDate] = useState(new Date());
 
   useEffect(() => {
     axios
@@ -44,6 +45,7 @@ function StudyLog() {
           setAssignments(res3.data);
           setStudyInfo(res4.data);
           toDate(dateInfo);
+          setOriginalDate(dateInfo)
           setLoading(false);
         })
       )
@@ -129,18 +131,38 @@ function StudyLog() {
                 {/* 과제제출여부 */}
                 <Accordion defaultActiveKey="0" alwaysOpen>
                   {loading ? (
-                    <h3>LOADING...</h3>
+                    // <h3>LOADING...</h3>
+                    <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
                   ) : (
-                    assignments.map((assignment) => (
-                      <AssignmentBox
-                        gpId={gpId}
-                        boxId={assignment.boxId}
-                        title={assignment.title}
-                        content={assignment.content}
-                        deadline={assignment.deadline}
-                        Assignments={assignment.Assignments}
-                      />
-                    ))
+                    // assignments.map((assignment) => (
+                    //   <AssignmentBox
+                    //     gpId={gpId}
+                    //     boxId={assignment.boxId}
+                    //     title={assignment.title}
+                    //     content={assignment.content}
+                    //     deadline={assignment.deadline}
+                    //     Assignments={assignment.Assignments}
+                    //   />
+                    // ))
+                    assignments.map(function(assignment) {
+                      const deadlineD = new Date(assignment.deadline);
+                      const studyD = new Date(originalDate);
+                      const gap = studyD.getTime() - deadlineD.getTime();
+                      const dateGap = gap / 1000 / 60 / 60 / 24;
+                      const isTrue = dateGap <= 7 && dateGap >= -7;
+                      console.log(isTrue)
+
+                      if(isTrue) return(
+                        <AssignmentBox
+                          gpId={gpId}
+                          boxId={assignment.boxId}
+                          title={assignment.title}
+                          content={assignment.content}
+                          deadline={assignment.deadline}
+                          Assignments={assignment.Assignments}
+                        />
+                      )
+                    })
                   )}
                 </Accordion>
               </div>

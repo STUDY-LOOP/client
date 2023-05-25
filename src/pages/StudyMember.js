@@ -94,15 +94,11 @@ function StudyMember() {
               </Badge>
             </h2>
             {loading ? (
-              <h3>LOADING...</h3>
+              // <h3>LOADING...</h3>
+              <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
             ) : (
               <MemberSummary key={gpId} gpId={gpId} isAsgmt={false} />
             )}
-            {/*
-                        {loading ? <h3>LOADING...</h3> :
-                            <MemberAttendance />
-                        }
-                        */}
           </div>
 
           <div id="div-table-asgmt">
@@ -112,7 +108,8 @@ function StudyMember() {
               </Badge>
             </h2>
             {loading ? (
-              <h3>LOADING...</h3>
+              // <h3>LOADING...</h3>
+              <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
             ) : (
               <MemberSummary key={gpId} gpId={gpId} isAsgmt={true} />
             )}

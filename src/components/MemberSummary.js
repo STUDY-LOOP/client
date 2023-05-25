@@ -1,7 +1,8 @@
 import { useEffect, useState } from 'react';
 import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
-import { Table } from 'react-bootstrap';
+import { Table, Button } from 'react-bootstrap';
+
 
 import AssignmentResult from '../components/AssignmentResult';
 import AssignmentName from '../components/AssignmentName';
@@ -43,7 +44,8 @@ function MemberSummary({ gpId, isAsgmt }) {
 
   return (
     <>
-      {loading ? null : (
+      {loading ? <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
+       : (
         <Table responsive bordered hover className="tables">
           <thead>
             <tr>

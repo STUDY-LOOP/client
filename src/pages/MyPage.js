@@ -83,7 +83,8 @@ function MyPage() {
   return (
     <>
       {loading ? (
-        <h3>LOADING...</h3>
+        // <h3>LOADING...</h3>
+        <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
       ) : (
         <div class="div-layout-upper">
           <div class="div-layout-lower-1">

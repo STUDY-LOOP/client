@@ -80,6 +80,43 @@ function CreateGroup() {
     window.location.replace('/');
   };
 
+  // required
+  const [validated, setValidated] = useState(false);
+  const handleSubmit = (event) => {
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
+    else {
+      event.preventDefault();
+      axios.post(`${SERVER_URI}/api/group`, {
+        groupName: document.getElementById('create-title').value,
+        groupDescription: document.getElementById('create-desc').value,
+
+        rule: document.getElementById('create-rule').value,
+        lateTime: document.getElementById('create-late-time').value,
+        lateFee: document.getElementById('create-late-fee').value,
+        absentTime: document.getElementById('create-absent-time').value,
+        absentFee: document.getElementById('create-absent-fee').value,
+
+        scheduleDay: document.getElementById('create-day').value,
+        scheduleTime: document.getElementById('create-time').value,
+
+        interest0,
+        interest1,
+        interest2,
+        interest3,
+        interest4,
+        interest5,
+      });
+      // navigate('/');
+      window.location.replace('/');
+    }
+
+    setValidated(true);
+  };
+
   return (
     <div className="div-layout-upper">
       <div className="div-layout-lower-1">
@@ -93,7 +130,7 @@ function CreateGroup() {
           </h2>{' '}
           <br />
           <h3>스터디 소개</h3>
-          <Form id="createForm">
+          <Form id="createForm" noValidate validated={validated} onSubmit={handleSubmit}>
             <Form.Group as={Row} class="row">
               <Form.Label column sm="2">
                 {' '}
@@ -101,7 +138,7 @@ function CreateGroup() {
               </Form.Label>
               <Col sm="10">
                 {' '}
-                <Form.Control type="text" id="create-title" />{' '}
+                <Form.Control type="text" id="create-title" required />{' '}
               </Col>
             </Form.Group>
 
@@ -112,7 +149,7 @@ function CreateGroup() {
               </Form.Label>
               <Col sm="10">
                 {' '}
-                <Form.Control id="create-desc" as="textarea" rows={2} />{' '}
+                <Form.Control id="create-desc" as="textarea" rows={2} required />{' '}
               </Col>
             </Form.Group>
 
@@ -126,7 +163,7 @@ function CreateGroup() {
               </Form.Label>
               <Col sm="10">
                 {' '}
-                <Form.Control id="create-rule" as="textarea" rows={4} />{' '}
+                <Form.Control id="create-rule" as="textarea" rows={4} required />{' '}
               </Col>
             </Form.Group>
 
@@ -136,11 +173,11 @@ function CreateGroup() {
                 지각{' '}
               </Form.Label>
               <Col sm="2">
-                <Form.Control type="text" id="create-late-time" />
+                <Form.Control type="text" id="create-late-time" required />
               </Col>
               분부터, 벌금{' '}
               <Col sm="2">
-                <Form.Control type="text" id="create-late-fee" />
+                <Form.Control type="text" id="create-late-fee" required />
               </Col>
               원
             </Form.Group>
@@ -151,11 +188,11 @@ function CreateGroup() {
                 결석{' '}
               </Form.Label>
               <Col sm="2">
-                <Form.Control type="text" id="create-absent-time" />
+                <Form.Control type="text" id="create-absent-time" required />
               </Col>
               분부터, 벌금{' '}
               <Col sm="2">
-                <Form.Control type="text" id="create-absent-fee" />
+                <Form.Control type="text" id="create-absent-fee" required />
               </Col>
               원
             </Form.Group>
@@ -175,7 +212,6 @@ function CreateGroup() {
                     name="scheduleDay"
                     displayEmpty
                     inputProps={{ 'aria-label': 'Without label' }}
-                    required
                   >
                     <MenuItem value="Mon">월</MenuItem>
                     <MenuItem value="Tue">화</MenuItem>
@@ -210,7 +246,7 @@ function CreateGroup() {
                 {' '}
                 스터디 종류{' '}
               </Form.Label>
-              <Col sm="1">
+              <Col sm="2">
                 <Form.Check
                   type="checkbox"
                   id="chkbox-0"
@@ -225,7 +261,7 @@ function CreateGroup() {
                 />
               </Col>
 
-              <Col sm="1">
+              <Col sm="2">
                 <Form.Check
                   type="checkbox"
                   id="chkbox-2"
@@ -257,7 +293,7 @@ function CreateGroup() {
             </Form.Group>
 
             <br />
-            <Button variant="success" id="create-btn" onClick={onClick}>
+            <Button variant="success" type="submit" id="create-btn" >
               스터디 생성
             </Button>
           </Form>

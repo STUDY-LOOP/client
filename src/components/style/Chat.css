@@ -33,6 +33,13 @@
   width: 75%;
 }
 
+/* 비회원용 채팅 */
+.guestSection{
+  display : flex;
+  justify-content : center;
+  align-items : center;
+}
+
 
 /* .Chat-div-info {
   margin-bottom: 6px;

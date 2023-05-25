@@ -21,7 +21,7 @@
 #row-main {
   flex-wrap: wrap;
   flex-direction: row;
-  align-items: stretch;
+  align-items: start;
 }
 
 ::-webkit-scrollbar {

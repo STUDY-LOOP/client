@@ -64,30 +64,45 @@ function StudyMember() {
   };
 
   const onClickCreate = async () => {
-    await axios
-      .post(`${SERVER_URI}/api/assignmentBox`, {
-        gpId: gpId,
-        log: log,
-        title: title,
-        content: content,
-        deadline: startDateTime,
-      })
-      .then((res) => {
-        axios.post(`${SERVER_URI}/api/event`, {
-          gpId: gpId,
-          event_title: title,
-          event_type: '1',
-          date_start: startDateTime,
-          date_end: null,
-          event_color: '#5882FA',
-          boxId: res.data,
-        });
-      })
-      .then(() => {
-        setModalIsOpen(false);
-        window.location.reload();
-      })
-      .catch((err) => alert(err));
+
+    await axios.post(`${SERVER_URI}/api/event`, {
+      gpId: gpId,
+      event_title: title,
+      event_type: '1',
+      date_start: startDateTime,
+      event_color: '#5882FA',
+      title: title,
+      content: content,
+      deadline: startDateTime,
+    });
+
+    setModalIsOpen(false);
+    window.location.reload();
+
+    // await axios
+    //   .post(`${SERVER_URI}/api/assignmentBox`, {
+    //     gpId: gpId,
+    //     log: log,
+    //     title: title,
+    //     content: content,
+    //     deadline: startDateTime,
+    //   })
+    //   .then((res) => {
+    //     axios.post(`${SERVER_URI}/api/event`, {
+    //       gpId: gpId,
+    //       event_title: title,
+    //       event_type: '1',
+    //       date_start: startDateTime,
+    //       date_end: null,
+    //       event_color: '#5882FA',
+    //       boxId: res.data,
+    //     });
+    //   })
+    //   .then(() => {
+    //     setModalIsOpen(false);
+    //     window.location.reload();
+    //   })
+    //   .catch((err) => alert(err));
   };
 
   return (
@@ -205,7 +220,8 @@ function StudyMember() {
             {/* 과제제출여부 */}
             <Accordion defaultActiveKey="0" alwaysOpen>
               {loading ? (
-                <h3>LOADING...</h3>
+                // <h3>LOADING...</h3>
+                <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
               ) : (
                 assignments.map((assignment) => (
                   <AssignmentBox

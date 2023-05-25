@@ -129,10 +129,11 @@ function Main() {
             </div>
           </div>
           <div class="divider"></div>
-          <Container fluid id="div-list-groups">
+          <Container fixed id="div-list-groups">
             <Row xs={2} md={3} lg={4} xl={4} id="row-main">
               {loading ? (
-                <h3>LOADING...</h3>
+                <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
+                // <h3>LOADING...</h3>
               ) : (
                 studies.map((study) => (
                   <>
@@ -149,29 +150,6 @@ function Main() {
               )}
             </Row>
           </Container>{' '}
-
-          {/* <Container fluid id="div-list-groups">
-            <CardGroup>
-              <Row xs={2} md={3} lg={4} xl={4} id="row-main">
-                {loading ? (
-                  <h3>LOADING...</h3>
-                ) : (
-                  studies.map((study) => (
-                    <>
-                      <Col className="col-3">
-                        <StudyList
-                          key={study.gpId}
-                          gpId={study.groupPublicId}
-                          groupName={study.groupName}
-                          groupDesc={study.groupDescription}
-                        />
-                      </Col>
-                    </>
-                  ))
-                )}
-              </Row>
-            </CardGroup>
-          </Container>{' '} */}
 
           <br />
           <br />

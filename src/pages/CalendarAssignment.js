@@ -70,6 +70,9 @@ function CalendarAssignment() {
   };
 
   const upload = async (event) => {
+    window.location.reload(`/study-group/${gpId}/asgmt/${boxId}`);
+
+    console.log('upload 파트 실행: 캘린더 과제');
     // event.preventDefault();
     let jsonData = JSON.stringify({
       gpId: gpId,
@@ -100,7 +103,8 @@ function CalendarAssignment() {
 
         <div id="div-scroll-main-calendar" class="div-layout-lower-2">
           {loading ? (
-            <h2>loading...</h2>
+            // <h2>loading...</h2>
+            <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
           ) : (
             <>
               <div

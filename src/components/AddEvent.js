@@ -86,24 +86,43 @@ function AddEvent({ date_start }) {
     setContent(event.target.value);
   };
 
-  const onClickAsgmtEvent = async (event) => {
+  const onClickAsgmtEvent = (event) => {
     window.location.replace(`/study-group/${gpId}`);
-    const boxId = await axios.post(`${SERVER_URI}/api/assignmentBox`, {
-      gpId: gpId,
-      log: log,
-      title: eventTitle,
-      content: content,
-      deadline: startDateTime,
-    });
 
-    await axios.post(`${SERVER_URI}/api/event`, {
+    axios.post(`${SERVER_URI}/api/event`, {
       gpId: gpId,
       event_title: eventTitle,
       event_type: '1',
       date_start: startDateTime,
       event_color: color[1],
-      boxId: boxId.data,
+      title: eventTitle,
+      content: content,
+      deadline: startDateTime,
     });
+
+
+
+    /*
+    // const boxId = 
+    axios.post(`${SERVER_URI}/api/assignmentBox`, {
+      gpId: gpId,
+      log: null,
+      title: eventTitle,
+      content: content,
+      deadline: startDateTime,
+    })
+      .then((res) => {
+        axios.post(`${SERVER_URI}/api/event`, {
+          gpId: gpId,
+          event_title: eventTitle,
+          event_type: '1',
+          date_start: startDateTime,
+          event_color: color[1],
+          boxId: res.data,
+        });
+      })
+      .catch((err) => alert(err));
+      */
 
     // window.location.replace(`/study-group/${gpId}`);
   };
@@ -202,14 +221,14 @@ function AddEvent({ date_start }) {
             </Col>
           </Form.Group>
 
-          <Form.Group as={Row} class="form-add-event">
+          {/* <Form.Group as={Row} class="form-add-event">
             <Form.Label column sm="2">
               <strong>로그</strong>
             </Form.Label>
             <Col>
               <Form.Control type="text" onChange={logHandler} required />
             </Col>
-          </Form.Group>
+          </Form.Group> */}
 
           <Form.Group as={Row} class="form-add-event">
             <Form.Label column sm="2">
