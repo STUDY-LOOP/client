@@ -32,7 +32,8 @@ function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline, eve
 
 	const upload = async (event) => {
 		console.log('upload 파트 실행');
-		event.preventDefault();
+		navigate(`/study-group/${gpId}/asgmt/${boxId}`);
+		// event.preventDefault();
 		let jsonData = JSON.stringify({
 			gpId: gpId,
 			boxId: boxId,
@@ -44,7 +45,6 @@ function AssignmentBox({ gpId, boxId, title, Assignments, content, deadline, eve
 		formData.append('jsonData', jsonData);
 
 		await axios.post(`${SERVER_URI}/api/assignment`, formData);
-		navigate(`/study-group/${gpId}/asgmt/${boxId}`);
 	};
 
 	return (

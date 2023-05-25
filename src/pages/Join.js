@@ -8,6 +8,7 @@ import { InputLabel, MenuItem, FormControl } from '@mui/material';
 import Select, { SelectChangeEvent } from '@mui/material/Select';
 
 import LayoutMain from '../components/LayoutMain';
+import './style/Join.css'
 import './style/Common.css'
 
 const SERVER_URI = 'http://localhost:3000';

@@ -51,7 +51,9 @@ function CreateGroup() {
 
             interest0, interest1, interest2, interest3, interest4, interest5,
         });
-        navigate('/');
+        // navigate('/');
+        window.location.replace('/');
+
     };
 
     return (
