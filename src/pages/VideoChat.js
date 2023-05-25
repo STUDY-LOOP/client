@@ -273,7 +273,7 @@ function VideoChat() {
       nicknameElement.textContent = nickname;
 
       videoParent.append(userVideo);
-      videoParent.append(nicknameElement);
+      // videoParent.append(nicknameElement);
       videoGrid.current.append(videoParent);
     }
 
