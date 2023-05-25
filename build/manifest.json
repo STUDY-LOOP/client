@@ -1,0 +1,9 @@
+{
+    "short_name": "Team 12",
+    "name": "Capstone Design Project - Team 12",
+    "icons": [],
+    "start_url": ".",
+    "display": "standalone",
+    "theme_color": "#000000",
+    "background_color": "#ffffff"
+  }

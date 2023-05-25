@@ -40,6 +40,7 @@ function StudyList({ gpId, groupName, groupDesc }) {
           </Typography>
         </CardContent>
       </CardActionArea>
+
     </Card>
 
     // <Card id="study-main-card" style={{ width: '15rem', height: '22rem', marginTop: '20px' }}>

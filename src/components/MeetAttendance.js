@@ -6,8 +6,7 @@ import axios from 'axios';
 import * as React from 'react';
 import { styled } from '@mui/material/styles';
 import { typography } from '@mui/system';
-import {Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper} from '@mui/material';
-
+import { Table, TableBody, TableCell, TableContainer, TableHead, TableRow, Paper } from '@mui/material';
 
 const SERVER_URI = 'http://localhost:3000';
 
@@ -16,7 +15,7 @@ function MeetAttendance() {
     const [attendance, setAttendance] = useState([])
 
     const callApi = async () => {
-        const res = await axios.get(`${SERVER_URI}/api/attendance/${log}`);
+        const res = await axios.get(`${SERVER_URI}/api/meet-attendance/${log}`);
         setAttendance(res.data);
     };
 
@@ -37,11 +36,18 @@ function MeetAttendance() {
                     <TableBody>
                         {attendance.map((row) => (
                             <TableRow
-                                key={row['User.userNick']}
+                                key={row.User.userNick}
                                 sx={{ '&:last-child td, &:last-child th': { border: 0 } }}
                             >
-                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row['User.userNick']}</TableCell>
-                                <TableCell sx={{ textAlign: 'center' }}>{row.attendState}</TableCell>
+                                <TableCell component="th" scope="row" sx={{ textAlign: 'center' }}>{row.User.userNick}</TableCell>
+                                <TableCell sx={{ textAlign: 'center' }}>
+                                    {row.attendState === 0 ? '0' : <>
+                                        {row.attendState === 1 ? '지각' : <>
+                                            {row.attendState === -1 ? 'X' : <td></td>}
+                                        </>}
+                                    </>}
+                                    {/* {row.attendState} */}
+                                </TableCell>
                             </TableRow>
                         ))}
                     </TableBody>

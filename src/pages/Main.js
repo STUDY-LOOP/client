@@ -108,8 +108,11 @@ function Main() {
         <div id="div-scroll-main-child">
           <div id="div-search">
             <div id="div-search-input-btn">
-              <h1><b>스터디 준비부터 진행까지</b></h1>
+              <h1>
+                <b>스터디 준비부터 진행까지</b>
+              </h1>
               <h3>새로운 스터디를 시작하세요!</h3> <br />
+                
               <input
                 id="input-search"
                 type="search"
@@ -119,11 +122,10 @@ function Main() {
               <Button variant="success" style={{ marginLeft: '20px' }} onClick={onClickSearch}>
                 검색
               </Button>
+
             </div>
           </div>
-
           <div class="divider"></div>
-
           <Container fluid id="div-list-groups">
             <Row xs={2} md={3} lg={4} xl={4} id="row-main">
               {loading ? (
@@ -170,16 +172,11 @@ function Main() {
 
           <br />
           <br />
-
           {user ? (
             <div id="div-btn-to-create-study">
               {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
 
-              <Fab
-                variant="extended"
-                color="success"
-                href="/group/create"
-              >
+              <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
               </Fab>
@@ -188,19 +185,12 @@ function Main() {
             <div id="div-btn-to-create-study">
               {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
 
-              <Fab
-                variant="extended"
-                color="success"
-                href="/group/create"
-              >
+              <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
               </Fab>
             </div>
           )}
-
-
-
           <>
             {/*
                      <div id="div-main-carousel">
@@ -248,7 +238,7 @@ function Main() {
           </>
         </div>
       </div>
-    </div >
+    </div>
   );
 }
 
