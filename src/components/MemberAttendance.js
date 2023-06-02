@@ -27,7 +27,6 @@ function MemberAttendance() {
 
   const callApi = async () => {
     const res = await axios.get(`${SERVER_URI}/api/${gpId}/attendance`);
-    console.log(res.data);
     setAttendance(res.data);
   };
 

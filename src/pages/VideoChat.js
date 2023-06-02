@@ -3,7 +3,6 @@ import { useParams, useLocation, useNavigate } from 'react-router-dom';
 import { io } from 'socket.io-client';
 import { Peer } from 'peerjs';
 import axios from 'axios';
-import { renderToString } from 'react-dom/server';
 
 // component for chat drawer
 import { styled, useTheme } from '@mui/material/styles';
@@ -22,7 +21,6 @@ import LogoutIcon from '@mui/icons-material/Logout';
 import Tab from 'react-bootstrap/Tab';
 import Tabs from 'react-bootstrap/Tabs';
 import BootstrapButton from 'react-bootstrap/Button';
-import LayoutMain from '../components/LayoutMain';
 
 import './style/VideoChat.css';
 import './style/Common.css';

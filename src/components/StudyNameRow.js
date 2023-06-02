@@ -14,8 +14,6 @@ function AssignmentName({ gpId }) {
   const callApi = async () => {
     const response = await axios.get(`${SERVER_URI}/api/${gpId}/event/title`);
     setEvents(response.data);
-
-    console.log(response.data);
   };
 
   useEffect(() => {

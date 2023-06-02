@@ -10,7 +10,6 @@
 }
 
 #div-layout-grid {
-    /* display: grid; */
     width: 100%;
     height: fit-content;
     overflow-y: auto;

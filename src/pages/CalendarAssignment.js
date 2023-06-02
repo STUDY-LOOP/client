@@ -60,7 +60,6 @@ function CalendarAssignment() {
           submittedFile.map((asgmt) => {
             if (asgmt.uploader === my_email) setMyAsgmt(true);
           });
-        console.log(submittedFile);
       })
       .catch((err) => console.log(err));
   }, []);
@@ -72,8 +71,6 @@ function CalendarAssignment() {
   const upload = async (event) => {
     window.location.reload(`/study-group/${gpId}/asgmt/${boxId}`);
 
-    console.log('upload 파트 실행: 캘린더 과제');
-    // event.preventDefault();
     let jsonData = JSON.stringify({
       gpId: gpId,
       boxId: boxId,

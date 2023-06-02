@@ -57,8 +57,6 @@ function Main() {
     const response = await axios.get(`${SERVER_URI}/api/study/all`);
     setStudies(response.data);
     setLoading(false);
-
-    console.log(response.data);
   };
 
   useEffect(() => {
@@ -155,8 +153,6 @@ function Main() {
           <br />
           {user ? (
             <div id="div-btn-to-create-study">
-              {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
-
               <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
@@ -164,59 +160,12 @@ function Main() {
             </div>
           ) : (
             <div id="div-btn-to-create-study">
-              {/* <Button variant="success" onClick={onClickCreate}>스터디 만들기</Button> <br /> <br /> */}
-
               <Fab variant="extended" color="success" href="/group/create">
                 <AddIcon sx={{ mr: 1 }} />
                 스터디 만들기
               </Fab>
             </div>
           )}
-          <>
-            {/*
-                     <div id="div-main-carousel">
-                            <Carousel activeIndex={index} onSelect={handleSelect}>
-                                <Carousel.Item>
-                                    <img
-                                        class="main-image"
-                                        src={imgUrl1}
-                                        alt="First slide"
-                                    />
-                                    <Carousel.Caption>
-                                        <h3>스터디 준비부터 진행까지</h3>
-                                        <p>새로운 스터디를 시작하세요!</p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <img
-                                        class="main-image"
-                                        src={imgUrl2}
-                                        alt="Second slide"
-                                    />
-
-                                    <Carousel.Caption>
-                                        <h3>Second slide label</h3>
-                                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <img
-                                        class="main-image"
-                                        src={imgUrl3}
-                                        alt="Third slide"
-                                    />
-
-                                    <Carousel.Caption>
-                                        <h3>Third slide label</h3>
-                                        <p>
-                                            Praesent commodo cursus magna, vel scelerisque nisl consectetur.
-                                        </p>
-                                    </Carousel.Caption>
-                                </Carousel.Item>
-                            </Carousel>
-                        </div> 
-                        */}
-          </>
         </div>
       </div>
     </div>

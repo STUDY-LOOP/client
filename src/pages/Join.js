@@ -95,19 +95,7 @@ function Join() {
   };
 
   const onClickJoin = async () => {
-    console.log(
-      interest0,
-      interest1,
-      interest2,
-      interest3,
-      interest4,
-      interest5
-    );
-    /*
-        await axios.post(`${SERVER_URI}/api/user/interest`, {
-            email, interest0, interest1, interest2, interest3, interest4, interest5,
-        })
-*/
+    
     await axios
       .post(
         `${SERVER_URI}/api/user`,

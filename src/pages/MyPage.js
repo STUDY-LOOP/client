@@ -26,22 +26,6 @@ function MyPage() {
   };
   const [values, setValues] = useState(initialValues);
 
-  //const [modalIsOpen, setModalIsOpen] = useState(false);
-
-  /*
-  const [nick, setNick] = useState(null);
-  const [password, setPassword] = useState(null);
-  //state 수정
-  const nickInputHandler = (event) => {
-    event.preventDefault();
-    setNick(event.target.value);
-  };
-  const pwInputHandler = (event) => {
-    event.preventDefault();
-    setPassword(event.target.value);
-  };
-  */
-
   const email = sessionStorage.getItem('user_email');
 
   useEffect(() => {
@@ -63,8 +47,6 @@ function MyPage() {
   }, []);
 
   const onFormChange = (e) => {
-    //const name = e.target.name;
-    //const value = e.target.value;
     const { name, value } = e.target;
     setValues({ ...values, [name]: value });
   };
@@ -76,7 +58,6 @@ function MyPage() {
       newPW: values.password,
     });
     //sessionStorage 업데이트
-    console.log('이 부분 실행 확인!!!!!!!!!!!!!!!!!!');
     sessionStorage.setItem('user_nick', values.nickname);
   };
 

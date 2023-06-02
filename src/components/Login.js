@@ -31,8 +31,6 @@ function Login() {
   };
 
   const onClickLogin = async () => {
-    // console.log(email);
-    // console.log(password);
 
     await axios
       .post(

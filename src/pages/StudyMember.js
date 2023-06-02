@@ -4,11 +4,7 @@ import axios from 'axios';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { Alert, Badge, Button, Table } from 'react-bootstrap';
 
-import UserAssignment from '../components/UserAssignment';
-import AssignmentName from '../components/AssignmentName';
-import MemberWithQuitBtn from '../components/MemberWithQuitBtn';
 import LayoutStudyPage from '../components/LayoutStudyPage';
-import MemberAttendance from '../components/MemberAttendance.js';
 import LayoutMain from '../components/LayoutMain';
 import MemberSummary from '../components/MemberSummary';
 import './style/StudyMember.css';
@@ -69,22 +65,6 @@ function StudyMember() {
               <div class="div-component-header"> 스터디장 </div>
               <div id="div-leader-nick"> {studyLeader} </div>
             </div>
-
-            {/* 포스터 영상 촬영용 임시 주석
-                        <div class="div-component-header">
-                            스터디원
-
-                            {studyMembers.map((member) =>
-                                <MemberWithQuitBtn
-                                    key={member.email}
-                                    email={member.email}
-                                    nick={member.userNick}
-                                    gpId={studyInfo.groupPublicId}
-                                    leader={studyInfo.groupLeader}
-                                />
-                            )}
-                        </div>
-                        */}
           </div>
 
           <div id="div-table-attend">
@@ -108,7 +88,6 @@ function StudyMember() {
               </Badge>
             </h2>
             {loading ? (
-              // <h3>LOADING...</h3>
               <Button variant="secondary" onClick={() => window.location.reload()} size="sm">새로고침</Button>
             ) : (
               <MemberSummary key={gpId} gpId={gpId} isAsgmt={true} />

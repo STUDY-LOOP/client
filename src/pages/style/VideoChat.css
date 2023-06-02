@@ -99,11 +99,3 @@ video {
     font-weight: 600;
     margin-bottom: 15px;
 }
-
-#chat-content {}
-
-.enter-message {
-    /* align-self: end; */
-    /* align-items: flex-end; */
-    /* margin-top: auto; */
-}

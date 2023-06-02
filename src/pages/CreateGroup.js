@@ -110,7 +110,6 @@ function CreateGroup() {
         interest4,
         interest5,
       });
-      // navigate('/');
       window.location.replace('/');
     }
 

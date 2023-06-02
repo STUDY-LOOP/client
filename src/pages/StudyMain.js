@@ -74,29 +74,20 @@ function StudyMain() {
 			.catch((err) => console.log(err));
 	}, []);
 
+
 	const onClickJoin = async () => {
-		let key = prompt("비밀번호를 입력해주세요", "");
-
-		if (key === "999") {
-			await axios
-				.post(`${SERVER_URI}/api/group/member`, {
-					gpId: gpId,
-				})
-				.then((res) => res)
-				.then((result) => {
-					if (result.data.code == 0) {
-						alert('스터디 그룹 가입 완료');
-						window.location.href = '/';
-					}
-				})
-				.catch((err) => alert(err));
-		}
-
-		else if (key === null) { }
-
-		else {
-			alert("비밀번호가 일치하지 않습니다.");
-		}
+		await axios
+			.post(`${SERVER_URI}/api/group/member`, {
+				gpId: gpId,
+			})
+			.then((res) => res)
+			.then((result) => {
+				if (result.data.code == 0) {
+					alert('스터디 그룹 가입 완료');
+					window.location.href = '/';
+				}
+			})
+			.catch((err) => alert(err));
 	};
 
 	// 기본 버튼

@@ -69,7 +69,6 @@ function AddEvent({ date_start }) {
       .then((res) => {
         axios.post(`${SERVER_URI}/api/${gpId}/create-attendance/${res.data}`);
       })
-      // .then(() => window.location.replace(`/study-group/${gpId}`))
       .catch((err) => alert(err));
   };
 
@@ -99,32 +98,6 @@ function AddEvent({ date_start }) {
       content: content,
       deadline: startDateTime,
     });
-
-
-
-    /*
-    // const boxId = 
-    axios.post(`${SERVER_URI}/api/assignmentBox`, {
-      gpId: gpId,
-      log: null,
-      title: eventTitle,
-      content: content,
-      deadline: startDateTime,
-    })
-      .then((res) => {
-        axios.post(`${SERVER_URI}/api/event`, {
-          gpId: gpId,
-          event_title: eventTitle,
-          event_type: '1',
-          date_start: startDateTime,
-          event_color: color[1],
-          boxId: res.data,
-        });
-      })
-      .catch((err) => alert(err));
-      */
-
-    // window.location.replace(`/study-group/${gpId}`);
   };
 
   // -- 기타 일정 생성 -- //
@@ -146,7 +119,6 @@ function AddEvent({ date_start }) {
           withCredentials: true,
         }
       )
-      // .then(() => window.location.replace(`/study-group/${gpId}`))
       .catch((err) => alert(err));
   };
 
@@ -220,15 +192,6 @@ function AddEvent({ date_start }) {
               />
             </Col>
           </Form.Group>
-
-          {/* <Form.Group as={Row} class="form-add-event">
-            <Form.Label column sm="2">
-              <strong>로그</strong>
-            </Form.Label>
-            <Col>
-              <Form.Control type="text" onChange={logHandler} required />
-            </Col>
-          </Form.Group> */}
 
           <Form.Group as={Row} class="form-add-event">
             <Form.Label column sm="2">

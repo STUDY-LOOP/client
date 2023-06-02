@@ -34,9 +34,6 @@ function MemberSummary({ gpId, isAsgmt }) {
           setAttendance(res2.data);
           setAssignment(res3.data);
           setLoading(false);
-
-          console.log(res2.data);
-          console.log(res3.data);
         })
       )
       .catch((err) => console.log(err));
